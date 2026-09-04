@@ -29,7 +29,10 @@ camera.position.set(0, 1.8, 9);
    RENDERER
 -------------------------------------------------- */
 
+
+
 const renderer = new THREE.WebGLRenderer({
+    canvas: document.getElementById("robotCanvas"),
     antialias: true,
     alpha: true
 });
@@ -41,10 +44,6 @@ renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
 renderer.outputColorSpace = THREE.SRGBColorSpace;
-
-document.body.appendChild(renderer.domElement);
-
-renderer.domElement.id = "robotCanvas";
 
 
 /* --------------------------------------------------
