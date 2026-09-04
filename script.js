@@ -105,25 +105,25 @@ const loader = new GLTFLoader();
 
 const robotData = [
     {
-        file: "demo/models/greet.glb",
+        file: "models/greet.glb",
         position: [-3.0, 0, 0],
         scale: 1.0
     },
 
     {
-        file: "demo/models/jump.glb",
+        file: "models/jump.glb",
         position: [-1.0, 0, -0.3],
         scale: 0.9
     },
 
     {
-        file: "demo/models/taunt.glb",
+        file: "models/taunt.glb",
         position: [1.1, 0, -0.2],
         scale: 1.0
     },
 
     {
-        file: "demo/models/walking.glb",
+        file: "models/walking.glb",
         position: [3.0, 0, 0],
         scale: 1.0
     }
