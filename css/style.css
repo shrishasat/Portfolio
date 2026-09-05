@@ -1,259 +1,604 @@
-/* ===================================================================
-   SHRISHA SATHISHSKUMAR — PORTFOLIO
-   Base tokens + reset + home hero layout
-   =================================================================== */
+/* =========================================================
+   SHRISHA SATHISHKUMAR
+   BASE
+========================================================= */
 
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=VT323&display=swap');
+@import url(
+  'https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=VT323&display=swap'
+);
 
-:root{
-  /* -- palette -- */
-  --void:        #ffffff;   /* base background          */
-  --panel:       #f4f4f2;   /* raised surfaces           */
-  --line:        #dcdcd6;   /* hairlines / borders       */
-  --ink:         #0a0a0a;   /* primary text              */
-  --ink-dim:     #4a4a46;   /* secondary text            */
-  --signal:      #0077b3;   /* accent — data / telemetry */
-  --pulse:       #b3560a;   /* accent — highlight moments*/
-  --violet:      #6a4fd1;   /* hue-shift partner colour  */
 
-  /* -- type -- */
-  --font-display: 'Space Grotesk', sans-serif;
-  --font-mono:    'IBM Plex Mono', monospace;
-  --font-digital: 'VT323', monospace;
+:root {
+
+  --void: #ffffff;
+
+  --ink: #090909;
+
+  --ink-dim: #4a4a46;
+
+  --line: #ddddda;
+
+  --font-display:
+    'Space Grotesk',
+    sans-serif;
+
+  --font-mono:
+    'IBM Plex Mono',
+    monospace;
+
+  --font-digital:
+    'VT323',
+    monospace;
 }
 
-*, *::before, *::after{ box-sizing: border-box; }
 
-html{ scroll-behavior: smooth; }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
-body{
+
+html {
+  scroll-behavior: smooth;
+}
+
+
+body {
+
   margin: 0;
-  background: var(--void);
+
+  background: #ffffff;
+
   color: var(--ink);
+
   font-family: var(--font-mono);
+
   overflow-x: hidden;
 }
 
-a{ color: inherit; text-decoration: none; }
 
-::selection{ background: var(--signal); color: #fff; }
+a {
 
-a:focus-visible, button:focus-visible{
-  outline: 2px solid var(--signal);
-  outline-offset: 3px;
+  color: inherit;
+
+  text-decoration: none;
 }
 
-@media (prefers-reduced-motion: reduce){
-  *, *::before, *::after{
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+
+::selection {
+
+  background: #000000;
+
+  color: #ffffff;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.site-header {
+
+  position: sticky;
+
+  top: 0;
+
+  z-index: 100;
+
+  height: 74px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  padding:
+    0
+    clamp(1.2rem, 4vw, 4rem);
+
+  background:
+    rgba(255,255,255,0.92);
+
+  backdrop-filter: blur(14px);
+
+  border-bottom:
+    1px solid var(--line);
+}
+
+
+.site-header .brand {
+
+  font-family: var(--font-display);
+
+  font-weight: 600;
+
+  font-size: 0.95rem;
+
+  letter-spacing: 0.03em;
+}
+
+
+.site-header nav {
+
+  display: flex;
+
+  gap:
+    clamp(1rem, 3vw, 2.5rem);
+}
+
+
+.site-header nav a {
+
+  font-family: var(--font-mono);
+
+  font-size: 0.7rem;
+
+  letter-spacing: 0.12em;
+
+  color: #666662;
+
+  transition:
+    color 0.2s ease;
+}
+
+
+.site-header nav a:hover,
+.site-header nav a[aria-current="page"] {
+
+  color: #000000;
+}
+
+
+/* =========================================================
+   HOME ROBOT CANVAS
+========================================================= */
+
+#robotCanvas {
+
+  position: fixed;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  z-index: 1;
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   HOME NAV
+========================================================= */
+
+#nav {
+
+  position: fixed;
+
+  top: 0;
+
+  left: 0;
+
+  right: 0;
+
+  height: 100px;
+
+  z-index: 80;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: flex-end;
+
+  gap:
+    clamp(2rem, 5vw, 5rem);
+
+  padding:
+    0
+    clamp(1.5rem, 5vw, 5rem);
+
+  background:
+    rgba(255,255,255,0.93);
+
+  backdrop-filter: blur(16px);
+
+  border-bottom:
+    1px solid transparent;
+
+  transform:
+    translateY(-110%);
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  transition:
+    transform 0.65s cubic-bezier(.22,.9,.32,1),
+    opacity 0.4s ease,
+    border-color 0.4s ease;
+}
+
+
+#nav.nav--visible {
+
+  transform: translateY(0);
+
+  opacity: 1;
+
+  pointer-events: auto;
+
+  border-bottom-color:
+    var(--line);
+}
+
+
+#nav a {
+
+  font-family: var(--font-display);
+
+  font-weight: 500;
+
+  font-size:
+    clamp(1.2rem, 2.2vw, 2.2rem);
+
+  letter-spacing: -0.02em;
+
+  color: #111111;
+
+  transition:
+    opacity 0.2s ease;
+}
+
+
+#nav a:hover {
+
+  opacity: 0.45;
+}
+
+
+/* =========================================================
+   HOME HERO
+========================================================= */
+
+.home-page {
+
+  height: 100vh;
+
+  overflow: hidden;
+}
+
+
+.hero {
+
+  position: relative;
+
+  width: 100%;
+
+  height: 100vh;
+
+  min-height: 600px;
+
+  z-index: 5;
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   IDENTITY
+========================================================= */
+
+#identity {
+
+  position: absolute;
+
+  left:
+    clamp(5vw, 9vw, 11vw);
+
+  top: 50%;
+
+  transform:
+    translateY(-50%);
+
+  width:
+    min(55vw, 850px);
+}
+
+
+#identity .role {
+
+  margin: 0 0 1.3rem;
+
+  font-family: var(--font-mono);
+
+  font-size:
+    clamp(0.65rem, 1vw, 0.9rem);
+
+  letter-spacing: 0.17em;
+
+  color: #777773;
+}
+
+
+#identity h1 {
+
+  margin: 0;
+
+  font-family: var(--font-display);
+
+  font-weight: 600;
+
+  font-size:
+    clamp(4rem, 7.5vw, 8rem);
+
+  line-height: 0.9;
+
+  letter-spacing: -0.065em;
+
+  color: #050505;
+}
+
+
+#identity .tagline {
+
+  margin-top: 2rem;
+
+  font-family: var(--font-mono);
+
+  font-size:
+    clamp(1rem, 1.5vw, 1.4rem);
+
+  color: #444440;
+}
+
+
+/* =========================================================
+   HERO META
+========================================================= */
+
+.hero-meta {
+
+  position: absolute;
+
+  left:
+    clamp(5vw, 9vw, 11vw);
+
+  bottom: 8vh;
+
+  display: flex;
+
+  gap: 2rem;
+
+  font-family: var(--font-mono);
+
+  font-size: 0.58rem;
+
+  letter-spacing: 0.13em;
+
+  color: #999994;
+}
+
+
+/* =========================================================
+   SCROLL
+========================================================= */
+
+.scroll-hint {
+
+  position: absolute;
+
+  bottom: 3vh;
+
+  left: 50%;
+
+  transform:
+    translateX(-50%);
+
+  font-family: var(--font-mono);
+
+  font-size: 0.6rem;
+
+  letter-spacing: 0.25em;
+
+  color: #999994;
+
+  animation:
+    scrollPulse 2.5s ease-in-out infinite;
+}
+
+
+@keyframes scrollPulse {
+
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(5px);
   }
 }
 
-/* -------------------------------------------------------------
-   3D canvas — full-bleed behind everything on the hero
-   ------------------------------------------------------------- */
-#robotCanvas{
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  display: block;
-}
 
-/* -------------------------------------------------------------
-   Nav — hidden at rest, becomes an overlay header on scroll
-   ------------------------------------------------------------- */
-#nav{
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 50;
-  display: flex;
-  justify-content: flex-end;
-  gap: clamp(1.2rem, 3vw, 2.6rem);
-  padding: 1.4rem clamp(1.2rem, 4vw, 3rem);
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-bottom: 1px solid transparent;
-  transform: translateY(-120%);
-  opacity: 0;
-  transition: transform 0.6s cubic-bezier(.22,.9,.32,1), opacity 0.5s ease, border-color 0.5s ease;
-  pointer-events: none;
-}
-#nav.nav--visible{
-  transform: translateY(0);
-  opacity: 1;
-  border-bottom-color: var(--line);
-  pointer-events: auto;
-}
-#nav a{
-  font-size: 0.8rem;
-  letter-spacing: 0.14em;
-  color: var(--ink-dim);
-  transition: color 0.25s ease;
-}
-#nav a:hover{ color: var(--signal); }
+/* =========================================================
+   TELEMETRY
+   No box. Just small live information.
+========================================================= */
 
-/* -------------------------------------------------------------
-   Telemetry — bottom-right readout, digital-clock styling
-   ------------------------------------------------------------- */
-#telemetry{
+#telemetry {
+
   position: fixed;
-  right: clamp(1rem, 3vw, 2rem);
-  bottom: clamp(1rem, 3vw, 2rem);
-  z-index: 20;
-  width: min(480px, 70vw);
-  padding: 1.2rem 1.4rem;
-  background: #ffffff;
+
+  right: 2.5vw;
+
+  bottom: 2.5vh;
+
+  z-index: 30;
+
+  width: auto;
+
+  padding: 0;
+
+  background: transparent;
+
   border: none;
-  border-radius: 4px;
-  box-shadow: 0 2px 24px rgba(0,0,0,0.12);
+
+  box-shadow: none;
+
   font-family: var(--font-digital);
-  font-size: 1.5rem;
-  color: #000000;
-  line-height: 1.5;
+
+  font-size: 1.25rem;
+
+  line-height: 1.1;
+
+  color: #555550;
+
   pointer-events: none;
+
+  text-align: right;
 }
-#telemetry .tele-row{
+
+
+#telemetry .tele-row {
+
   display: flex;
-  justify-content: space-between;
+
+  justify-content: flex-end;
+
   gap: 0.8rem;
+
   white-space: nowrap;
 }
-#telemetry .tele-zone{ color: #000; }
-#telemetry .tele-time{ color: #000; letter-spacing: 0.02em; }
-#telemetry hr{ border: none; border-top: 1px solid #ddd; margin: 0.5rem 0; }
-#telemetry .tele-metric{ color: #000; }
-#telemetry .tele-value{ color: #000; }
-#telemetry .tele-note{
+
+
+#telemetry .tele-zone {
+
+  color: #999994;
+}
+
+
+#telemetry .tele-time {
+
+  color: #444440;
+
+  letter-spacing: 0.02em;
+}
+
+
+#telemetry hr {
+
+  border: 0;
+
+  border-top:
+    1px solid #ddddda;
+
+  margin:
+    0.35rem 0;
+}
+
+
+#telemetry .tele-metric {
+
+  color: #999994;
+}
+
+
+#telemetry .tele-value {
+
+  color: #444440;
+}
+
+
+#telemetry .tele-note {
+
   margin-top: 0.4rem;
+
   font-family: var(--font-mono);
-  font-size: 0.6rem;
-  color: #777;
+
+  font-size: 0.5rem;
+
+  color: #aaaaa5;
 }
 
-/* -------------------------------------------------------------
-   Hero section
-   ------------------------------------------------------------- */
-main{ position: relative; z-index: 5; }
 
-.hero{
-  position: relative;
-  height: 100vh;
-  min-height: 560px;
-  pointer-events: none; /* let mouse reach the canvas for proximity detection */
-}
+/* =========================================================
+   MOBILE
+========================================================= */
 
-/* Name block — moved toward the left, everything single-line and huge */
-#identity{
-  position: absolute;
-  left: clamp(1rem, 5vw, 4rem);
-  top: 50%;
-  transform: translateY(-50%);
-  max-width: 92vw;
-}
-#identity .role{
-  font-family: var(--font-mono);
-  font-size: clamp(0.9rem, 2vw, 1.6rem);
-  letter-spacing: 0.1em;
-  color: var(--ink-dim);
-  margin-bottom: 0.8rem;
-  white-space: nowrap;
-}
-#identity h1{
-  margin: 0;
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(2.4rem, 9vw, 8rem);
-  line-height: 1;
-  white-space: nowrap;
-  background: linear-gradient(100deg, var(--signal), var(--violet), var(--pulse), var(--signal));
-  background-size: 300% auto;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: hueDrift 10s linear infinite;
-}
-@keyframes hueDrift{
-  0%   { background-position: 0% 50%; }
-  100% { background-position: 300% 50%; }
-}
-#identity .tagline{
-  margin-top: 1rem;
-  font-family: var(--font-mono);
-  font-size: clamp(1rem, 3vw, 2.4rem);
-  color: var(--ink-dim);
-  white-space: nowrap;
-}
+@media (max-width: 800px) {
 
-/* Rotating catchy phrase — bottom-center of the hero, single line */
-#phrase{
-  position: absolute;
-  left: 50%;
-  bottom: 6rem;
-  transform: translateX(-50%);
-  width: max-content;
-  max-width: 94vw;
-  text-align: center;
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: clamp(1.2rem, 4.2vw, 3rem);
-  white-space: nowrap;
-  color: #fff;
-  opacity: 0;
-}
-#phrase.run{
-  animation: dissolve 7s ease-in-out;
-}
-@keyframes dissolve{
-  0%   { opacity: 0; color: #ffffff; }
-  14%  { opacity: 1; color: #ffffff; }
-  70%  { opacity: 1; color: #050508; }
-  100% { opacity: 0; color: #050508; }
-}
+  #identity {
 
-.scroll-hint{
-  position: absolute;
-  bottom: 1.2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.3em;
-  color: var(--ink-dim);
-  animation: bob 2.4s ease-in-out infinite;
-}
-@keyframes bob{
-  0%, 100% { transform: translate(-50%, 0); opacity: 0.5; }
-  50%      { transform: translate(-50%, 8px); opacity: 1; }
-}
+    left: 7vw;
 
-/* -------------------------------------------------------------
-   Intro strip — gives index.html real scroll height
-   ------------------------------------------------------------- */
-.intro-strip{
-  position: relative;
-  z-index: 5;
-  min-height: 60vh;
-  display: flex;
-  align-items: center;
-  padding: 3rem clamp(1.2rem, 6vw, 5rem);
-  background: var(--void);
-  border-top: 1px solid var(--line);
-}
-.intro-strip p{
-  max-width: 60ch;
-  font-size: 1.1rem;
-  line-height: 1.9;
-  color: var(--ink-dim);
-}
+    width: 85vw;
+  }
 
-@media (max-width: 780px){
-  #telemetry{ width: min(320px, 80vw); font-size: 1.1rem; }
+
+  #identity h1 {
+
+    font-size:
+      clamp(3.5rem, 14vw, 6rem);
+  }
+
+
+  #identity .role {
+
+    white-space: normal;
+
+    line-height: 1.5;
+  }
+
+
+  .hero-meta {
+
+    left: 7vw;
+
+    bottom: 8vh;
+
+    flex-direction: column;
+
+    gap: 0.5rem;
+  }
+
+
+  #nav {
+
+    height: auto;
+
+    min-height: 100vh;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    justify-content: center;
+
+    gap: 1.8rem;
+  }
+
+
+  #nav a {
+
+    font-size: 2.3rem;
+  }
+
+
+  #telemetry {
+
+    font-size: 0.9rem;
+
+    right: 1rem;
+
+    bottom: 1rem;
+  }
+
 }
