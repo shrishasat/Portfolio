@@ -1,0 +1,150 @@
+/* ===================================================================
+   Blogs page — same brand, inverted to a stark white "notebook"
+   =================================================================== */
+
+body.blog-theme{
+  --void:    #ffffff;
+  --panel:   #f5f5f3;
+  --line:    #d9d9d4;
+  --ink:     #0a0a0a;
+  --ink-dim: #55554f;
+  background: var(--void);
+  color: var(--ink);
+}
+
+body.blog-theme .site-header{
+  background: rgba(255, 255, 255, 0.85);
+}
+body.blog-theme .site-header nav a:hover,
+body.blog-theme .site-header nav a[aria-current="page"]{ color: #0a0a0a; text-decoration: underline; }
+
+body.blog-theme .page-hero h1{ color: #0a0a0a; }
+
+/* year / reading-corner switcher */
+.year-nav{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.9rem;
+  padding: 0 clamp(1.2rem, 6vw, 5rem);
+  margin-bottom: 2rem;
+}
+.year-nav a{
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  color: var(--ink-dim);
+  border-bottom: 2px solid transparent;
+  padding-bottom: 0.2rem;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.year-nav a:hover,
+.year-nav a.is-active{
+  color: #0a0a0a;
+  border-color: #0a0a0a;
+}
+.year-nav .sep{ color: var(--line); }
+
+.blog-year{
+  padding: 0 clamp(1.2rem, 6vw, 5rem) 3rem;
+  max-width: 760px;
+  scroll-margin-top: 6rem;
+}
+.blog-year h2{
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.8rem;
+  margin: 0 0 1.4rem;
+  color: #0a0a0a;
+}
+
+.post{
+  border-top: 1px solid var(--line);
+  padding: 1.6rem 0;
+}
+.post .post-date{
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-dim);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+.post h3{
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  margin: 0 0 0.6rem;
+  color: #0a0a0a;
+}
+.post p{
+  line-height: 1.85;
+  color: #232320;
+  max-width: 62ch;
+}
+.post .source{
+  margin-top: 0.7rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--ink-dim);
+}
+.post.stub{ color: var(--ink-dim); font-style: normal; }
+.post.stub p{ color: var(--ink-dim); font-family: var(--font-mono); font-size: 0.85rem; }
+
+/* reading corner */
+.reading-corner{
+  padding: 3rem clamp(1.2rem, 6vw, 5rem) 4rem;
+  max-width: 760px;
+  border-top: 1px solid var(--line);
+  scroll-margin-top: 6rem;
+}
+.reading-corner h2{
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  margin-bottom: 1.6rem;
+}
+.tamil-quote{
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 3vw, 1.9rem);
+  font-weight: 600;
+  color: #0a0a0a;
+  margin: 0 0 0.7rem;
+}
+.tamil-translation{
+  font-family: var(--font-mono);
+  font-style: italic;
+  font-size: 0.85rem;
+  color: var(--ink-dim);
+  line-height: 1.7;
+  margin: 0 0 2rem;
+}
+.book-list{ list-style: none; padding: 0; margin: 0; }
+.book-list li{
+  padding: 0.8rem 0;
+  border-top: 1px solid var(--line);
+}
+.book-list .book-title{ font-family: var(--font-display); font-weight: 600; }
+.book-list .book-author{ color: var(--ink-dim); font-size: 0.85rem; }
+.book-list .book-note{ margin-top: 0.3rem; font-size: 0.88rem; color: #232320; line-height: 1.7; }
+
+/* back to top */
+#backTop{
+  position: fixed;
+  top: 1.2rem;
+  right: 1.2rem;
+  z-index: 60;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: #ffffff;
+  color: #0a0a0a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+#backTop.show{ opacity: 1; pointer-events: auto; transform: translateY(0); }

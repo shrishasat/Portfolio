@@ -1,0 +1,259 @@
+/* ===================================================================
+   SHRISHA SATHISHSKUMAR — PORTFOLIO
+   Base tokens + reset + home hero layout
+   =================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+:root{
+  /* -- palette -- */
+  --void:        #05050a;   /* base background          */
+  --panel:       #101018;   /* raised surfaces           */
+  --line:        #2a2a38;   /* hairlines / borders       */
+  --ink:         #ececea;   /* primary text on dark      */
+  --ink-dim:     #8d8d9c;   /* secondary text on dark    */
+  --signal:      #4fd1ff;   /* cyan — data / telemetry   */
+  --pulse:       #e8a33d;   /* amber — accent moments    */
+  --violet:      #9b7bff;   /* hue-shift partner colour  */
+
+  /* -- type -- */
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-mono:    'IBM Plex Mono', monospace;
+}
+
+*, *::before, *::after{ box-sizing: border-box; }
+
+html{ scroll-behavior: smooth; }
+
+body{
+  margin: 0;
+  background: var(--void);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  overflow-x: hidden;
+}
+
+a{ color: inherit; text-decoration: none; }
+
+::selection{ background: var(--signal); color: var(--void); }
+
+/* focus visibility kept intact everywhere */
+a:focus-visible, button:focus-visible{
+  outline: 2px solid var(--signal);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce){
+  *, *::before, *::after{
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* -------------------------------------------------------------
+   3D canvas — full-bleed behind everything on the hero
+   ------------------------------------------------------------- */
+#robotCanvas{
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  display: block;
+}
+
+/* -------------------------------------------------------------
+   Nav — hidden at rest, becomes an overlay header on scroll
+   ------------------------------------------------------------- */
+#nav{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  display: flex;
+  justify-content: flex-end;
+  gap: clamp(1.2rem, 3vw, 2.6rem);
+  padding: 1.4rem clamp(1.2rem, 4vw, 3rem);
+  background: rgba(5, 5, 10, 0.55);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid transparent;
+  transform: translateY(-120%);
+  opacity: 0;
+  transition: transform 0.6s cubic-bezier(.22,.9,.32,1), opacity 0.5s ease, border-color 0.5s ease;
+  pointer-events: none;
+}
+#nav.nav--visible{
+  transform: translateY(0);
+  opacity: 1;
+  border-bottom-color: var(--line);
+  pointer-events: auto;
+}
+#nav a{
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  color: var(--ink-dim);
+  transition: color 0.25s ease;
+}
+#nav a:hover{ color: var(--signal); }
+
+/* -------------------------------------------------------------
+   Telemetry — bottom-right, always-on readout
+   ------------------------------------------------------------- */
+#telemetry{
+  position: fixed;
+  right: clamp(1rem, 3vw, 2rem);
+  bottom: clamp(1rem, 3vw, 2rem);
+  z-index: 20;
+  width: min(280px, 42vw);
+  padding: 0.9rem 1rem;
+  background: rgba(16, 16, 24, 0.55);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--ink-dim);
+  line-height: 1.6;
+  pointer-events: none;
+}
+#telemetry .tele-row{
+  display: flex;
+  justify-content: space-between;
+  gap: 0.6rem;
+}
+#telemetry .tele-zone{ color: var(--ink-dim); }
+#telemetry .tele-time{
+  color: var(--signal);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.03em;
+}
+#telemetry hr{
+  border: none;
+  border-top: 1px solid var(--line);
+  margin: 0.5rem 0;
+}
+#telemetry .tele-metric{ color: var(--ink-dim); }
+#telemetry .tele-value{
+  color: var(--pulse);
+  font-variant-numeric: tabular-nums;
+}
+#telemetry .tele-note{
+  margin-top: 0.4rem;
+  font-size: 0.56rem;
+  opacity: 0.55;
+  letter-spacing: 0.04em;
+}
+
+/* -------------------------------------------------------------
+   Hero section
+   ------------------------------------------------------------- */
+main{ position: relative; z-index: 5; }
+
+.hero{
+  position: relative;
+  height: 100vh;
+  min-height: 560px;
+  pointer-events: none; /* let mouse reach the canvas for proximity detection */
+}
+
+/* Catchy dissolving phrase — sits between the robot and the name */
+#phrase-zone{
+  position: absolute;
+  left: 34%;
+  top: 46%;
+  width: min(30vw, 340px);
+  transform: translateY(-50%);
+}
+#phrase{
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1rem, 1.7vw, 1.35rem);
+  line-height: 1.35;
+  color: #fff;
+  opacity: 0;
+}
+#phrase.run{
+  animation: dissolve 7s ease-in-out;
+}
+@keyframes dissolve{
+  0%   { opacity: 0; color: #ffffff; }
+  14%  { opacity: 1; color: #ffffff; }
+  70%  { opacity: 1; color: #050508; }
+  100% { opacity: 0; color: #050508; }
+}
+
+/* Name block — right-middle, hue-shifting display type */
+#identity{
+  position: absolute;
+  right: clamp(1.5rem, 6vw, 6rem);
+  top: 50%;
+  transform: translateY(-50%);
+  text-align: right;
+  max-width: 46vw;
+}
+#identity .role{
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  color: var(--ink-dim);
+  margin-bottom: 0.6rem;
+}
+#identity h1{
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.8rem, 4.4vw, 3.4rem);
+  line-height: 1.05;
+  background: linear-gradient(100deg, var(--signal), var(--violet), var(--pulse), var(--signal));
+  background-size: 300% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: hueDrift 10s linear infinite;
+}
+@keyframes hueDrift{
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 300% 50%; }
+}
+#identity .tagline{
+  margin-top: 0.9rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--ink-dim);
+  line-height: 1.6;
+}
+
+.scroll-hint{
+  position: absolute;
+  bottom: 2.4rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.3em;
+  color: var(--ink-dim);
+  animation: bob 2.4s ease-in-out infinite;
+}
+@keyframes bob{
+  0%, 100% { transform: translate(-50%, 0); opacity: 0.5; }
+  50%      { transform: translate(-50%, 8px); opacity: 1; }
+}
+
+@media (max-width: 780px){
+  #phrase-zone{ display: none; } /* keep the mobile hero uncluttered */
+  #identity{
+    left: 1.2rem;
+    right: 1.2rem;
+    text-align: left;
+    max-width: none;
+    top: auto;
+    bottom: 6rem;
+    transform: none;
+  }
+  #telemetry{ width: min(240px, 60vw); font-size: 0.6rem; }
+}
