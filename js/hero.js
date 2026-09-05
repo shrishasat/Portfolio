@@ -441,41 +441,36 @@ function playGreeting(){
    RIGHT-SIDE CURSOR TRIGGER
 ===================================================== */
 
-let pointerWasRight =
-  false;
+let lastMouseX = null;
+let lastMouseY = null;
 
+window.addEventListener("pointermove", (event) => {
 
-window.addEventListener(
-  "pointermove",
-  (event) => {
+  // Robot interaction area
+  const robotX = window.innerWidth * 0.25;
+  const robotY = window.innerHeight * 0.5;
 
-    /*
-      Rightmost 25% of the screen.
-    */
+  // How close the mouse needs to be
+  const interactionRadius = 300;
 
-    const pointerIsRight =
-      event.clientX >
-      window.innerWidth * 0.75;
+  const dx = event.clientX - robotX;
+  const dy = event.clientY - robotY;
 
+  const distance = Math.sqrt(
+    dx * dx + dy * dy
+  );
 
-    /*
-      Trigger when entering the zone.
-    */
+  // Mouse is moving near the robot
+  if (distance < interactionRadius) {
 
-    if (
-      pointerIsRight &&
-      !pointerWasRight
-    ){
+    playGreeting();
 
-      playGreeting();
-    }
-
-
-    pointerWasRight =
-      pointerIsRight;
   }
-);
 
+  lastMouseX = event.clientX;
+  lastMouseY = event.clientY;
+
+});
 
 /* =====================================================
    ROTATING PHRASES
