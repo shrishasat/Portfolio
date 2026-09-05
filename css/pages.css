@@ -171,43 +171,24 @@
 }
 
 .contact-list {
-  width: min(720px, 100%);
-  padding: 0;
-  margin: 0;
-  list-style: none;
-  border-top: 1px solid #d8d8d3;
+  margin-left: 5vw;
 }
 
-.contact-list li {
-  display: grid;
-  grid-template-columns: 120px 1fr;
-  gap: 1.5rem;
-  padding: 1.15rem 0;
-  border-bottom: 1px solid #d8d8d3;
+/* Robot on the right side, vertically centered */
+.contact-page + .corner-robot {
+  position: fixed;
+  right: 3vw;
+  top: 50%;
+  bottom: auto;
+  width: 320px;
+  height: 520px;
+  transform: translateY(-50%);
+  z-index: 5;
+  pointer-events: none;
 }
 
-.contact-list li span {
-  font-family: var(--font-mono);
-  font-size: 0.58rem;
-  letter-spacing: 0.14em;
-  color: #8a8a85;
-}
-
-.contact-list li a {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  color: #111;
-  text-decoration: none;
-  transition: opacity 0.2s ease;
-}
-
-.contact-list li a:hover {
-  opacity: 0.45;
-}
-
-@media (max-width: 700px) {
-  .contact-list li {
-    grid-template-columns: 1fr;
-    gap: 0.5rem;
-  }
+.contact-page + .corner-robot canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
