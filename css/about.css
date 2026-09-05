@@ -3,9 +3,15 @@
 ========================================================= */
 
 .about-page-body {
+  margin: 0;
+
   background: #ffffff;
   color: #0a0a0a;
-  overflow: hidden;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  min-height: 100vh;
 }
 
 
@@ -17,12 +23,19 @@
   position: relative;
 
   width: 100%;
-  height: calc(100vh - 74px);
+  min-height: calc(100vh - 74px);
 
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 34vw;
 
-  padding: 0 4vw 0 6vw;
+  grid-template-columns:
+    minmax(0, 1fr)
+    32vw;
+
+  padding:
+    0
+    4vw
+    0
+    6vw;
 }
 
 
@@ -37,12 +50,13 @@
   padding-top: 7vh;
   padding-right: 5vw;
 
-  overflow-y: auto;
-  scrollbar-width: none;
-}
+  /*
+    IMPORTANT:
+    Do NOT make the left content itself scroll.
+    The entire About page should scroll normally.
+  */
 
-.about-content::-webkit-scrollbar {
-  display: none;
+  overflow: visible;
 }
 
 
@@ -54,23 +68,33 @@
   max-width: 1000px;
 }
 
+
 .about-intro .eyebrow-mono {
   color: #111111;
+
   font-size: 0.7rem;
+
   letter-spacing: 0.25em;
+
   margin-bottom: 1.2rem;
 }
+
 
 .about-intro h1 {
   margin: 0;
 
   font-family: var(--font-display);
-  font-size: clamp(3rem, 5vw, 5.8rem);
+
+  font-size:
+    clamp(3rem, 5vw, 5.8rem);
+
   line-height: 0.98;
+
   letter-spacing: -0.045em;
 
   color: #050505;
 }
+
 
 .about-intro .lead {
   margin-top: 2rem;
@@ -78,7 +102,10 @@
   max-width: 850px;
 
   font-family: var(--font-mono);
-  font-size: clamp(1rem, 1.25vw, 1.2rem);
+
+  font-size:
+    clamp(1rem, 1.25vw, 1.2rem);
+
   line-height: 1.85;
 
   color: #343432;
@@ -91,51 +118,75 @@
 
 .about-sections {
   margin-top: 5rem;
+
   padding-bottom: 6rem;
 }
 
+
 .about-sections > section {
   display: grid;
-  grid-template-columns: 70px minmax(0, 1fr);
+
+  grid-template-columns:
+    70px
+    minmax(0, 1fr);
 
   gap: 1.5rem;
 
   padding: 2.2rem 0;
 
-  border-top: 1px solid #deded9;
+  border-top:
+    1px solid #deded9;
 }
+
 
 .section-index {
   font-family: var(--font-mono);
+
   font-size: 0.7rem;
+
   letter-spacing: 0.12em;
+
   color: #888883;
 }
 
+
 .about-sections h2 {
-  margin: 0 0 1rem;
+  margin:
+    0
+    0
+    1rem;
 
   font-family: var(--font-display);
+
   font-size: 1.5rem;
+
   font-weight: 600;
 
   color: #090909;
 }
 
+
 .about-sections p {
   max-width: 850px;
 
-  margin: 0 0 1rem;
+  margin:
+    0
+    0
+    1rem;
 
   font-family: var(--font-mono);
+
   font-size: 0.92rem;
+
   line-height: 1.9;
 
   color: #3f3f3b;
 }
 
+
 .about-sections strong {
   color: #090909;
+
   font-weight: 500;
 }
 
@@ -148,34 +199,52 @@
   display: grid;
 
   grid-template-columns:
-    repeat(2, minmax(220px, 1fr));
+    repeat(
+      2,
+      minmax(220px, 1fr)
+    );
 
   gap: 0;
 
-  border-top: 1px solid #deded9;
+  border-top:
+    1px solid #deded9;
 }
+
 
 .fact {
   display: flex;
+
   flex-direction: column;
 
   gap: 0.35rem;
 
-  padding: 1rem 1.2rem 1rem 0;
+  padding:
+    1rem
+    1.2rem
+    1rem
+    0;
 
-  border-bottom: 1px solid #deded9;
+  border-bottom:
+    1px solid #deded9;
 }
+
 
 .fact-label {
   font-family: var(--font-mono);
+
   font-size: 0.62rem;
+
   letter-spacing: 0.14em;
+
   color: #888883;
 }
 
+
 .fact-value {
   font-family: var(--font-display);
+
   font-size: 0.95rem;
+
   color: #111111;
 }
 
@@ -185,13 +254,20 @@
 ========================================================= */
 
 .about-robot {
-  position: relative;
+  position: sticky;
+
+  top: 74px;
+
+  align-self: start;
 
   width: 100%;
-  height: 100%;
+
+  height: calc(100vh - 74px);
 
   display: flex;
-  align-items: flex-end;
+
+  align-items: center;
+
   justify-content: center;
 
   overflow: hidden;
@@ -199,9 +275,15 @@
   pointer-events: none;
 }
 
+
 #aboutRobotCanvas {
   width: 100%;
-  height: 82%;
+
+  /*
+    Smaller robot area.
+  */
+
+  height: 65%;
 
   display: block;
 }
@@ -214,38 +296,67 @@
 @media (max-width: 900px) {
 
   .about-page-body {
+    overflow-x: hidden;
+
     overflow-y: auto;
   }
 
+
   .about-layout {
-    height: auto;
+
+    min-height: auto;
 
     display: block;
 
-    padding: 0 7vw;
+    padding:
+      0
+      7vw;
   }
 
+
   .about-content {
+
     overflow: visible;
 
     padding-top: 5rem;
+
     padding-right: 0;
   }
 
+
   .about-intro h1 {
-    font-size: clamp(3rem, 12vw, 5rem);
+
+    font-size:
+      clamp(
+        3rem,
+        12vw,
+        5rem
+      );
   }
 
+
   .about-robot {
-    height: 350px;
+
+    position: relative;
+
+    top: auto;
+
+    height: 300px;
+
     margin-top: 2rem;
   }
 
+
   #aboutRobotCanvas {
+
     height: 100%;
   }
 
+
   .facts {
-    grid-template-columns: 1fr;
+
+    grid-template-columns:
+      1fr;
   }
+
 }
