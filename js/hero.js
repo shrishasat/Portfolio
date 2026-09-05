@@ -2,32 +2,50 @@ import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 
 
-/* =========================================================
-   THREE.JS SETUP
-========================================================= */
+/* =====================================================
+   BASIC THREE.JS SETUP
+===================================================== */
 
-const canvas = document.getElementById("robotCanvas");
+const canvas =
+  document.getElementById("robotCanvas");
 
-const scene = new THREE.Scene();
+
+const scene =
+  new THREE.Scene();
+
 
 scene.background = null;
 
 
-const camera = new THREE.PerspectiveCamera(
-  35,
-  window.innerWidth / window.innerHeight,
-  0.1,
-  100
+const camera =
+  new THREE.PerspectiveCamera(
+    35,
+    window.innerWidth / window.innerHeight,
+    0.1,
+    100
+  );
+
+
+camera.position.set(
+  0,
+  1.6,
+  8
 );
 
-camera.position.set(0, 1.6, 8);
 
+/* =====================================================
+   RENDERER
+===================================================== */
 
-const renderer = new THREE.WebGLRenderer({
-  canvas,
-  antialias: true,
-  alpha: true
-});
+const renderer =
+  new THREE.WebGLRenderer({
+
+    canvas: canvas,
+
+    antialias: true,
+
+    alpha: true
+  });
 
 
 renderer.setSize(
@@ -35,30 +53,37 @@ renderer.setSize(
   window.innerHeight
 );
 
+
 renderer.setPixelRatio(
   Math.min(window.devicePixelRatio, 2)
 );
 
-renderer.outputColorSpace = THREE.SRGBColorSpace;
+
+renderer.outputColorSpace =
+  THREE.SRGBColorSpace;
 
 
-/* =========================================================
+/* =====================================================
    LIGHTING
-========================================================= */
+===================================================== */
 
-const hemi = new THREE.HemisphereLight(
-  0xffffff,
-  0x777777,
-  2.8
-);
+const hemisphere =
+  new THREE.HemisphereLight(
+    0xffffff,
+    0x555555,
+    2.5
+  );
 
-scene.add(hemi);
+
+scene.add(hemisphere);
 
 
-const keyLight = new THREE.DirectionalLight(
-  0xffffff,
-  4.5
-);
+const keyLight =
+  new THREE.DirectionalLight(
+    0xffffff,
+    4
+  );
+
 
 keyLight.position.set(
   4,
@@ -66,28 +91,54 @@ keyLight.position.set(
   5
 );
 
+
 scene.add(keyLight);
 
 
-const fillLight = new THREE.DirectionalLight(
-  0xffffff,
-  2.5
-);
+const rimLight =
+  new THREE.DirectionalLight(
+    0xffffff,
+    2
+  );
 
-fillLight.position.set(
-  -5,
-  4,
+
+rimLight.position.set(
+  -4,
+  5,
   -4
 );
 
-scene.add(fillLight);
+
+scene.add(rimLight);
 
 
-/* =========================================================
-   ROBOT
-========================================================= */
+/* =====================================================
+   ROBOT SETTINGS
+===================================================== */
 
-const loader = new GLTFLoader();
+/*
+  IMPORTANT:
+  This is the model you said was working before.
+*/
+
+const MODEL_PATH =
+  "models/greetinggreet.glb";
+
+
+/*
+  Large robot on left.
+*/
+
+const ROBOT_POSITION =
+  new THREE.Vector3(
+    -2.9,
+    0.15,
+    0
+  );
+
+
+const ROBOT_SCALE = 2.25;
+
 
 let robot = null;
 
@@ -100,25 +151,11 @@ let isGreeting = false;
 let greetingTimer = null;
 
 
-/*
-  Large robot on the LEFT.
-
-  Increase/decrease these if you want to move it.
-*/
-const ROBOT_POSITION = new THREE.Vector3(
-  -2.8,
-  0.15,
-  0
-);
-
-const ROBOT_SCALE = 2.35;
-
-
-/* =========================================================
+/* =====================================================
    ROBOT MATERIAL
-========================================================= */
+===================================================== */
 
-function styleRobot(model) {
+function styleRobot(model){
 
   model.traverse((child) => {
 
@@ -126,82 +163,76 @@ function styleRobot(model) {
 
 
     child.castShadow = true;
+
     child.receiveShadow = true;
 
 
-    const materials = Array.isArray(child.material)
-      ? child.material
-      : [child.material];
+    const material =
+      child.material.clone();
 
 
-    child.material = materials.map((source) => {
+    /*
+      Shiny black robot.
+    */
 
-      const material = source.clone();
+    if ("color" in material){
 
-
-      if ("metalness" in material) {
-
-        material.metalness = 0.92;
-      }
-
-
-      if ("roughness" in material) {
-
-        material.roughness = 0.16;
-      }
+      material.color.set(
+        0x111111
+      );
+    }
 
 
-      if ("envMapIntensity" in material) {
+    if ("metalness" in material){
 
-        material.envMapIntensity = 2;
-      }
-
-
-      const name = (
-        `${child.name} ${material.name}`
-      ).toLowerCase();
+      material.metalness =
+        0.88;
+    }
 
 
-      /*
-        Default = shiny black.
+    if ("roughness" in material){
 
-        Parts named joint / silver / chrome /
-        white / eye etc. become white.
-      */
-
-      const lightPart =
-        /joint|white|silver|chrome|eye|light|hand|foot|neck/.test(name);
+      material.roughness =
+        0.16;
+    }
 
 
-      if ("color" in material) {
+    if ("envMapIntensity" in material){
 
-        material.color.set(
-          lightPart
-            ? 0xf2f2f0
-            : 0x111111
-        );
-      }
+      material.envMapIntensity =
+        1.8;
+    }
 
 
-      return material;
-
-    });
+    child.material =
+      material;
 
   });
 }
 
 
-/* =========================================================
-   LOAD GREETING ROBOT
-========================================================= */
+/* =====================================================
+   LOAD ROBOT
+===================================================== */
+
+const loader =
+  new GLTFLoader();
+
 
 loader.load(
 
-  "models/greetinggreet.glb",
+  MODEL_PATH,
 
   (gltf) => {
 
-    robot = gltf.scene;
+    console.log(
+      "Robot loaded:",
+      MODEL_PATH
+    );
+
+
+    robot =
+      gltf.scene;
 
 
     robot.position.copy(
@@ -214,46 +245,70 @@ loader.load(
     );
 
 
-    styleRobot(robot);
+    styleRobot(
+      robot
+    );
 
 
     /*
-      Prevent feet from being accidentally below
-      the visible canvas.
+      Check bounding box so that
+      the feet are not below the viewport.
     */
 
-    const box = new THREE.Box3()
-      .setFromObject(robot);
+    const box =
+      new THREE.Box3()
+        .setFromObject(robot);
 
 
-    const minY = box.min.y;
+    const minY =
+      box.min.y;
 
 
-    if (minY < -0.8) {
+    if (minY < -0.4){
 
       robot.position.y +=
-        Math.abs(minY) + 0.1;
+        Math.abs(minY) + 0.15;
     }
 
 
-    scene.add(robot);
+    scene.add(
+      robot
+    );
 
 
-    mixer = new THREE.AnimationMixer(robot);
+    /* -----------------------------------------------
+       ANIMATION
+    ------------------------------------------------ */
+
+    mixer =
+      new THREE.AnimationMixer(
+        robot
+      );
 
 
-    if (gltf.animations.length === 0) {
+    if (
+      !gltf.animations ||
+      gltf.animations.length === 0
+    ){
 
       console.warn(
-        "greetinggreet.glb contains no animation clips."
+        "Robot loaded, but no animation was found."
       );
 
       return;
     }
 
 
+    console.log(
+      "Animations found:",
+      gltf.animations.map(
+        animation => animation.name
+      )
+    );
+
+
     /*
-      Use the first animation in the GLB.
+      Use the first animation.
     */
 
     greetingAction =
@@ -268,20 +323,26 @@ loader.load(
     );
 
 
-    greetingAction.clampWhenFinished = true;
+    greetingAction.clampWhenFinished =
+      true;
 
 
     /*
       When greeting finishes:
-      wait 30 seconds,
-      then greet again.
+      wait exactly 30 seconds.
     */
 
     mixer.addEventListener(
       "finished",
       () => {
 
-        isGreeting = false;
+        console.log(
+          "Greeting finished. Waiting 30 seconds."
+        );
+
+
+        isGreeting =
+          false;
 
 
         clearTimeout(
@@ -289,17 +350,17 @@ loader.load(
         );
 
 
-        greetingTimer = setTimeout(
-          playGreeting,
-          30000
-        );
-
+        greetingTimer =
+          setTimeout(
+            playGreeting,
+            30000
+          );
       }
     );
 
 
     /*
-      First greeting after 1 second.
+      First greeting.
     */
 
     setTimeout(
@@ -309,61 +370,79 @@ loader.load(
 
   },
 
+
   undefined,
+
 
   (error) => {
 
     console.error(
-      "Could not load greetinggreet.glb:",
+      "ROBOT LOAD ERROR:",
+      MODEL_PATH,
       error
     );
 
   }
+
 );
 
 
-/* =========================================================
-   PLAY GREETING
-========================================================= */
+/* =====================================================
+   GREETING FUNCTION
+===================================================== */
 
-function playGreeting() {
+function playGreeting(){
 
-  if (!greetingAction) return;
+  if (
+    !greetingAction ||
+    isGreeting
+  ){
+
+    return;
+  }
 
 
   /*
-    Don't restart the animation halfway through.
+    Cancel an existing 30-second timer.
   */
-
-  if (isGreeting) return;
-
 
   clearTimeout(
     greetingTimer
   );
 
 
-  isGreeting = true;
+  isGreeting =
+    true;
 
 
   greetingAction.reset();
+
 
   greetingAction.setLoop(
     THREE.LoopOnce,
     1
   );
 
-  greetingAction.clampWhenFinished = true;
+
+  greetingAction.clampWhenFinished =
+    true;
+
 
   greetingAction.play();
+
+
+  console.log(
+    "Robot greeting."
+  );
 }
 
 
-/* =========================================================
-   RIGHT-SIDE MOUSE TRIGGER
-========================================================= */
+/* =====================================================
+   RIGHT-SIDE CURSOR TRIGGER
+===================================================== */
 
-let pointerWasOnRight = false;
+let pointerWasRight =
+  false;
 
 
 window.addEventListener(
@@ -371,44 +450,42 @@ window.addEventListener(
   (event) => {
 
     /*
-      Rightmost 28% of the screen.
+      Rightmost 25% of the screen.
     */
 
-    const pointerOnRight =
+    const pointerIsRight =
       event.clientX >
-      window.innerWidth * 0.72;
+      window.innerWidth * 0.75;
 
 
     /*
-      Trigger only when the cursor ENTERS
-      the right-side zone.
-
-      Otherwise it would restart constantly
-      while the mouse is moving.
+      Trigger when entering the zone.
     */
 
     if (
-      pointerOnRight &&
-      !pointerWasOnRight
-    ) {
+      pointerIsRight &&
+      !pointerWasRight
+    ){
 
       playGreeting();
     }
 
 
-    pointerWasOnRight =
-      pointerOnRight;
+    pointerWasRight =
+      pointerIsRight;
   }
 );
 
 
-/* =========================================================
+/* =====================================================
    ROTATING PHRASES
-========================================================= */
+===================================================== */
 
 const PHRASES = [
 
   "half scientist, half skeptic.",
+
+  "building models, doubting models.",
 
   "curious enough to question the model.",
 
@@ -416,11 +493,9 @@ const PHRASES = [
 
   "somewhere between brains and machines.",
 
-  "building models, doubting models.",
+  "part researcher, part builder.",
 
   "less interested in answers than better questions.",
-
-  "part researcher, part builder.",
 
   "trying to understand what the brain leaves unsaid.",
 
@@ -433,33 +508,69 @@ const PHRASES = [
 ];
 
 
-const phraseEl =
-  document.getElementById("phrase");
+const phrase =
+  document.getElementById(
+    "phrase"
+  );
+
+
+/*
+  Your restored index.html no longer contains
+  #phrase.
+
+  So we create it automatically instead of
+  making you change the HTML again.
+*/
+
+let phraseElement =
+  phrase;
+
+
+if (!phraseElement){
+
+  phraseElement =
+    document.createElement(
+      "div"
+    );
+
+
+  phraseElement.id =
+    "phrase";
+
+
+  document.querySelector(
+    ".hero"
+  ).appendChild(
+    phraseElement
+  );
+
+}
 
 
 let phraseIndex = 0;
 
 
-function showNextPhrase() {
+function showPhrase(){
 
-  if (!phraseEl) return;
-
-
-  phraseEl.classList.remove("run");
+  phraseElement.classList.remove(
+    "run"
+  );
 
 
   /*
-    Force browser to restart animation.
+    Force animation restart.
   */
 
-  void phraseEl.offsetWidth;
+  void phraseElement.offsetWidth;
 
 
-  phraseEl.textContent =
+  phraseElement.textContent =
     PHRASES[phraseIndex];
 
 
-  phraseEl.classList.add("run");
+  phraseElement.classList.add(
+    "run"
+  );
 
 
   phraseIndex =
@@ -468,44 +579,140 @@ function showNextPhrase() {
 }
 
 
-/*
-  First phrase after a short delay.
-*/
-
 setTimeout(
-  showNextPhrase,
+  showPhrase,
   1800
 );
 
 
-/*
-  Change phrase every ~7 seconds.
-*/
-
 setInterval(
-  showNextPhrase,
+  showPhrase,
   7000
 );
 
 
-/* =========================================================
-   LIVE TIME
-========================================================= */
+/* =====================================================
+   PHRASE CSS
+===================================================== */
 
-const localTimeEl =
-  document.getElementById("localTime");
+const phraseStyle =
+  document.createElement(
+    "style"
+  );
 
 
-function updateClock() {
+phraseStyle.textContent = `
 
-  if (!localTimeEl) return;
+#phrase{
+
+  position:absolute;
+
+  left:50%;
+
+  bottom:10vh;
+
+  transform:translateX(-50%);
+
+  width:90vw;
+
+  text-align:center;
+
+  z-index:10;
+
+  font-family:var(--font-display);
+
+  font-weight:600;
+
+  font-size:clamp(2.5rem,5.8vw,6.5rem);
+
+  line-height:0.95;
+
+  letter-spacing:-0.045em;
+
+  color:#080808;
+
+  opacity:0;
+
+  white-space:nowrap;
+
+  pointer-events:none;
+}
+
+
+#phrase.run{
+
+  animation:
+    phraseAppear 5.8s ease-in-out;
+}
+
+
+@keyframes phraseAppear{
+
+  0%{
+
+    opacity:0;
+
+    transform:
+      translateX(-50%)
+      translateY(12px);
+  }
+
+  15%{
+
+    opacity:1;
+
+    transform:
+      translateX(-50%)
+      translateY(0);
+  }
+
+  72%{
+
+    opacity:1;
+
+    transform:
+      translateX(-50%)
+      translateY(0);
+  }
+
+  100%{
+
+    opacity:0;
+
+    transform:
+      translateX(-50%)
+      translateY(-8px);
+  }
+}
+
+`;
+
+
+document.head.appendChild(
+  phraseStyle
+);
+
+
+/* =====================================================
+   TELEMETRY
+===================================================== */
+
+const telemetry =
+  document.getElementById(
+    "telemetry"
+  );
+
+
+function updateTelemetry(){
+
+  if (!telemetry) return;
 
 
   const now =
     new Date();
 
 
-  localTimeEl.textContent =
+  const time =
     now.toLocaleTimeString(
       [],
       {
@@ -514,243 +721,116 @@ function updateClock() {
         second: "2-digit"
       }
     );
-}
 
 
-updateClock();
-
-
-setInterval(
-  updateClock,
-  1000
-);
-
-
-/* =========================================================
-   EARTH ORBIT
-========================================================= */
-
-/*
-  Approximate distance Earth travels around the Sun
-  during the current calendar day.
-
-  Circumference ≈ 2π × 149.6 million km
-  / 365.2425 days.
-*/
-
-const orbitTodayEl =
-  document.getElementById("orbitToday");
-
-
-function updateOrbit() {
-
-  if (!orbitTodayEl) return;
-
+  /*
+    Approximate distance travelled
+    by Earth around the Sun in one day.
+  */
 
   const earthOrbitRadius =
     149600000;
 
 
   const circumference =
-    2 * Math.PI *
+    2 *
+    Math.PI *
     earthOrbitRadius;
 
 
-  const dailyDistance =
+  const dailyOrbit =
     circumference /
     365.2425;
 
 
-  orbitTodayEl.textContent =
-    `${Math.round(dailyDistance).toLocaleString()} KM`;
+  telemetry.innerHTML = `
+
+    <div class="tele-row">
+
+      <span class="tele-label">
+        LOCAL
+      </span>
+
+      <span class="tele-value">
+        ${time}
+      </span>
+
+    </div>
+
+
+    <div class="tele-row">
+
+      <span class="tele-label">
+        EARTH → SUN
+      </span>
+
+      <span class="tele-value">
+        ~149.6M KM
+      </span>
+
+    </div>
+
+
+    <div class="tele-row">
+
+      <span class="tele-label">
+        ANDROMEDA
+      </span>
+
+      <span class="tele-value">
+        ~2.54M LY
+      </span>
+
+    </div>
+
+
+    <div class="tele-row">
+
+      <span class="tele-label">
+        EARTH ORBIT / TODAY
+      </span>
+
+      <span class="tele-value">
+        ${Math.round(dailyOrbit).toLocaleString()} KM
+      </span>
+
+    </div>
+
+
+    <div class="tele-row">
+
+      <span class="tele-label">
+        ROBOT
+      </span>
+
+      <span class="tele-value">
+        ONLINE
+      </span>
+
+    </div>
+
+  `;
 }
 
 
-updateOrbit();
+updateTelemetry();
 
-
-/* =========================================================
-   CLOSEST UPCOMING ASTEROID
-========================================================= */
-
-const asteroidEl =
-  document.getElementById(
-    "asteroidDistance"
-  );
-
-
-/*
-  NASA/JPL CNEOS CAD API.
-
-  We request close approaches from today
-  through the next 7 days.
-
-  sort=dist gives the closest object first.
-*/
-
-async function updateAsteroid() {
-
-  if (!asteroidEl) return;
-
-
-  try {
-
-    const now =
-      new Date();
-
-
-    const start =
-      now.toISOString()
-        .slice(0, 10);
-
-
-    const future =
-      new Date(
-        now.getTime() +
-        7 * 24 * 60 * 60 * 1000
-      );
-
-
-    const end =
-      future.toISOString()
-        .slice(0, 10);
-
-
-    const url =
-      "https://ssd-api.jpl.nasa.gov/cad.api" +
-      `?body=Earth` +
-      `&date-min=${start}` +
-      `&date-max=${end}` +
-      `&dist-max=0.1` +
-      `&sort=dist`;
-
-
-    const response =
-      await fetch(url);
-
-
-    if (!response.ok) {
-
-      throw new Error(
-        `NASA API returned ${response.status}`
-      );
-    }
-
-
-    const data =
-      await response.json();
-
-
-    /*
-      NASA's CAD API returns:
-      data = array of close approaches
-
-      dist is in AU.
-    */
-
-    if (
-      !data.data ||
-      data.data.length === 0
-    ) {
-
-      asteroidEl.textContent =
-        "NO OBJECTS";
-
-      return;
-    }
-
-
-    const closest =
-      data.data[0];
-
-
-    /*
-      According to the CNEOS API structure,
-      the distance column is returned in AU.
-    */
-
-    const distanceAU =
-      parseFloat(
-        closest[
-          data.fields.indexOf("dist")
-        ]
-      );
-
-
-    if (
-      Number.isNaN(distanceAU)
-    ) {
-
-      asteroidEl.textContent =
-        "DATA UNAVAILABLE";
-
-      return;
-    }
-
-
-    /*
-      1 AU ≈ 92,955,807 miles.
-    */
-
-    const distanceMiles =
-      distanceAU *
-      92955807;
-
-
-    const roundedMiles =
-      Math.round(
-        distanceMiles
-      );
-
-
-    asteroidEl.textContent =
-      `${roundedMiles.toLocaleString()} MI`;
-
-  }
-
-  catch (error) {
-
-    console.warn(
-      "Asteroid data unavailable:",
-      error
-    );
-
-
-    asteroidEl.textContent =
-      "SCAN UNAVAILABLE";
-  }
-}
-
-
-/*
-  Run immediately.
-*/
-
-updateAsteroid();
-
-
-/*
-  Re-check every 10 minutes.
-
-  The actual distance will also change as
-  NASA/JPL updates the orbital solution.
-*/
 
 setInterval(
-  updateAsteroid,
-  10 * 60 * 1000
+  updateTelemetry,
+  1000
 );
 
 
-/* =========================================================
+/* =====================================================
    ANIMATION LOOP
-========================================================= */
+===================================================== */
 
 const clock =
   new THREE.Clock();
 
 
-function animate() {
+function animate(){
 
   requestAnimationFrame(
     animate
@@ -761,7 +841,7 @@ function animate() {
     clock.getDelta();
 
 
-  if (mixer) {
+  if (mixer){
 
     mixer.update(
       delta
@@ -779,9 +859,9 @@ function animate() {
 animate();
 
 
-/* =========================================================
+/* =====================================================
    RESIZE
-========================================================= */
+===================================================== */
 
 window.addEventListener(
   "resize",
@@ -804,9 +884,9 @@ window.addEventListener(
 );
 
 
-/* =========================================================
+/* =====================================================
    NAVIGATION REVEAL
-========================================================= */
+===================================================== */
 
 const nav =
   document.getElementById(
@@ -814,25 +894,28 @@ const nav =
   );
 
 
-function updateNav() {
+function updateNav(){
 
   if (!nav) return;
 
 
   /*
-    Only a small scroll is necessary.
-    Previously the threshold was too large
-    relative to the available page height.
+    Just a tiny amount of scrolling
+    reveals the navigation.
   */
 
-  const shouldShow =
-    window.scrollY > 35;
+  if (window.scrollY > 30){
 
+    nav.classList.add(
+      "nav--visible"
+    );
 
-  nav.classList.toggle(
-    "nav--visible",
-    shouldShow
-  );
+  } else {
+
+    nav.classList.remove(
+      "nav--visible"
+    );
+  }
 }
 
 
@@ -844,9 +927,5 @@ window.addEventListener(
   }
 );
 
-
-/*
-  Run once on page load.
-*/
 
 updateNav();
