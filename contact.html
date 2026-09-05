@@ -1,24 +1,31 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contact — Shrisha Sathishskumar</title>
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/pages.css">
-<script type="importmap">
-{
-  "imports": {
-    "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
-    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Contact — Shrisha Sathishkumar</title>
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/pages.css">
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"
+    }
   }
-}
-</script>
+  </script>
 </head>
+
 <body>
 
+  <!-- HEADER -->
   <header class="site-header">
     <a class="brand" href="index.html">SHRISHA</a>
+
     <nav>
       <a href="about.html">ABOUT ME</a>
       <a href="blogs.html">BLOGS</a>
@@ -27,26 +34,101 @@
     </nav>
   </header>
 
-  <section class="page-hero">
-    <p class="eyebrow-mono">CONTACT</p>
-    <h1>Say hello.</h1>
-    <p>Open to conversations about neuroAI, BCIs, or anything adjacent. The fastest way to
-       reach me is email.</p>
-  </section>
 
-  <section class="content-block">
-    <ul class="contact-list">
-      <li><a href="s.sathishkumar@bham.ac.uk">hello@example.com</a></li>
-      <li><a href="https://github.com/shrishasat/" target="_blank" rel="noopener">github.com/shrishasat</a></li>
-      <li><a href="https://www.linkedin.com/in/shrishasathishkumar/" target="_blank" rel="noopener">linkedin.com/in/your-handle</a></li>
-    </ul>
-  </section>
+  <!-- CONTACT -->
+  <main class="contact-page">
 
-  <div class="corner-robot"><canvas id="cornerCanvas"></canvas></div>
+    <section class="page-hero">
 
+      <p class="eyebrow-mono">CONTACT / 01</p>
+
+      <h1>Let's explore<br>what's possible.</h1>
+
+      <p>
+        Interested in collaborating, exchanging ideas, or exploring problems
+        at the intersection of neuroscience, AI and intelligent systems?
+        I'd love to hear from you.
+      </p>
+
+    </section>
+
+
+    <section class="content-block">
+
+      <div class="contact-intro">
+        <p class="contact-label">OPEN TO</p>
+
+        <p class="contact-description">
+          Research collaborations · NeuroAI · Brain–computer interfaces ·
+          Neural decoding · Computational neuroscience · AI × neuroscience
+        </p>
+      </div>
+
+
+      <ul class="contact-list">
+
+        <li>
+          <span>EMAIL</span>
+          <a href="mailto:s.sathishkumar@bham.ac.uk">
+            s.sathishkumar@bham.ac.uk
+          </a>
+        </li>
+
+        <li>
+          <span>GITHUB</span>
+          <a
+            href="https://github.com/shrishasat/"
+            target="_blank"
+            rel="noopener"
+          >
+            github.com/shrishasat
+          </a>
+        </li>
+
+        <li>
+          <span>LINKEDIN</span>
+          <a
+            href="https://www.linkedin.com/in/shrishasathishkumar/"
+            target="_blank"
+            rel="noopener"
+          >
+            linkedin.com/in/shrishasathishkumar
+          </a>
+        </li>
+
+      </ul>
+
+    </section>
+
+  </main>
+
+
+  <!-- ROBOT -->
+  <div class="corner-robot">
+    <canvas id="cornerCanvas"></canvas>
+  </div>
+
+
+  <!-- THREE.JS ROBOT -->
   <script type="module">
+
     import { createCornerRobot } from "./js/robots.js";
-    createCornerRobot("#cornerCanvas", "models/Martelo 2.glb");
+
+    createCornerRobot(
+      "#cornerCanvas",
+      "models/angry.glb",
+      {
+        scale: 2.0,
+        x: 0,
+        y: -0.65,
+        z: 0,
+        cameraY: 1.45,
+        cameraZ: 5.2
+      }
+    );
+
   </script>
+
 </body>
 </html>
+```
