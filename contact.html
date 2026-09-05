@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Shrisha Sathishskumar</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/pages.css">
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+
+  <header class="site-header">
+    <a class="brand" href="index.html">SHRISHA</a>
+    <nav>
+      <a href="about.html">ABOUT ME</a>
+      <a href="blogs.html">BLOGS</a>
+      <a href="projects.html">PROJECTS</a>
+      <a href="contact.html" aria-current="page">CONTACT</a>
+    </nav>
+  </header>
+
+  <section class="page-hero">
+    <p class="eyebrow-mono">CONTACT</p>
+    <h1>Say hello.</h1>
+    <p>Open to conversations about neuroAI, BCIs, or anything adjacent. The fastest way to
+       reach me is email — replace the placeholders below with your real links.</p>
+  </section>
+
+  <section class="content-block">
+    <ul class="contact-list">
+      <li><a href="mailto:hello@example.com">hello@example.com</a></li>
+      <li><a href="https://github.com/shrishasat" target="_blank" rel="noopener">github.com/shrishasat</a></li>
+      <li><a href="https://linkedin.com/in/your-handle" target="_blank" rel="noopener">linkedin.com/in/your-handle</a></li>
+    </ul>
+  </section>
+
+  <div class="corner-robot"><canvas id="cornerCanvas"></canvas></div>
+
+  <script type="module">
+    import { createCornerRobot } from "./js/robots.js";
+    createCornerRobot("#cornerCanvas", "models/Martelo 2.glb");
+  </script>
+</body>
+</html>

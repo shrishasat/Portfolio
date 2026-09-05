@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects — Shrisha Sathishskumar</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/pages.css">
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+
+  <header class="site-header">
+    <a class="brand" href="index.html">SHRISHA</a>
+    <nav>
+      <a href="about.html">ABOUT ME</a>
+      <a href="blogs.html">BLOGS</a>
+      <a href="projects.html" aria-current="page">PROJECTS</a>
+      <a href="contact.html">CONTACT</a>
+    </nav>
+  </header>
+
+  <section class="page-hero">
+    <p class="eyebrow-mono">PROJECTS</p>
+    <h1>Things I've built and broken.</h1>
+    <p>A running set of work — some finished, some deliberately left open. Swap these placeholder
+       cards out for your real project write-ups and links.</p>
+  </section>
+
+  <section class="content-block">
+    <div class="grid">
+      <article class="card">
+        <h3>EEG-to-text baseline</h3>
+        <p>A small reproduction of contrastive non-invasive decoding pipelines, built to
+           understand where the accuracy ceiling actually comes from.</p>
+        <div class="tags"><span>PyTorch</span><span>EEG</span><span>Contrastive learning</span></div>
+      </article>
+
+      <article class="card">
+        <h3>Attention on cortical time-series</h3>
+        <p>Exploring transformer attention maps over MEG windows to see what the model is
+           actually attending to when it gets a prediction right.</p>
+        <div class="tags"><span>Transformers</span><span>MEG</span><span>Interpretability</span></div>
+      </article>
+
+      <article class="card">
+        <h3>This portfolio</h3>
+        <p>A cinematic, robot-guided site built to feel less like a résumé and more like a
+           small piece of interactive fiction.</p>
+        <div class="tags"><span>Three.js</span><span>WebGL</span><span>Design</span></div>
+      </article>
+    </div>
+  </section>
+
+  <div class="corner-robot"><canvas id="cornerCanvas"></canvas></div>
+
+  <div class="walk-strip">
+    <div class="walk-robot" id="walkContainer" style="left:12px;">
+      <canvas id="walkCanvas"></canvas>
+    </div>
+  </div>
+
+  <script type="module">
+    import { createCornerRobot, createScrollWalkRobot } from "./js/robots.js";
+    createCornerRobot("#cornerCanvas", "models/jumpy.glb");
+    createScrollWalkRobot("#walkCanvas", "#walkContainer", "models/walking.glb");
+  </script>
+</body>
+</html>
