@@ -1,14 +1,14 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>About — Shrisha Sathishskumar</title>
+<title>About — Shrisha Sathishkumar</title>
 
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/pages.css">
+<link rel="stylesheet" href="css/about.css">
 
 <script type="importmap">
 {
@@ -20,108 +20,182 @@
 </script>
 </head>
 
-<body>
+<body class="about-page-body">
 
-  <header class="site-header">
+<header class="site-header">
+  <a class="brand" href="index.html">SHRISHA</a>
 
-    <a class="brand" href="index.html">
-      SHRISHA
-    </a>
-
-    <nav>
-      <a href="about.html" aria-current="page">ABOUT ME</a>
-      <a href="blogs.html">BLOGS</a>
-      <a href="projects.html">PROJECTS</a>
-      <a href="contact.html">CONTACT</a>
-    </nav>
-
-  </header>
+  <nav>
+    <a href="about.html" aria-current="page">ABOUT ME</a>
+    <a href="blogs.html">BLOGS</a>
+    <a href="projects.html">PROJECTS</a>
+    <a href="contact.html">CONTACT</a>
+  </nav>
+</header>
 
 
-  <main class="about-page">
+<main class="about-layout">
 
-    <!-- LEFT CONTENT -->
+  <!-- ================= LEFT / MAIN CONTENT ================= -->
 
-    <section class="page-hero">
+  <section class="about-content">
 
-      <p class="eyebrow-mono">
-        ABOUT
-      </p>
+    <div class="about-intro">
+      <p class="eyebrow-mono">ABOUT ME</p>
 
       <h1>
-        I work at the edge of brains and machines.
+        I work where<br>
+        brains meet machines.
       </h1>
 
-      <p>
-        I'm Shrisha Sathishskumar — I work in neuroAI, the stretch of ground
-        where neuroscience, machine learning, and a healthy amount of curiosity
-        overlap. Most days that means reading brain-computer-interface papers,
-        building small models, and asking too many "but why does it work"
-        questions.
+      <p class="lead">
+        I'm Shrisha Sathishkumar, a biomedical engineer and computational
+        neuroscientist interested in understanding how information is represented
+        in the brain — and how we can build machines that learn from it.
       </p>
-
-    </section>
-
-
-    <section class="content-block">
-
-      <h2>
-        What I'm drawn to
-      </h2>
-
-      <p>
-        Non-invasive brain decoding, representation learning, and the question
-        of how much of cognition is legible from the outside. I like problems
-        that sit between disciplines, where the interesting part is translating
-        one field's language into another's.
-      </p>
+    </div>
 
 
-      <h2>
-        How I work
-      </h2>
+    <div class="about-sections">
 
-      <p>
-        Slowly, then all at once. I keep a running journal of papers and
-        half-formed ideas — some of it ends up in the blog. I'd rather
-        understand one idea deeply than skim ten.
-      </p>
+      <section>
+        <span class="section-index">01</span>
+
+        <div>
+          <h2>Background</h2>
+
+          <p>
+            My background spans <strong>Biomedical Engineering</strong>,
+            <strong>Computational Neuroscience</strong>, and
+            <strong>Cognitive Robotics</strong>.
+          </p>
+
+          <p>
+            My work sits between neuroscience, machine learning and
+            brain-computer interfaces, with a particular interest in extracting
+            meaningful representations from non-invasive brain signals.
+          </p>
+        </div>
+      </section>
 
 
-      <h2>
-        Outside of work
-      </h2>
+      <section>
+        <span class="section-index">02</span>
 
-      <p>
-        Reading, long scrolls through arXiv, and the reading corner on my blog
-        page, where I keep a running list of books worth your time.
-      </p>
+        <div>
+          <h2>Recent work</h2>
 
-    </section>
+          <p>
+            Recently I've been working with <strong>MEG</strong> to investigate
+            how language, meaning and iconicity are represented in the brain.
+            I've worked with neural encoding, representational similarity
+            analysis, temporal response functions and computational language
+            representations.
+          </p>
+
+          <p>
+            Alongside research, I've been building small computational tools,
+            experimenting with GPU-accelerated analysis and exploring the
+            intersection between neuroscience and AI.
+          </p>
+        </div>
+      </section>
 
 
-    <!-- RIGHT ROBOT -->
+      <section>
+        <span class="section-index">03</span>
 
-    <div class="about-robot">
+        <div>
+          <h2>What interests me</h2>
 
-      <canvas id="flairCanvas"></canvas>
+          <p>
+            Non-invasive neural decoding. Representation learning.
+            Brain-computer interfaces. Computational models of cognition.
+            And the bigger question of how much of the mind can be inferred
+            from the signals it leaves behind.
+          </p>
+        </div>
+      </section>
+
+
+      <section class="facts-section">
+        <span class="section-index">04</span>
+
+        <div>
+          <h2>Some things about me</h2>
+
+          <div class="facts">
+
+            <div class="fact">
+              <span class="fact-label">BACKGROUND</span>
+              <span class="fact-value">Biomedical Engineering</span>
+            </div>
+
+            <div class="fact">
+              <span class="fact-label">MSc</span>
+              <span class="fact-value">
+                Computational Neuroscience &amp; Cognitive Robotics
+              </span>
+            </div>
+
+            <div class="fact">
+              <span class="fact-label">SIGNALS</span>
+              <span class="fact-value">MEG · EEG · fMRI · fNIRS</span>
+            </div>
+
+            <div class="fact">
+              <span class="fact-label">MODELS</span>
+              <span class="fact-value">
+                RSA · mTRF · Ridge · Transformers
+              </span>
+            </div>
+
+            <div class="fact">
+              <span class="fact-label">LANGUAGES</span>
+              <span class="fact-value">Python · MATLAB · PyTorch</span>
+            </div>
+
+            <div class="fact">
+              <span class="fact-label">CURRENT CURIOSITY</span>
+              <span class="fact-value">
+                Neural representations of language
+              </span>
+            </div>
+
+          </div>
+        </div>
+      </section>
 
     </div>
 
-  </main>
+  </section>
 
 
-  <script type="module">
+  <!-- ================= RIGHT ROBOT ================= -->
 
-    import { createCornerRobot } from "./js/robots.js";
+  <aside class="about-robot">
+    <canvas id="aboutRobotCanvas"></canvas>
+  </aside>
 
-    createCornerRobot(
-      "#flairCanvas",
-      "models/flair.glb"
-    );
+</main>
 
-  </script>
+
+<script type="module">
+
+import { createCornerRobot } from "./js/robots.js";
+
+createCornerRobot(
+  "#aboutRobotCanvas",
+  "models/Flair.glb",
+  {
+    scale: 2.35,
+    y: -0.65,
+    cameraY: 1.55,
+    cameraZ: 5.5
+  }
+);
+
+</script>
 
 </body>
 </html>
-```
