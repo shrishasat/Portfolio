@@ -29,46 +29,47 @@ function styleRobot(model) {
     }
 
 
-    const materials =
+    const originalMaterials =
       Array.isArray(child.material)
         ? child.material
         : [child.material];
 
 
-    materials.forEach((material) => {
+    const newMaterials =
+      originalMaterials.map((material) => {
 
-      const m =
-        material.clone();
-
-
-      /*
-        Black / white chrome appearance.
-
-        We deliberately keep it close to black.
-        White lighting creates the highlights.
-      */
-
-      m.color.setRGB(
-        0.025,
-        0.025,
-        0.025
-      );
+        const m =
+          material.clone();
 
 
-      m.metalness =
-        0.9;
+        /*
+          Black / shiny metallic appearance
+        */
+
+        m.color.setRGB(
+          0.025,
+          0.025,
+          0.025
+        );
 
 
-      m.roughness =
-        0.15;
+        m.metalness =
+          0.9;
 
 
-      child.material =
-        Array.isArray(child.material)
-          ? materials
-          : m;
+        m.roughness =
+          0.15;
 
-    });
+
+        return m;
+
+      });
+
+
+    child.material =
+      Array.isArray(child.material)
+        ? newMaterials
+        : newMaterials[0];
 
   });
 
@@ -155,9 +156,9 @@ function buildScene(
     THREE.PCFSoftShadowMap;
 
 
-  /* =====================================================
+  /* =======================================================
      LIGHTING
-  ===================================================== */
+  ======================================================= */
 
   const hemisphere =
     new THREE.HemisphereLight(
@@ -233,6 +234,10 @@ function buildScene(
   );
 
 
+  /* =======================================================
+     RESIZE
+  ======================================================= */
+
   function resize() {
 
     const w =
@@ -279,6 +284,7 @@ function buildScene(
 
 /* =========================================================
    CONTINUOUS ROBOT
+   ABOUT / PROJECTS / CONTACT
 ========================================================= */
 
 export function createCornerRobot(
@@ -308,7 +314,11 @@ export function createCornerRobot(
 
     scale = 2.0,
 
+    x = 0,
+
     y = -0.65,
+
+    z = 0,
 
     cameraY = 1.45,
 
@@ -339,11 +349,20 @@ export function createCornerRobot(
     new THREE.Clock();
 
 
+  /* =======================================================
+     LOAD MODEL
+  ======================================================= */
+
   loader.load(
 
     modelPath,
 
     (gltf) => {
+
+      console.log(
+        `Robot loaded: ${modelPath}`
+      );
+
 
       const model =
         gltf.scene;
@@ -354,15 +373,10 @@ export function createCornerRobot(
       );
 
 
-      /*
-        Raised slightly so the feet
-        don't disappear below the canvas.
-      */
-
       model.position.set(
-        0,
+        x,
         y,
-        0
+        z
       );
 
 
@@ -377,13 +391,22 @@ export function createCornerRobot(
 
 
       /* ===================================================
-         LOOP ANIMATION FOREVER
+         CONTINUOUS ANIMATION
       =================================================== */
 
       if (
         gltf.animations &&
         gltf.animations.length > 0
       ) {
+
+        console.log(
+          "Animations found:",
+          gltf.animations.map(
+            animation =>
+              animation.name
+          )
+        );
+
 
         mixer =
           new THREE.AnimationMixer(
@@ -396,6 +419,10 @@ export function createCornerRobot(
             gltf.animations[0]
           );
 
+
+        /*
+          Repeat forever.
+        */
 
         action.setLoop(
           THREE.LoopRepeat,
@@ -434,6 +461,10 @@ export function createCornerRobot(
   );
 
 
+  /* =======================================================
+     ANIMATION LOOP
+  ======================================================= */
+
   function animate() {
 
     requestAnimationFrame(
@@ -469,7 +500,8 @@ export function createCornerRobot(
 
 /* =========================================================
    BLOG ROBOT
-   Plays ONLY while scrolling.
+   walking.glb
+   ANIMATES ONLY WHILE USER IS SCROLLING
 ========================================================= */
 
 export function createScrollRobot(
@@ -485,7 +517,13 @@ export function createScrollRobot(
 
 
   if (!canvas) {
+
+    console.warn(
+      `Canvas ${canvasSelector} not found`
+    );
+
     return;
+
   }
 
 
@@ -493,7 +531,11 @@ export function createScrollRobot(
 
     scale = 2.0,
 
+    x = 0,
+
     y = -0.65,
+
+    z = 0,
 
     cameraY = 1.45,
 
@@ -536,11 +578,20 @@ export function createScrollRobot(
     new THREE.Clock();
 
 
+  /* =======================================================
+     LOAD WALKING ROBOT
+  ======================================================= */
+
   loader.load(
 
     modelPath,
 
     (gltf) => {
+
+      console.log(
+        `Scroll robot loaded: ${modelPath}`
+      );
+
 
       const model =
         gltf.scene;
@@ -552,9 +603,9 @@ export function createScrollRobot(
 
 
       model.position.set(
-        0,
+        x,
         y,
-        0
+        z
       );
 
 
@@ -568,10 +619,23 @@ export function createScrollRobot(
       );
 
 
+      /* ===================================================
+         ANIMATION
+      =================================================== */
+
       if (
         gltf.animations &&
         gltf.animations.length > 0
       ) {
+
+        console.log(
+          "Walking animations found:",
+          gltf.animations.map(
+            animation =>
+              animation.name
+          )
+        );
+
 
         mixer =
           new THREE.AnimationMixer(
@@ -585,10 +649,19 @@ export function createScrollRobot(
           );
 
 
+        /*
+          The walking animation itself
+          loops continuously while active.
+        */
+
         action.setLoop(
           THREE.LoopRepeat,
           Infinity
         );
+
+
+        action.clampWhenFinished =
+          false;
 
 
         /*
@@ -599,6 +672,13 @@ export function createScrollRobot(
 
         action.paused =
           true;
+
+      }
+      else {
+
+        console.warn(
+          `No animation found in ${modelPath}`
+        );
 
       }
 
@@ -618,9 +698,9 @@ export function createScrollRobot(
   );
 
 
-  /* =====================================================
-     SCROLL START
-  ===================================================== */
+  /* =======================================================
+     START WALKING WHEN SCROLLING
+  ======================================================= */
 
   function startAnimation() {
 
@@ -629,21 +709,23 @@ export function createScrollRobot(
     }
 
 
-    if (!isScrolling) {
+    isScrolling =
+      true;
 
-      isScrolling =
-        true;
 
-      action.paused =
-        false;
-
-    }
+    action.paused =
+      false;
 
 
     clearTimeout(
       stopTimer
     );
 
+
+    /*
+      If no new scroll event occurs
+      for 180 ms, scrolling has stopped.
+    */
 
     stopTimer =
       setTimeout(
@@ -654,9 +736,9 @@ export function createScrollRobot(
   }
 
 
-  /* =====================================================
-     SCROLL STOP
-  ===================================================== */
+  /* =======================================================
+     STOP WALKING WHEN SCROLLING STOPS
+  ======================================================= */
 
   function stopAnimation() {
 
@@ -683,9 +765,9 @@ export function createScrollRobot(
   );
 
 
-  /* =====================================================
+  /* =======================================================
      RENDER
-  ===================================================== */
+  ======================================================= */
 
   function animate() {
 
@@ -697,6 +779,11 @@ export function createScrollRobot(
     const delta =
       clock.getDelta();
 
+
+    /*
+      Only advance the animation
+      while the page is scrolling.
+    */
 
     if (
       mixer &&
