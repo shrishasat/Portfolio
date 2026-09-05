@@ -1,125 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Shrisha Sathishkumar</title>
+<meta charset="UTF-8">
 
-  <meta
-    name="description"
-    content="Shrisha Sathishkumar — neuroscience, neuroAI, brain-machine interfaces and computational research."
-  >
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
 
-  <link rel="stylesheet" href="css/style.css">
+<title>Shrisha Sathishkumar</title>
 
-  <script type="importmap">
-  {
-    "imports": {
-      "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
-      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"
-    }
+<meta
+  name="description"
+  content="Shrisha Sathishkumar — computational neuroscience, neuroAI and brain-machine interfaces."
+>
+
+<link rel="stylesheet" href="css/style.css">
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"
   }
-  </script>
+}
+</script>
+
 </head>
 
-<body>
 
-  <!-- 3D robot -->
-  <canvas id="robotCanvas"></canvas>
-
-  <!-- Navigation revealed by scrolling -->
-  <nav id="nav" aria-label="Main navigation">
-
-    <a href="about.html">ABOUT ME</a>
-    <a href="blogs.html">BLOGS</a>
-    <a href="projects.html">PROJECTS</a>
-    <a href="contact.html">CONTACT</a>
-
-  </nav>
+<body class="home-page">
 
 
-  <!-- Live information -->
-  <div id="telemetry">
+<!-- =====================================================
+     ROBOT
+===================================================== -->
 
-    <div class="tele-line">
-      <span>LOCAL TIME</span>
-      <span id="localTime">--:--:--</span>
-    </div>
+<canvas id="robotCanvas"></canvas>
 
-    <div class="tele-line">
-      <span>EARTH → SUN</span>
-      <span>~149.6M KM</span>
-    </div>
 
-    <div class="tele-line">
-      <span>EARTH → ANDROMEDA</span>
-      <span>~2.54M LY</span>
-    </div>
+<!-- =====================================================
+     NAVIGATION
+===================================================== -->
 
-    <div class="tele-line">
-      <span>EARTH ORBIT / TODAY</span>
-      <span id="orbitToday">-- KM</span>
-    </div>
+<nav id="nav">
 
-    <div class="tele-line asteroid-line">
-      <span>CLOSEST ASTEROID</span>
-      <span id="asteroidDistance">SCANNING...</span>
-    </div>
+  <a href="about.html">ABOUT ME</a>
 
-    <div class="tele-status">
-      <span>ROBOT</span>
-      <span>ONLINE</span>
-    </div>
+  <a href="blogs.html">BLOGS</a>
+
+  <a href="projects.html">PROJECTS</a>
+
+  <a href="contact.html">CONTACT</a>
+
+</nav>
+
+
+<!-- =====================================================
+     SMALL TELEMETRY
+===================================================== -->
+
+<div id="telemetry" aria-hidden="true"></div>
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<main>
+
+<section class="hero">
+
+  <div id="identity">
+
+    <p class="role">
+      NEUROAI · Speech intelligence · BCI
+    </p>
+
+    <h1>
+      SHRISHA<br>
+      SATHISHKUMAR
+    </h1>
+
+    <p class="tagline">
+      Welcome to my Neuro Space.
+    </p>
 
   </div>
 
 
-  <main>
-
-    <section class="hero" id="home">
-
-      <!-- Identity -->
-      <div id="identity">
-
-        <p class="role">
-          neuroAI · brain–machine interfaces
-        </p>
-
-        <h1>
-          Shrisha Sathishkumar
-        </h1>
-
-        <p class="tagline">
-          neuroscience × machine learning × curiosity
-        </p>
-
-      </div>
+ 
 
 
-      <!-- Rotating philosophical/scientific phrases -->
-      <div id="phrase" aria-live="polite"></div>
+  <div class="scroll-hint">
+    SCROLL TO EXPLORE
+  </div>
+
+</section>
+
+</main>
 
 
-      <!-- Scroll indicator -->
-      <div class="scroll-hint">
-        SCROLL ↓
-      </div>
-
-    </section>
-
-
-    <!--
-      Invisible extra scroll space.
-      This gives the browser enough page height for
-      the navigation to reveal when scrolling.
-    -->
-    <div class="scroll-space"></div>
-
-  </main>
-
-
-  <script type="module" src="js/hero.js"></script>
+<script type="module" src="js/hero.js"></script>
 
 </body>
+
 </html>
