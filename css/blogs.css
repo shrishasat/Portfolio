@@ -330,6 +330,7 @@
   }
 
   .blog-robot {
+    transform: translateY(-3vh);
     position: relative;
 
     top: auto;
