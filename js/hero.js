@@ -55,7 +55,7 @@ let isGreeting = false;
 let cooldownUntil = 0;
 
 // World-space anchor for the robot, used to test cursor proximity.
-const ROBOT_POSITION = new THREE.Vector3(-2.2, -0.35, 0); // raised so feet clear the frame
+const ROBOT_POSITION = new THREE.Vector3(-2.7, -0.35, 0); // raised so feet clear the frame
 const PROXIMITY_RADIUS_PX = 220;   // how close (in screen pixels) the cursor must get
 const GREETING_COOLDOWN_MS = 4000; // minimum gap between greetings
 
@@ -64,7 +64,7 @@ loader.load(
   (gltf) => {
     robot = gltf.scene;
     robot.position.copy(ROBOT_POSITION);
-    robot.scale.setScalar(2.5);
+    robot.scale.setScalar(2.0);
 
     robot.traverse((child) => {
       if (child.isMesh) {
