@@ -131,3 +131,83 @@
 
   color: #444440;
 }
+
+
+.contact-page {
+  min-height: calc(100vh - 74px);
+}
+
+.contact-page .page-hero {
+  max-width: 900px;
+}
+
+.contact-page .page-hero h1 {
+  max-width: 800px;
+}
+
+.contact-page .page-hero > p:last-child {
+  max-width: 620px;
+}
+
+.contact-intro {
+  max-width: 720px;
+  margin-bottom: 3rem;
+}
+
+.contact-label {
+  margin-bottom: 0.8rem;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  color: #858580;
+}
+
+.contact-description {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  line-height: 1.8;
+  color: #4d4d48;
+}
+
+.contact-list {
+  width: min(720px, 100%);
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  border-top: 1px solid #d8d8d3;
+}
+
+.contact-list li {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 1.5rem;
+  padding: 1.15rem 0;
+  border-bottom: 1px solid #d8d8d3;
+}
+
+.contact-list li span {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  color: #8a8a85;
+}
+
+.contact-list li a {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: #111;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.contact-list li a:hover {
+  opacity: 0.45;
+}
+
+@media (max-width: 700px) {
+  .contact-list li {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+}
