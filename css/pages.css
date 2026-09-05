@@ -158,3 +158,113 @@
   .corner-robot{ width: 90px; height: 90px; }
   .walk-robot{ width: 80px; height: 80px; }
 }
+
+
+```css
+/* --------------------------------------------------
+   ABOUT PAGE LAYOUT
+-------------------------------------------------- */
+
+.about-page {
+    position: relative;
+
+    width: 100%;
+    max-width: 1400px;
+
+    margin: 0 auto;
+
+    padding: 120px 7vw 120px;
+
+    min-height: calc(100vh - 80px);
+}
+
+
+/* --------------------------------------------------
+   LEFT CONTENT
+-------------------------------------------------- */
+
+.about-page .page-hero {
+    width: 62%;
+    max-width: 850px;
+
+    margin-left: 0;
+}
+
+
+.about-page .content-block {
+    width: 62%;
+    max-width: 850px;
+
+    margin-left: 0;
+}
+
+
+/* --------------------------------------------------
+   ROBOT — RIGHT BOTTOM
+-------------------------------------------------- */
+
+.about-robot {
+    position: absolute;
+
+    right: 3vw;
+    bottom: 20px;
+
+    width: 32vw;
+    height: 42vh;
+
+    min-width: 260px;
+    min-height: 280px;
+
+    max-width: 430px;
+    max-height: 450px;
+
+    pointer-events: none;
+
+    z-index: 2;
+}
+
+
+#flairCanvas {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+}
+
+
+/* --------------------------------------------------
+   MOBILE
+-------------------------------------------------- */
+
+@media (max-width: 800px) {
+
+    .about-page {
+        padding: 100px 7vw 40px;
+    }
+
+
+    .about-page .page-hero,
+    .about-page .content-block {
+
+        width: 100%;
+        max-width: none;
+    }
+
+
+    .about-robot {
+
+        position: relative;
+
+        right: auto;
+        bottom: auto;
+
+        width: 280px;
+        height: 300px;
+
+        margin-left: auto;
+        margin-top: 40px;
+
+    }
+
+}
+```
