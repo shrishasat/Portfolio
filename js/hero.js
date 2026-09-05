@@ -255,20 +255,6 @@ loader.load(
       the feet are not below the viewport.
     */
 
-    const box =
-      new THREE.Box3()
-        .setFromObject(robot);
-
-
-    const minY =
-      box.min.y;
-
-
-    if (minY < -0.4){
-
-      robot.position.y +=
-        Math.abs(minY) + 0.15;
-    }
 
 
     scene.add(
