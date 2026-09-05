@@ -1,247 +1,613 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 
-/* ==================================================================
-   SCENE / CAMERA / RENDERER
-   ================================================================== */
 
-const scene = new THREE.Scene();
-scene.background = null;
+/* =========================================================
+   SCENE
+========================================================= */
 
-const camera = new THREE.PerspectiveCamera(
-  35,
-  window.innerWidth / window.innerHeight,
-  0.1,
-  100
+const canvas =
+  document.getElementById("robotCanvas");
+
+const scene =
+  new THREE.Scene();
+
+
+/* =========================================================
+   CAMERA
+========================================================= */
+
+const camera =
+  new THREE.PerspectiveCamera(
+    35,
+    window.innerWidth / window.innerHeight,
+    0.1,
+    100
+  );
+
+
+camera.position.set(
+  0,
+  1.6,
+  8
 );
-camera.position.set(0, 1.6, 8);
 
-const renderer = new THREE.WebGLRenderer({
-  canvas: document.getElementById("robotCanvas"),
-  antialias: true,
-  alpha: true
-});
-renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-renderer.shadowMap.enabled = true;
-renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-renderer.outputColorSpace = THREE.SRGBColorSpace;
 
-/* ==================================================================
+/* =========================================================
+   RENDERER
+========================================================= */
+
+const renderer =
+  new THREE.WebGLRenderer({
+
+    canvas,
+
+    antialias: true,
+
+    alpha: true
+
+  });
+
+
+renderer.setPixelRatio(
+  Math.min(window.devicePixelRatio, 2)
+);
+
+renderer.setSize(
+  window.innerWidth,
+  window.innerHeight
+);
+
+renderer.outputColorSpace =
+  THREE.SRGBColorSpace;
+
+
+/* =========================================================
    LIGHTING
-   ================================================================== */
+========================================================= */
 
-scene.add(new THREE.HemisphereLight(0xffffff, 0x666666, 2.5));
+scene.add(
+  new THREE.HemisphereLight(
+    0xffffff,
+    0x555555,
+    2.6
+  )
+);
 
-const keyLight = new THREE.DirectionalLight(0xffffff, 4);
-keyLight.position.set(4, 7, 5);
-keyLight.castShadow = true;
+
+const keyLight =
+  new THREE.DirectionalLight(
+    0xffffff,
+    4.5
+  );
+
+keyLight.position.set(
+  4,
+  7,
+  5
+);
+
 scene.add(keyLight);
 
-const rimLight = new THREE.DirectionalLight(0xffffff, 2);
-rimLight.position.set(-4, 5, -4);
-scene.add(rimLight);
 
-/* ==================================================================
+const fillLight =
+  new THREE.DirectionalLight(
+    0xffffff,
+    2
+  );
+
+fillLight.position.set(
+  -4,
+  4,
+  -3
+);
+
+scene.add(fillLight);
+
+
+/* =========================================================
    ROBOT
-   - plays its greeting once, ~1s after load, then holds ("sleeps")
-   - replays every time the cursor newly enters its proximity radius
-   ================================================================== */
+========================================================= */
 
-const loader = new GLTFLoader();
+const loader =
+  new GLTFLoader();
 
 let robot = null;
+
 let mixer = null;
+
 let greetingAction = null;
+
 let isGreeting = false;
 
-// Moved further left and scaled down; raise/lower `y` if feet still clip.
-const ROBOT_POSITION = new THREE.Vector3(-2.9, -0.35, 0);
-const ROBOT_SCALE = 2.0;
-const PROXIMITY_RADIUS_PX = 220; // how close the cursor must get, in screen pixels
+let lastGreeting = 0;
+
+
+/*
+  Position robot on right side.
+*/
+
+const ROBOT_POSITION =
+  new THREE.Vector3(
+    2.9,
+    -0.45,
+    0
+  );
+
+
+const ROBOT_SCALE = 2.15;
+
+
+/* =========================================================
+   LOAD
+========================================================= */
 
 loader.load(
+
   "models/greetinggreet.glb",
+
   (gltf) => {
+
     robot = gltf.scene;
-    robot.position.copy(ROBOT_POSITION);
-    robot.scale.setScalar(ROBOT_SCALE);
+
+    robot.position.copy(
+      ROBOT_POSITION
+    );
+
+    robot.scale.setScalar(
+      ROBOT_SCALE
+    );
+
 
     robot.traverse((child) => {
-      if (child.isMesh) {
-        child.castShadow = true;
-        child.receiveShadow = true;
-        if (child.material) {
-          child.material = child.material.clone();
-          child.material.color.setRGB(0.03, 0.03, 0.03);
-          child.material.metalness = 0.85;
-          child.material.roughness = 0.18;
-        }
+
+      if (!child.isMesh) return;
+
+      child.castShadow = true;
+
+      child.receiveShadow = true;
+
+
+      if (child.material) {
+
+        child.material =
+          child.material.clone();
+
+        /*
+          Shiny black chrome.
+        */
+
+        child.material.color.setRGB(
+          0.025,
+          0.025,
+          0.025
+        );
+
+        child.material.metalness =
+          0.88;
+
+        child.material.roughness =
+          0.16;
+
       }
+
     });
+
 
     scene.add(robot);
 
-    mixer = new THREE.AnimationMixer(robot);
 
-    if (gltf.animations.length > 0) {
-      greetingAction = mixer.clipAction(gltf.animations[0]);
-      greetingAction.setLoop(THREE.LoopOnce, 1);
-      greetingAction.clampWhenFinished = true; // holds the final pose = "sleeps"
+    /* =====================================================
+       ANIMATION
+    ===================================================== */
 
-      mixer.addEventListener("finished", () => { isGreeting = false; });
+    mixer =
+      new THREE.AnimationMixer(
+        robot
+      );
 
-      // Play once automatically, ~1 second after the model is ready.
-      setTimeout(playGreeting, 1000);
-    } else {
-      console.warn("No animation clips found inside greetinggreet.glb");
+
+    if (
+      gltf.animations.length > 0
+    ) {
+
+      greetingAction =
+        mixer.clipAction(
+          gltf.animations[0]
+        );
+
+      greetingAction.setLoop(
+        THREE.LoopOnce,
+        1
+      );
+
+      greetingAction.clampWhenFinished =
+        true;
+
+
+      mixer.addEventListener(
+        "finished",
+        () => {
+
+          isGreeting = false;
+
+        }
+      );
+
+
+      /*
+        First greeting after entering.
+      */
+
+      setTimeout(
+        playGreeting,
+        1200
+      );
+
     }
+
   },
+
   undefined,
-  (error) => console.error("Could not load models/greetinggreet.glb:", error)
+
+  (error) => {
+
+    console.error(
+      "Could not load models/greetinggreet.glb:",
+      error
+    );
+
+  }
+
 );
 
+
+/* =========================================================
+   GREETING
+========================================================= */
+
 function playGreeting() {
-  if (!greetingAction || isGreeting) return;
+
+  if (
+    !greetingAction ||
+    isGreeting
+  ) {
+    return;
+  }
+
+
+  const now =
+    performance.now();
+
+
+  /*
+    Prevent frantic restarting.
+  */
+
+  if (
+    now - lastGreeting <
+    3000
+  ) {
+    return;
+  }
+
+
+  lastGreeting = now;
+
   isGreeting = true;
+
+
   greetingAction.reset();
+
   greetingAction.play();
 }
 
-/* ==================================================================
-   CURSOR PROXIMITY — edge-triggered: fires only the moment the
-   cursor crosses INTO the radius, not continuously while it's inside.
-   ================================================================== */
 
-const pointer = { x: -9999, y: -9999 };
-let wasNear = false;
+/* =========================================================
+   CURSOR
+========================================================= */
 
-window.addEventListener("pointermove", (e) => {
-  pointer.x = e.clientX;
-  pointer.y = e.clientY;
-});
+const pointer = {
 
-const projected = new THREE.Vector3();
+  x: -9999,
 
-function checkProximity() {
-  if (!robot) return;
+  y: -9999
 
-  projected.copy(ROBOT_POSITION).project(camera);
-  const screenX = (projected.x * 0.5 + 0.5) * window.innerWidth;
-  const screenY = (-projected.y * 0.5 + 0.5) * window.innerHeight;
+};
 
-  const dist = Math.hypot(pointer.x - screenX, pointer.y - screenY);
-  const isNear = dist < PROXIMITY_RADIUS_PX;
 
-  if (isNear && !wasNear) playGreeting(); // just crossed into range
-  wasNear = isNear;
+window.addEventListener(
+  "pointermove",
+  (event) => {
+
+    pointer.x =
+      event.clientX;
+
+    pointer.y =
+      event.clientY;
+
+  }
+);
+
+
+/*
+  Instead of checking distance from the
+  robot's 3D position, create a simple
+  "robot area" on the right side.
+*/
+
+let cursorInsideRobotZone =
+  false;
+
+
+function checkCursor() {
+
+  const zoneStart =
+    window.innerWidth * 0.68;
+
+
+  const inside =
+    pointer.x > zoneStart;
+
+
+  /*
+    Only trigger when cursor enters.
+  */
+
+  if (
+    inside &&
+    !cursorInsideRobotZone
+  ) {
+
+    playGreeting();
+
+  }
+
+
+  cursorInsideRobotZone =
+    inside;
 }
 
-/* ==================================================================
-   ANIMATION LOOP
-   ================================================================== */
 
-const clock = new THREE.Clock();
+/* =========================================================
+   ANIMATION
+========================================================= */
+
+const clock =
+  new THREE.Clock();
+
 
 function animate() {
-  requestAnimationFrame(animate);
-  const delta = clock.getDelta();
-  if (mixer) mixer.update(delta);
-  checkProximity();
-  renderer.render(scene, camera);
+
+  requestAnimationFrame(
+    animate
+  );
+
+
+  const delta =
+    clock.getDelta();
+
+
+  if (mixer) {
+
+    mixer.update(delta);
+
+  }
+
+
+  checkCursor();
+
+
+  renderer.render(
+    scene,
+    camera
+  );
+
 }
+
+
 animate();
 
-window.addEventListener("resize", () => {
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth, window.innerHeight);
-});
 
-/* ==================================================================
-   NAV — docks in as a header once you scroll
-   ================================================================== */
+/* =========================================================
+   RESIZE
+========================================================= */
 
-const nav = document.getElementById("nav");
-const REVEAL_AT = () => window.innerHeight * 0.08;
+window.addEventListener(
+  "resize",
+  () => {
+
+    camera.aspect =
+      window.innerWidth /
+      window.innerHeight;
+
+    camera.updateProjectionMatrix();
+
+
+    renderer.setSize(
+      window.innerWidth,
+      window.innerHeight
+    );
+
+  }
+);
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+const nav =
+  document.getElementById("nav");
+
 
 function updateNav() {
-  nav.classList.toggle("nav--visible", window.scrollY > REVEAL_AT());
+
+  /*
+    Very small amount of scroll.
+    The page itself does not move because
+    the home page is locked to 100vh.
+  */
+
+  const visible =
+    window.scrollY > 20;
+
+
+  nav.classList.toggle(
+    "nav--visible",
+    visible
+  );
+
 }
-window.addEventListener("scroll", updateNav, { passive: true });
+
+
+window.addEventListener(
+  "scroll",
+  updateNav,
+  {
+    passive: true
+  }
+);
+
 updateNav();
 
-/* ==================================================================
-   ROTATING CATCHY PHRASE
-   ================================================================== */
 
-const PHRASES = [
-  "Half scientist, half sceptic, fully curious.",
-  "Trained on curiosity, fine-tuned on caffeine.",
-  "Somewhere between a neuron and a neural net.",
-  "I build interfaces for minds, not just machines.",
-  "Signals in, stories out."
-];
+/* =========================================================
+   TELEMETRY
+========================================================= */
 
-const phraseEl = document.getElementById("phrase");
-let phraseIndex = 0;
+const telemetry =
+  document.getElementById(
+    "telemetry"
+  );
 
-function cyclePhrase() {
-  phraseEl.textContent = PHRASES[phraseIndex % PHRASES.length];
-  phraseIndex++;
-  phraseEl.classList.remove("run");
-  void phraseEl.offsetWidth; // force reflow so the animation restarts
-  phraseEl.classList.add("run");
-}
-cyclePhrase();
-setInterval(cyclePhrase, 7000);
 
-/* ==================================================================
-   TELEMETRY — per-zone time + date (since date rolls over between
-   zones), plus a few slowly-drifting numbers. Distances/age are
-   computed client-side from known constants, not a live feed.
-   ================================================================== */
+const AU_KM =
+  149597870;
 
-const ZONES = [
-  { label: "INDIA",  tz: "Asia/Kolkata" },
-  { label: "UK",     tz: "Europe/London" },
-  { label: "USA",    tz: "America/New_York" },
-  { label: "JAPAN",  tz: "Asia/Tokyo" },
-  { label: "UTC",    tz: "UTC" }
-];
 
-const teleEl = document.getElementById("telemetry");
+const EARTH_ORBIT_SPEED =
+  29.78;
 
-const AU_KM = 149_597_870;
-const EARTH_ORBIT_SPEED_KMS = 29.78;
-const ANDROMEDA_LY = 2_537_000;
-const EARTH_AGE_YEARS = 4_540_000_000;
+
+const ANDROMEDA_LY =
+  2537000;
+
 
 function renderTelemetry() {
-  const now = new Date();
-  const secondsToday = now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
-  const traveledToday = (EARTH_ORBIT_SPEED_KMS * secondsToday).toLocaleString("en-US", { maximumFractionDigits: 0 });
-  const sunDistance = (AU_KM + Math.sin(now.getTime() / 90000) * 25000).toLocaleString("en-US", { maximumFractionDigits: 0 });
 
-  const rows = ZONES.map(z => {
-    const time = new Intl.DateTimeFormat("en-GB", {
-      timeZone: z.tz, hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false
-    }).format(now);
-    const date = new Intl.DateTimeFormat("en-GB", {
-      timeZone: z.tz, day: "2-digit", month: "short"
-    }).format(now);
-    return `<div class="tele-row"><span class="tele-zone">${z.label}</span><span class="tele-time">${time}, ${date}</span></div>`;
-  }).join("");
+  const now =
+    new Date();
 
-  teleEl.innerHTML = `
-    ${rows}
-    <hr />
-    <div class="tele-row"><span class="tele-metric">EARTH AGE</span><span class="tele-value">${(EARTH_AGE_YEARS / 1e9).toFixed(2)}B YRS</span></div>
-    <div class="tele-row"><span class="tele-metric">SUN DIST.</span><span class="tele-value">${sunDistance} KM</span></div>
-    <div class="tele-row"><span class="tele-metric">ORBIT TODAY</span><span class="tele-value">${traveledToday} KM</span></div>
-    <div class="tele-row"><span class="tele-metric">ANDROMEDA</span><span class="tele-value">${ANDROMEDA_LY.toLocaleString("en-US")} LY</span></div>
-    <div class="tele-note">simulated live estimate</div>
+
+  const seconds =
+    now.getHours() * 3600 +
+    now.getMinutes() * 60 +
+    now.getSeconds();
+
+
+  const orbitToday =
+    EARTH_ORBIT_SPEED *
+    seconds;
+
+
+  const sunDistance =
+    AU_KM +
+    Math.sin(
+      now.getTime() / 90000
+    ) * 25000;
+
+
+  const time =
+    new Intl.DateTimeFormat(
+      "en-GB",
+      {
+        timeZone:
+          "Asia/Kolkata",
+
+        hour:
+          "2-digit",
+
+        minute:
+          "2-digit",
+
+        second:
+          "2-digit",
+
+        hour12:
+          false
+      }
+    ).format(now);
+
+
+  telemetry.innerHTML = `
+
+    <div class="tele-row">
+      <span class="tele-zone">
+        IST
+      </span>
+
+      <span class="tele-time">
+        ${time}
+      </span>
+    </div>
+
+    <hr>
+
+    <div class="tele-row">
+      <span class="tele-metric">
+        SUN
+      </span>
+
+      <span class="tele-value">
+        ${sunDistance.toLocaleString(
+          "en-US",
+          {
+            maximumFractionDigits: 0
+          }
+        )} KM
+      </span>
+    </div>
+
+    <div class="tele-row">
+      <span class="tele-metric">
+        ORBIT
+      </span>
+
+      <span class="tele-value">
+        ${orbitToday.toLocaleString(
+          "en-US",
+          {
+            maximumFractionDigits: 0
+          }
+        )} KM
+      </span>
+    </div>
+
+    <div class="tele-row">
+      <span class="tele-metric">
+        ANDROMEDA
+      </span>
+
+      <span class="tele-value">
+        ${ANDROMEDA_LY.toLocaleString(
+          "en-US"
+        )} LY
+      </span>
+    </div>
+
+    <div class="tele-note">
+      LIVE ESTIMATE
+    </div>
+
   `;
+
 }
+
+
 renderTelemetry();
-setInterval(renderTelemetry, 1000);
+
+setInterval(
+  renderTelemetry,
+  1000
+);
