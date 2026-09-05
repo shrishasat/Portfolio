@@ -10,8 +10,10 @@
   --void: #ffffff;  /* base background          */
   --panel:       #101018;   /* raised surfaces           */
   --line:        #2a2a38;   /* hairlines / borders       */
-  --ink:         #ececea;   /* primary text on dark      */
-  --ink-dim:     #8d8d9c;   /* secondary text on dark    */
+  /* primary text on dark      */
+   --ink: #0a0a0a; 
+   --ink-dim: #55554f;
+ /* secondary text on dark    */
   --signal:      #4fd1ff;   /* cyan — data / telemetry   */
   --pulse:       #e8a33d;   /* amber — accent moments    */
   --violet:      #9b7bff;   /* hue-shift partner colour  */
