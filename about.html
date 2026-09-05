@@ -1,11 +1,15 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>About — Shrisha Sathishskumar</title>
+
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/pages.css">
+
 <script type="importmap">
 {
   "imports": {
@@ -15,47 +19,109 @@
 }
 </script>
 </head>
+
 <body>
 
   <header class="site-header">
-    <a class="brand" href="index.html">SHRISHA</a>
+
+    <a class="brand" href="index.html">
+      SHRISHA
+    </a>
+
     <nav>
       <a href="about.html" aria-current="page">ABOUT ME</a>
       <a href="blogs.html">BLOGS</a>
       <a href="projects.html">PROJECTS</a>
       <a href="contact.html">CONTACT</a>
     </nav>
+
   </header>
 
-  <section class="page-hero">
-    <p class="eyebrow-mono">ABOUT</p>
-    <h1>I work at the edge of brains and machines.</h1>
-    <p>I'm Shrisha Sathishskumar — I work in neuroAI, the stretch of ground where neuroscience,
-       machine learning, and a healthy amount of curiosity overlap. Most days that means reading
-       brain-computer-interface papers, building small models, and asking too many "but why does
-       it work" questions.</p>
-  </section>
 
-  <section class="content-block">
-    <h2>What I'm drawn to</h2>
-    <p>Non-invasive brain decoding, representation learning, and the question of how much of
-       cognition is legible from the outside. I like problems that sit between disciplines,
-       where the interesting part is translating one field's language into another's.</p>
+  <main class="about-page">
 
-    <h2>How I work</h2>
-    <p>Slowly, then all at once. I keep a running journal of papers and half-formed ideas — some
-       of it ends up in the blog. I'd rather understand one idea deeply than skim ten.</p>
+    <!-- LEFT CONTENT -->
 
-    <h2>Outside of work</h2>
-    <p>Reading, long scrolls through arXiv, and the reading corner on my blog page, where I keep
-       a running list of books worth your time.</p>
-  </section>
+    <section class="page-hero">
 
-  <div class="corner-robot"><canvas id="cornerCanvas"></canvas></div>
+      <p class="eyebrow-mono">
+        ABOUT
+      </p>
+
+      <h1>
+        I work at the edge of brains and machines.
+      </h1>
+
+      <p>
+        I'm Shrisha Sathishskumar — I work in neuroAI, the stretch of ground
+        where neuroscience, machine learning, and a healthy amount of curiosity
+        overlap. Most days that means reading brain-computer-interface papers,
+        building small models, and asking too many "but why does it work"
+        questions.
+      </p>
+
+    </section>
+
+
+    <section class="content-block">
+
+      <h2>
+        What I'm drawn to
+      </h2>
+
+      <p>
+        Non-invasive brain decoding, representation learning, and the question
+        of how much of cognition is legible from the outside. I like problems
+        that sit between disciplines, where the interesting part is translating
+        one field's language into another's.
+      </p>
+
+
+      <h2>
+        How I work
+      </h2>
+
+      <p>
+        Slowly, then all at once. I keep a running journal of papers and
+        half-formed ideas — some of it ends up in the blog. I'd rather
+        understand one idea deeply than skim ten.
+      </p>
+
+
+      <h2>
+        Outside of work
+      </h2>
+
+      <p>
+        Reading, long scrolls through arXiv, and the reading corner on my blog
+        page, where I keep a running list of books worth your time.
+      </p>
+
+    </section>
+
+
+    <!-- RIGHT ROBOT -->
+
+    <div class="about-robot">
+
+      <canvas id="flairCanvas"></canvas>
+
+    </div>
+
+  </main>
+
 
   <script type="module">
+
     import { createCornerRobot } from "./js/robots.js";
-    createCornerRobot("#cornerCanvas", "models/Martelo 2.glb");
+
+    createCornerRobot(
+      "#flairCanvas",
+      "models/flair.glb"
+    );
+
   </script>
+
 </body>
 </html>
+```
