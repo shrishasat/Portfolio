@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
@@ -11,16 +12,8 @@
 <link rel="stylesheet" href="css/pages.css">
 <link rel="stylesheet" href="css/projects.css">
 
-<script type="importmap">
-{
-  "imports": {
-    "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
-    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"
-  }
-}
-</script>
-
 </head>
+
 
 <body class="projects-page">
 
@@ -38,477 +31,578 @@
 </header>
 
 
-<!-- FIXED ROBOT -->
-
-<aside class="projects-robot">
-  <canvas id="projectsRobotCanvas"></canvas>
-</aside>
-
-
 <main class="projects-layout">
+
+  <!-- =====================================================
+       LEFT / MAIN PROJECT AREA
+  ====================================================== -->
 
   <section class="projects-content">
 
     <div class="projects-intro">
 
-      <p class="eyebrow-mono">SELECTED WORK</p>
+      <p class="eyebrow-mono">SELECTED WORK · 2021—2026</p>
 
       <h1>
         Experiments,<br>
-        tools &amp; questions.
+        models &amp; systems.
       </h1>
 
       <p>
-        Research projects, computational experiments and small tools
-        exploring neural representations, language and machine learning.
+        Computational neuroscience, neural representation learning,
+        machine learning and the systems built around them.
       </p>
 
     </div>
 
 
+    <!-- =================================================
+         PROJECT GRID
+    ================================================== -->
+
     <section class="project-grid">
 
 
-      <!-- 01 -->
+      <!-- =================================================
+           01
+      ================================================== -->
 
-      <article class="project-card">
+      <article
+        class="project-card"
+        data-project="p01"
+      >
 
-        <span class="project-number">01</span>
+        <div class="card-top">
+          <span class="project-number">01</span>
+          <span class="project-year">2026</span>
+        </div>
 
-        <h2>Metaphor vs Surrogate RSA</h2>
+        <h2>GPU-Accelerated Neural Representation Searchlight</h2>
 
         <p>
-          Source-level MEG representational similarity analysis testing
-          whether metaphorical language produces neural representations
-          beyond a matched surrogate distribution.
+          GPU-accelerated source-level RSA pipeline for large-scale
+          neural representation analysis, built around MNE source
+          reconstruction, temporal-spatial searchlights and CUDA/PyTorch
+          batching.
         </p>
 
         <div class="tags">
-          <span>MEG</span>
+          <span>CUDA</span>
+          <span>PyTorch</span>
+          <span>MNE</span>
           <span>RSA</span>
-          <span>Kendall τ</span>
-          <span>GPU</span>
         </div>
 
       </article>
 
 
-      <!-- 02 -->
+      <!-- =================================================
+           02
+      ================================================== -->
 
-      <article class="project-card">
+      <article
+        class="project-card"
+        data-project="p02"
+      >
 
-        <span class="project-number">02</span>
+        <div class="card-top">
+          <span class="project-number">02</span>
+          <span class="project-year">2026</span>
+        </div>
 
-        <h2>Metaphor vs Speech Envelope</h2>
+        <h2>Metaphorical Language vs Speech Envelope</h2>
 
         <p>
           Neural encoding analysis separating lexical-semantic metaphor
-          effects from low-level acoustic speech-envelope tracking.
+          representations from low-level acoustic speech-envelope
+          tracking in naturalistic MEG.
         </p>
 
         <div class="tags">
           <span>MEG</span>
           <span>mTRF</span>
+          <span>Ridge</span>
           <span>Speech</span>
         </div>
 
       </article>
 
 
-      <!-- 03 -->
+      <!-- =================================================
+           03
+      ================================================== -->
 
-      <article class="project-card">
+      <article
+        class="project-card"
+        data-project="p03"
+      >
 
-        <span class="project-number">03</span>
-
-        <h2>Metaphor mTRF</h2>
-
-        <p>
-          Word-onset locked temporal response functions examining when
-          metaphor-related linguistic information is encoded in cortical
-          source space.
-        </p>
-
-        <div class="tags">
-          <span>mTRF</span>
-          <span>Ridge</span>
-          <span>Source MEG</span>
+        <div class="card-top">
+          <span class="project-number">03</span>
+          <span class="project-year">2026</span>
         </div>
 
-      </article>
-
-
-      <!-- 04 -->
-
-      <article class="project-card">
-
-        <span class="project-number">04</span>
-
-        <h2>Iconicity RSA</h2>
+        <h2>Iconicity Beyond Sensorimotor Representations</h2>
 
         <p>
-          Representational similarity analysis linking neural activity
-          during continuous speech to computational estimates of lexical
-          iconicity.
+          RSA and regression framework testing whether lexical iconicity
+          explains neural representational structure beyond acoustic and
+          established sensorimotor dimensions.
         </p>
 
         <div class="tags">
-          <span>Iconicity</span>
           <span>RSA</span>
-          <span>MEG</span>
-        </div>
-
-      </article>
-
-
-      <!-- 05 -->
-
-      <article class="project-card">
-
-        <span class="project-number">05</span>
-
-        <h2>Iconicity vs Sensorimotor Space</h2>
-
-        <p>
-          Testing whether iconicity explains neural variance beyond
-          established Lancaster sensorimotor norms.
-        </p>
-
-        <div class="tags">
           <span>Iconicity</span>
-          <span>Sensorimotor</span>
+          <span>MEG</span>
           <span>Regression</span>
         </div>
 
       </article>
 
 
-      <!-- 06 -->
+      <!-- =================================================
+           04
+      ================================================== -->
 
-      <article class="project-card">
+      <article
+        class="project-card"
+        data-project="p04"
+      >
 
-        <span class="project-number">06</span>
+        <div class="card-top">
+          <span class="project-number">04</span>
+          <span class="project-year">2026</span>
+        </div>
 
-        <h2>Sensorimotor Representation</h2>
+        <h2>Computational Sensorimotor Language Space</h2>
 
         <p>
-          Computational and neural analysis of perceptual and action-related
-          lexical dimensions during naturalistic speech.
+          Analysis of twelve lexical sensorimotor dimensions and their
+          pairwise representational structure during naturalistic
+          language processing.
         </p>
 
         <div class="tags">
           <span>MEG</span>
-          <span>Lexical Semantics</span>
+          <span>RSA</span>
+          <span>12 Features</span>
+          <span>Semantics</span>
         </div>
 
       </article>
 
 
-      <!-- 07 -->
+      <!-- =================================================
+           05
+      ================================================== -->
 
-      <article class="project-card">
+      <article
+        class="project-card"
+        data-project="p05"
+      >
 
-        <span class="project-number">07</span>
+        <div class="card-top">
+          <span class="project-number">05</span>
+          <span class="project-year">2026</span>
+        </div>
 
         <h2>LexiGround</h2>
 
         <p>
-          Open-source Python package for estimating missing lexical
-          sensorimotor and iconicity ratings using pretrained language
-          representations and regression.
+          Open-source lexical representation toolkit for estimating
+          missing sensorimotor and iconicity ratings from pretrained
+          language representations.
         </p>
 
         <div class="tags">
           <span>Python</span>
-          <span>PyPI</span>
           <span>SBERT</span>
           <span>Ridge</span>
+          <span>NLP</span>
         </div>
 
       </article>
 
 
-      <!-- 08 -->
+      <!-- =================================================
+           06
+      ================================================== -->
 
-      <article class="project-card">
+      <article
+        class="project-card"
+        data-project="p06"
+      >
 
-        <span class="project-number">08</span>
+        <div class="card-top">
+          <span class="project-number">06</span>
+          <span class="project-year">2026</span>
+        </div>
 
         <h2>FriConic</h2>
 
         <p>
-          Computational exploration of iconicity representations using
-          distributional language models and semantic feature spaces.
+          Computational modelling of French lexical iconicity using
+          distributional language representations and semantic projection
+          into an interpretable iconicity space.
         </p>
 
         <div class="tags">
           <span>Python</span>
-          <span>NLP</span>
+          <span>French NLP</span>
           <span>Embeddings</span>
+          <span>Semantic Projection</span>
         </div>
 
       </article>
 
 
-      <!-- 09 -->
+      <!-- =================================================
+           07
+      ================================================== -->
 
-      <article class="project-card">
+      <article
+        class="project-card"
+        data-project="p07"
+      >
 
-        <span class="project-number">09</span>
-
-        <h2>SBERT Iconicity Model</h2>
-
-        <p>
-          Ridge regression from contextual sentence embeddings to
-          human-rated lexical iconicity, with model comparison across
-          embedding spaces.
-        </p>
-
-        <div class="tags">
-          <span>SBERT</span>
-          <span>Ridge</span>
-          <span>NLP</span>
+        <div class="card-top">
+          <span class="project-number">07</span>
+          <span class="project-year">2024</span>
         </div>
 
-      </article>
-
-
-      <!-- 10 -->
-
-      <article class="project-card">
-
-        <span class="project-number">10</span>
-
-        <h2>FastText Semantic Axis</h2>
+        <h2>Preterm Neurodevelopment &amp; Motor Oscillations</h2>
 
         <p>
-          Investigation of semantic dimensions in distributional
-          representations and their relationship to iconic and
-          non-iconic lexical categories.
-        </p>
-
-        <div class="tags">
-          <span>FastText</span>
-          <span>PCA</span>
-          <span>Semantics</span>
-        </div>
-
-      </article>
-
-
-      <!-- 11 -->
-
-      <article class="project-card">
-
-        <span class="project-number">11</span>
-
-        <h2>GPU RSA Searchlight</h2>
-
-        <p>
-          GPU-accelerated source-level RSA searchlight pipeline designed
-          to make large-scale MEG representational analyses computationally
-          tractable.
-        </p>
-
-        <div class="tags">
-          <span>CUDA</span>
-          <span>PyTorch</span>
-          <span>GPU</span>
-          <span>MEG</span>
-        </div>
-
-      </article>
-
-
-      <!-- 12 -->
-
-      <article class="project-card">
-
-        <span class="project-number">12</span>
-
-        <h2>OCT-6 Source RSA</h2>
-
-        <p>
-          High-resolution cortical RSA using an OCT-6 source space,
-          dSPM inverse modelling and temporal-spatial searchlights.
-        </p>
-
-        <div class="tags">
-          <span>MNE</span>
-          <span>dSPM</span>
-          <span>OCT-6</span>
-        </div>
-
-      </article>
-
-
-      <!-- 13 -->
-
-      <article class="project-card">
-
-        <span class="project-number">13</span>
-
-        <h2>MEG Language Encoding</h2>
-
-        <p>
-          Naturalistic speech encoding pipeline linking continuous
-          linguistic regressors to cortical neural responses.
+          MEG investigation of developmental differences in motor-related
+          beta and gamma oscillations associated with gestational and
+          birth factors.
         </p>
 
         <div class="tags">
           <span>MEG</span>
-          <span>Encoding</span>
-          <span>Ridge</span>
+          <span>Neurodevelopment</span>
+          <span>Beta</span>
+          <span>Gamma</span>
         </div>
 
       </article>
 
 
-      <!-- 14 -->
+      <!-- =================================================
+           08
+      ================================================== -->
 
-      <article class="project-card">
+      <article
+        class="project-card"
+        data-project="p08"
+      >
 
-        <span class="project-number">14</span>
+        <div class="card-top">
+          <span class="project-number">08</span>
+          <span class="project-year">2024</span>
+        </div>
 
-        <h2>Cluster-Based MEG Statistics</h2>
+        <h2>Air Piano</h2>
 
         <p>
-          Spatiotemporal permutation testing for identifying reliable
-          neural effects across cortical source space.
+          Real-time vision-based musical interaction system mapping
+          MediaPipe hand landmarks and finger dynamics to virtual piano
+          note events.
         </p>
 
         <div class="tags">
-          <span>Permutation</span>
-          <span>Clusters</span>
-          <span>MNE</span>
+          <span>Computer Vision</span>
+          <span>MediaPipe</span>
+          <span>OpenCV</span>
+          <span>HCI</span>
         </div>
 
       </article>
 
 
-      <!-- 15 -->
+      <!-- =================================================
+           09
+      ================================================== -->
 
-      <article class="project-card">
+      <article
+        class="project-card"
+        data-project="p09"
+      >
 
-        <span class="project-number">15</span>
+        <div class="card-top">
+          <span class="project-number">09</span>
+          <span class="project-year">2025</span>
+        </div>
 
-        <h2>Sensorimotor Prediction</h2>
+        <h2>Adaptive Inference &amp; Strategic Learning</h2>
 
         <p>
-          Comparison of computational lexical sensorimotor estimates
-          against neural representations during naturalistic language.
+          Adaptive decision model combining Bayesian inference,
+          heuristic policies and reinforcement-based probability updates
+          under repeated opponent behaviour.
         </p>
 
         <div class="tags">
-          <span>Semantics</span>
+          <span>Bayesian</span>
+          <span>RL</span>
+          <span>Game Theory</span>
+          <span>Inference</span>
+        </div>
+
+      </article>
+
+
+      <!-- =================================================
+           10
+      ================================================== -->
+
+      <article
+        class="project-card"
+        data-project="p10"
+      >
+
+        <div class="card-top">
+          <span class="project-number">10</span>
+          <span class="project-year">2022</span>
+        </div>
+
+        <h2>IR Ring</h2>
+
+        <p>
+          Embedded sensing and human-interaction project exploring
+          infrared-based interaction, signal acquisition and
+          hardware–software integration.
+        </p>
+
+        <div class="tags">
+          <span>Embedded Systems</span>
+          <span>IR</span>
+          <span>Sensing</span>
+          <span>HCI</span>
+        </div>
+
+      </article>
+
+
+      <!-- =================================================
+           11
+      ================================================== -->
+
+      <article
+        class="project-card"
+        data-project="p11"
+      >
+
+        <div class="card-top">
+          <span class="project-number">11</span>
+          <span class="project-year">2024</span>
+        </div>
+
+        <h2>Schelling Segregation Model</h2>
+
+        <p>
+          Agent-based simulation demonstrating how local similarity
+          preferences generate large-scale emergent spatial structure
+          without centralized coordination.
+        </p>
+
+        <div class="tags">
+          <span>Agent-Based</span>
+          <span>Emergence</span>
+          <span>Complex Systems</span>
+          <span>Simulation</span>
+        </div>
+
+      </article>
+
+
+      <!-- =================================================
+           12
+      ================================================== -->
+
+      <article
+        class="project-card"
+        data-project="p12"
+      >
+
+        <div class="card-top">
+          <span class="project-number">12</span>
+          <span class="project-year">2024</span>
+        </div>
+
+        <h2>Bayesian Modelling of Umpire Decisions</h2>
+
+        <p>
+          Probabilistic modelling of LBW decision-making under uncertain
+          trajectories, contextual variables, historical bias and
+          confidence adaptation.
+        </p>
+
+        <div class="tags">
+          <span>Bayesian</span>
+          <span>Probabilistic Models</span>
+          <span>Sports Analytics</span>
+          <span>Cognitive Bias</span>
+        </div>
+
+      </article>
+
+
+      <!-- =================================================
+           13
+      ================================================== -->
+
+      <article
+        class="project-card"
+        data-project="p13"
+      >
+
+        <div class="card-top">
+          <span class="project-number">13</span>
+          <span class="project-year">2023</span>
+        </div>
+
+        <h2>Tactile Neuron Dynamics</h2>
+
+        <p>
+          Computational modelling of SA1, RA and PC mechanoreceptor
+          responses to changes in shape, vibration frequency and applied
+          pressure.
+        </p>
+
+        <div class="tags">
+          <span>Computational Neuroscience</span>
+          <span>Neural Modelling</span>
+          <span>Somatosensory</span>
+          <span>Simulation</span>
+        </div>
+
+      </article>
+
+
+      <!-- =================================================
+           14
+      ================================================== -->
+
+      <article
+        class="project-card"
+        data-project="p14"
+      >
+
+        <div class="card-top">
+          <span class="project-number">14</span>
+          <span class="project-year">2024</span>
+        </div>
+
+        <h2>Dynamic Neural Field Modelling</h2>
+
+        <p>
+          Spatiotemporal neural population model using excitatory and
+          inhibitory interactions, nonlinear activation and external
+          time-varying input.
+        </p>
+
+        <div class="tags">
+          <span>DNF</span>
+          <span>MATLAB</span>
+          <span>Neural Dynamics</span>
+          <span>Modelling</span>
+        </div>
+
+      </article>
+
+
+      <!-- =================================================
+           15
+      ================================================== -->
+
+      <article
+        class="project-card"
+        data-project="p15"
+      >
+
+        <div class="card-top">
+          <span class="project-number">15</span>
+          <span class="project-year">2021</span>
+        </div>
+
+        <h2>EEG Motor Imagery Classification</h2>
+
+        <p>
+          EEG classification pipeline combining discrete wavelet
+          transforms, multifractal features and nonlinear scaling
+          measures for left-versus-right motor imagery decoding.
+        </p>
+
+        <div class="tags">
+          <span>EEG</span>
+          <span>DWT</span>
+          <span>Multifractal</span>
+          <span>ML</span>
+        </div>
+
+      </article>
+
+
+      <!-- =================================================
+           16
+      ================================================== -->
+
+      <article
+        class="project-card"
+        data-project="p16"
+      >
+
+        <div class="card-top">
+          <span class="project-number">16</span>
+          <span class="project-year">2021</span>
+        </div>
+
+        <h2>Parkinson's Voice Biomarker Detection</h2>
+
+        <p>
+          Machine-learning pipeline using vocal fundamental-frequency
+          statistics and Gaussian/SVM classifiers for Parkinson's disease
+          detection from voice signals.
+        </p>
+
+        <div class="tags">
+          <span>MATLAB</span>
+          <span>Voice Signals</span>
+          <span>SVM</span>
+          <span>Biomarkers</span>
+        </div>
+
+      </article>
+
+
+      <!-- =================================================
+           17
+      ================================================== -->
+
+      <article
+        class="project-card"
+        data-project="p17"
+      >
+
+        <div class="card-top">
+          <span class="project-number">17</span>
+          <span class="project-year">2023—2025</span>
+        </div>
+
+        <h2>Neuroimaging Systems &amp; Experimental Pipelines</h2>
+
+        <p>
+          End-to-end neuroimaging work spanning experimental design,
+          device calibration, acquisition, preprocessing and analysis
+          across OPM, MEG, fMRI and fNIRS.
+        </p>
+
+        <div class="tags">
           <span>MEG</span>
-          <span>Regression</span>
-        </div>
-
-      </article>
-
-
-      <!-- 16 -->
-
-      <article class="project-card">
-
-        <span class="project-number">16</span>
-
-        <h2>Surrogate Neural Distributions</h2>
-
-        <p>
-          Construction of matched surrogate representations to establish
-          empirical null distributions for neural similarity analyses.
-        </p>
-
-        <div class="tags">
-          <span>Statistics</span>
-          <span>RSA</span>
-          <span>Null Models</span>
-        </div>
-
-      </article>
-
-
-      <!-- 17 -->
-
-      <article class="project-card">
-
-        <span class="project-number">17</span>
-
-        <h2>Behaviour–Neural RSA</h2>
-
-        <p>
-          Linking participant-level behavioural similarity measures with
-          neural representational structure across temporal windows.
-        </p>
-
-        <div class="tags">
-          <span>Behaviour</span>
-          <span>RSA</span>
-          <span>Statistics</span>
-        </div>
-
-      </article>
-
-
-      <!-- 18 -->
-
-      <article class="project-card">
-
-        <span class="project-number">18</span>
-
-        <h2>Naturalistic Speech Pipeline</h2>
-
-        <p>
-          End-to-end preprocessing and modelling workflow for continuous
-          speech MEG, from lexical alignment through source-level analysis.
-        </p>
-
-        <div class="tags">
-          <span>Python</span>
-          <span>MNE</span>
-          <span>MEG</span>
-        </div>
-
-      </article>
-
-
-      <!-- 19 -->
-
-      <article class="project-card">
-
-        <span class="project-number">19</span>
-
-        <h2>Neural Representation Benchmark</h2>
-
-        <p>
-          Benchmarking computational representations against neural
-          geometry using multiple similarity metrics and temporal windows.
-        </p>
-
-        <div class="tags">
-          <span>RSA</span>
-          <span>Representations</span>
-        </div>
-
-      </article>
-
-
-      <!-- 20 -->
-
-      <article class="project-card project-placeholder">
-
-        <span class="project-number">20</span>
-
-        <h2>More to come.</h2>
-
-        <p>
-          Another experiment is currently being built.
-        </p>
-
-        <div class="tags">
-          <span>IN PROGRESS</span>
+          <span>OPM</span>
+          <span>fMRI</span>
+          <span>FSL</span>
         </div>
 
       </article>
@@ -518,25 +612,649 @@
 
   </section>
 
+
+  <!-- =====================================================
+       RIGHT DETAIL PANEL
+  ====================================================== -->
+
+  <aside class="project-detail" id="projectDetail">
+
+    <div class="detail-placeholder">
+
+      <span class="detail-label">PROJECT EXPLORER</span>
+
+      <h2>Hover over a project.</h2>
+
+      <p>
+        Technical details, methodology, figures, results and links
+        will appear here.
+      </p>
+
+    </div>
+
+
+    <!-- P01 -->
+
+    <div class="detail-project" data-detail="p01">
+
+      <div class="detail-header">
+        <span>01 · 2026</span>
+        <span>NEURAL COMPUTING</span>
+      </div>
+
+      <h2>GPU-Accelerated Neural Representation Searchlight</h2>
+
+      <p>
+        Built a GPU-accelerated RSA searchlight pipeline for source-level
+        MEG analysis where conventional CPU execution becomes
+        computationally prohibitive.
+      </p>
+
+      <p>
+        The system combines MNE inverse modelling, OCT-6 cortical source
+        spaces, temporal-spatial searchlights, Kendall tau similarity,
+        PyTorch tensor operations and batched CUDA execution.
+      </p>
+
+      <div class="detail-section">
+        <span>PIPELINE</span>
+        <p>
+          MEG → preprocessing → dSPM → cortical source space →
+          temporal-spatial searchlight → RDM computation →
+          Kendall τ → group analysis
+        </p>
+      </div>
+
+      <div class="detail-section">
+        <span>COMPUTE</span>
+        <p>
+          A100 GPU · PyTorch · CUDA · batched searchlight computation
+        </p>
+      </div>
+
+      <div class="detail-links">
+        <a href="#" target="_blank">GITHUB ↗</a>
+        <a href="#" target="_blank">FIGURES ↗</a>
+      </div>
+
+    </div>
+
+
+    <!-- P02 -->
+
+    <div class="detail-project" data-detail="p02">
+
+      <div class="detail-header">
+        <span>02 · 2026</span>
+        <span>NEURAL ENCODING</span>
+      </div>
+
+      <h2>Metaphorical Language vs Speech Envelope</h2>
+
+      <p>
+        Source-level MEG encoding analysis designed to distinguish
+        linguistic metaphor representations from low-level acoustic
+        tracking during continuous speech.
+      </p>
+
+      <div class="detail-section">
+        <span>METHOD</span>
+        <p>
+          Word-onset aligned regressors → source reconstruction →
+          mTRF → regularised regression → temporal analysis
+        </p>
+      </div>
+
+      <div class="detail-section">
+        <span>QUESTION</span>
+        <p>
+          Does metaphor-related neural encoding survive after accounting
+          for the acoustic structure of the speech signal?
+        </p>
+      </div>
+
+      <div class="detail-links">
+        <a href="#" target="_blank">RESULTS ↗</a>
+        <a href="#" target="_blank">GITHUB ↗</a>
+      </div>
+
+    </div>
+
+
+    <!-- P03 -->
+
+    <div class="detail-project" data-detail="p03">
+
+      <div class="detail-header">
+        <span>03 · 2026</span>
+        <span>REPRESENTATION LEARNING</span>
+      </div>
+
+      <h2>Iconicity Beyond Sensorimotor Representations</h2>
+
+      <p>
+        Neural RSA framework testing whether lexical iconicity contributes
+        unique representational structure beyond established lexical
+        sensorimotor and acoustic dimensions.
+      </p>
+
+      <div class="detail-section">
+        <span>FEATURE SPACE</span>
+        <p>
+          Iconicity + sensorimotor norms + speech envelope
+        </p>
+      </div>
+
+      <div class="detail-section">
+        <span>ANALYSIS</span>
+        <p>
+          Representational similarity analysis · surrogate distributions ·
+          regression · permutation statistics
+        </p>
+      </div>
+
+      <div class="detail-links">
+        <a href="#" target="_blank">PAPER ↗</a>
+        <a href="#" target="_blank">FIGURES ↗</a>
+      </div>
+
+    </div>
+
+
+    <!-- P04 -->
+
+    <div class="detail-project" data-detail="p04">
+
+      <div class="detail-header">
+        <span>04 · 2026</span>
+        <span>COMPUTATIONAL LINGUISTICS</span>
+      </div>
+
+      <h2>Computational Sensorimotor Language Space</h2>
+
+      <p>
+        Constructed and evaluated a multidimensional lexical feature space
+        spanning visual, auditory, haptic, motor, interoceptive and
+        other sensorimotor dimensions.
+      </p>
+
+      <div class="detail-section">
+        <span>ANALYSIS</span>
+        <p>
+          12 dimensions → 66 pairwise combinations → neural RSA →
+          temporal comparison
+        </p>
+      </div>
+
+      <div class="detail-section">
+        <span>QUESTION</span>
+        <p>
+          Which dimensions of embodied lexical meaning best explain
+          neural representational geometry?
+        </p>
+      </div>
+
+    </div>
+
+
+    <!-- P05 -->
+
+    <div class="detail-project" data-detail="p05">
+
+      <div class="detail-header">
+        <span>05 · 2026</span>
+        <span>OPEN SOURCE</span>
+      </div>
+
+      <h2>LexiGround</h2>
+
+      <p>
+        Python package for estimating missing lexical ratings using
+        pretrained language representations and supervised regression.
+      </p>
+
+      <div class="detail-section">
+        <span>MODELS</span>
+        <p>
+          SBERT · GloVe · FastText · Ridge Regression
+        </p>
+      </div>
+
+      <div class="detail-section">
+        <span>USE CASE</span>
+        <p>
+          Recovering missing lexical sensorimotor and iconicity
+          measurements while maintaining a reproducible modelling pipeline.
+        </p>
+      </div>
+
+      <div class="detail-links">
+        <a href="https://zenodo.org/records/22039258" target="_blank">ZENODO ↗</a>
+        <a href="#" target="_blank">PYPI ↗</a>
+        <a href="#" target="_blank">GITHUB ↗</a>
+      </div>
+
+    </div>
+
+
+    <!-- P06 -->
+
+    <div class="detail-project" data-detail="p06">
+
+      <div class="detail-header">
+        <span>06 · 2026</span>
+        <span>LANGUAGE MODELLING</span>
+      </div>
+
+      <h2>FriConic</h2>
+
+      <p>
+        Open-source modelling framework for estimating iconicity of French
+        lexical units using semantic representations rather than direct
+        human ratings alone.
+      </p>
+
+      <div class="detail-section">
+        <span>APPROACH</span>
+        <p>
+          Distributional embeddings → semantic projection →
+          interpretable iconicity axis
+        </p>
+      </div>
+
+      <div class="detail-section">
+        <span>FOCUS</span>
+        <p>
+          Cross-lingual computational modelling of lexical iconicity.
+        </p>
+      </div>
+
+      <div class="detail-links">
+        <a href="#" target="_blank">GITHUB ↗</a>
+        <a href="#" target="_blank">PAPER ↗</a>
+      </div>
+
+    </div>
+
+
+    <!-- P07 -->
+
+    <div class="detail-project" data-detail="p07">
+
+      <div class="detail-header">
+        <span>07 · 2024</span>
+        <span>DEVELOPMENTAL NEUROSCIENCE</span>
+      </div>
+
+      <h2>Preterm Neurodevelopment &amp; Motor Oscillations</h2>
+
+      <p>
+        MEG study investigating motor-induced neural oscillations in
+        children with differing perinatal and developmental factors.
+      </p>
+
+      <div class="detail-section">
+        <span>NEURAL FEATURES</span>
+        <p>
+          Motor beta and gamma oscillations · M1 activity ·
+          developmental biomarkers
+        </p>
+      </div>
+
+      <div class="detail-links">
+        <a
+          href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=KxEHmOIAAAAJ&authuser=1&citation_for_view=KxEHmOIAAAAJ:d1gkVwhDpl0C"
+          target="_blank"
+        >GOOGLE SCHOLAR ↗</a>
+      </div>
+
+    </div>
+
+
+    <!-- P08 -->
+
+    <div class="detail-project" data-detail="p08">
+
+      <div class="detail-header">
+        <span>08 · 2024</span>
+        <span>COMPUTER VISION</span>
+      </div>
+
+      <h2>Air Piano</h2>
+
+      <p>
+        Real-time gesture-to-music interface using computer vision to
+        transform hand movement into discrete musical events.
+      </p>
+
+      <div class="detail-section">
+        <span>PIPELINE</span>
+        <p>
+          Camera → OpenCV → MediaPipe landmarks → finger dynamics →
+          virtual keyboard → audio synthesis
+        </p>
+      </div>
+
+      <div class="detail-section">
+        <span>KEY IDEA</span>
+        <p>
+          Touchless human-computer interaction with low-latency gesture
+          recognition.
+        </p>
+      </div>
+
+    </div>
+
+
+    <!-- P09 -->
+
+    <div class="detail-project" data-detail="p09">
+
+      <div class="detail-header">
+        <span>09 · 2025</span>
+        <span>ADAPTIVE AI</span>
+      </div>
+
+      <h2>Adaptive Inference &amp; Strategic Learning</h2>
+
+      <p>
+        Model of repeated decision-making in which beliefs about opponent
+        behaviour are continuously updated from observed actions.
+      </p>
+
+      <div class="detail-section">
+        <span>METHOD</span>
+        <p>
+          Bayesian inference + heuristic policy + reinforcement-based
+          frequency updates
+        </p>
+      </div>
+
+      <div class="detail-section">
+        <span>PROPERTY</span>
+        <p>
+          Adaptive strategy refinement under repeated interaction.
+        </p>
+      </div>
+
+    </div>
+
+
+    <!-- P10 -->
+
+    <div class="detail-project" data-detail="p10">
+
+      <div class="detail-header">
+        <span>10 · 2022</span>
+        <span>EMBEDDED SYSTEMS</span>
+      </div>
+
+      <h2>IR Ring</h2>
+
+      <p>
+        Wearable interaction concept exploring infrared sensing,
+        signal acquisition and embedded human-computer interaction.
+      </p>
+
+      <div class="detail-section">
+        <span>FOCUS</span>
+        <p>
+          Embedded sensing · interaction design · signal processing
+        </p>
+      </div>
+
+      <div class="detail-links">
+        <a
+          href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=KxEHmOIAAAAJ&authuser=1&citation_for_view=KxEHmOIAAAAJ:u-x6o8ySG0sC"
+          target="_blank"
+        >GOOGLE SCHOLAR ↗</a>
+      </div>
+
+    </div>
+
+
+    <!-- P11 -->
+
+    <div class="detail-project" data-detail="p11">
+
+      <div class="detail-header">
+        <span>11 · 2024</span>
+        <span>COMPLEX SYSTEMS</span>
+      </div>
+
+      <h2>Schelling Segregation Model</h2>
+
+      <p>
+        Agent-based simulation demonstrating how simple local preference
+        rules can produce large-scale emergent spatial structure.
+      </p>
+
+      <div class="detail-section">
+        <span>MODEL</span>
+        <p>
+          Agents → neighbourhood similarity → satisfaction threshold →
+          relocation → emergent spatial pattern
+        </p>
+      </div>
+
+    </div>
+
+
+    <!-- P12 -->
+
+    <div class="detail-project" data-detail="p12">
+
+      <div class="detail-header">
+        <span>12 · 2024</span>
+        <span>PROBABILISTIC AI</span>
+      </div>
+
+      <h2>Bayesian Modelling of Umpire Decisions</h2>
+
+      <p>
+        Probabilistic model of LBW officiating under uncertain physical
+        trajectories and contextual behavioural influences.
+      </p>
+
+      <div class="detail-section">
+        <span>MODEL</span>
+        <p>
+          Prior → likelihood → posterior → decision confidence
+        </p>
+      </div>
+
+      <div class="detail-section">
+        <span>VARIABLES</span>
+        <p>
+          Ball trajectory · acoustic cues · player movement ·
+          crowd influence · historical bias
+        </p>
+      </div>
+
+    </div>
+
+
+    <!-- P13 -->
+
+    <div class="detail-project" data-detail="p13">
+
+      <div class="detail-header">
+        <span>13 · 2023</span>
+        <span>COMPUTATIONAL NEUROSCIENCE</span>
+      </div>
+
+      <h2>Tactile Neuron Dynamics</h2>
+
+      <p>
+        Computational investigation of mechanoreceptor-specific
+        encoding of tactile stimulus properties.
+      </p>
+
+      <div class="detail-section">
+        <span>NEURONS</span>
+        <p>
+          SA1 · RA · PC
+        </p>
+      </div>
+
+      <div class="detail-section">
+        <span>STIMULI</span>
+        <p>
+          Shape · vibration frequency · pressure
+        </p>
+      </div>
+
+    </div>
+
+
+    <!-- P14 -->
+
+    <div class="detail-project" data-detail="p14">
+
+      <div class="detail-header">
+        <span>14 · 2024</span>
+        <span>NEURAL DYNAMICS</span>
+      </div>
+
+      <h2>Dynamic Neural Field Modelling</h2>
+
+      <p>
+        Spatiotemporal population model investigating how local
+        excitation and inhibition generate stable and transient
+        neural states.
+      </p>
+
+      <div class="detail-section">
+        <span>MODEL</span>
+        <p>
+          Excitation + inhibition + spatial kernel + sigmoid activation
+        </p>
+      </div>
+
+      <div class="detail-section">
+        <span>REGIMES</span>
+        <p>
+          Growing activation · decay · persistent memory
+        </p>
+      </div>
+
+    </div>
+
+
+    <!-- P15 -->
+
+    <div class="detail-project" data-detail="p15">
+
+      <div class="detail-header">
+        <span>15 · 2021</span>
+        <span>EEG / MACHINE LEARNING</span>
+      </div>
+
+      <h2>EEG Motor Imagery Classification</h2>
+
+      <p>
+        Nonlinear EEG feature pipeline for discriminating left- and
+        right-hand motor imagery.
+      </p>
+
+      <div class="detail-section">
+        <span>FEATURE ENGINEERING</span>
+        <p>
+          Discrete Wavelet Transform · multifractal analysis ·
+          scaling exponents · time-frequency features
+        </p>
+      </div>
+
+      <div class="detail-section">
+        <span>CLASSIFICATION</span>
+        <p>
+          KNN-based machine learning models
+        </p>
+      </div>
+
+    </div>
+
+
+    <!-- P16 -->
+
+    <div class="detail-project" data-detail="p16">
+
+      <div class="detail-header">
+        <span>16 · 2021</span>
+        <span>BIOMARKER ML</span>
+      </div>
+
+      <h2>Parkinson's Voice Biomarker Detection</h2>
+
+      <p>
+        Machine-learning analysis of vocal biomarkers for distinguishing
+        Parkinson's disease from control recordings.
+      </p>
+
+      <div class="detail-section">
+        <span>FEATURES</span>
+        <p>
+          Mean · minimum · maximum fundamental frequency
+        </p>
+      </div>
+
+      <div class="detail-section">
+        <span>MODEL</span>
+        <p>
+          Gaussian/SVM classification
+        </p>
+      </div>
+
+    </div>
+
+
+    <!-- P17 -->
+
+    <div class="detail-project" data-detail="p17">
+
+      <div class="detail-header">
+        <span>17 · 2023—2025</span>
+        <span>NEUROIMAGING</span>
+      </div>
+
+      <h2>Neuroimaging Systems &amp; Experimental Pipelines</h2>
+
+      <p>
+        Practical neuroimaging experience spanning experimental design,
+        hardware calibration, acquisition, preprocessing and analysis.
+      </p>
+
+      <div class="detail-section">
+        <span>MODALITIES</span>
+        <p>
+          MEG · OPM · fMRI · fNIRS
+        </p>
+      </div>
+
+      <div class="detail-section">
+        <span>WORKFLOWS</span>
+        <p>
+          Experimental design · device troubleshooting · acquisition ·
+          preprocessing · time-frequency analysis · source modelling
+        </p>
+      </div>
+
+      <div class="detail-section">
+        <span>EXAMPLES</span>
+        <p>
+          OPM spatial-attention experiments · naturalistic MEG speech ·
+          fMRI Stop-Signal replication · structural MRI preprocessing
+        </p>
+      </div>
+
+    </div>
+
+  </aside>
+
 </main>
 
 
-<script type="module">
-
-import { createCornerRobot } from "./js/robots.js";
-
-createCornerRobot(
-  "#projectsRobotCanvas",
-  "models/Flair.glb",
-  {
-    scale: 2.0,
-    y: -0.65,
-    cameraY: 1.45,
-    cameraZ: 5.2
-  }
-);
-
-</script>
+<script src="js/projects.js"></script>
 
 </body>
 </html>
