@@ -7,7 +7,7 @@
 
 :root{
   /* -- palette -- */
-  --void:        #05050a;   /* base background          */
+  --void: #ffffff;  /* base background          */
   --panel:       #101018;   /* raised surfaces           */
   --line:        #2a2a38;   /* hairlines / borders       */
   --ink:         #ececea;   /* primary text on dark      */
