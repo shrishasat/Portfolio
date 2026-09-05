@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Projects — Shrisha Sathishskumar</title>
+
+<title>Projects — Shrisha Sathishkumar</title>
+
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/pages.css">
+<link rel="stylesheet" href="css/projects.css">
+
 <script type="importmap">
 {
   "imports": {
@@ -14,63 +19,524 @@
   }
 }
 </script>
+
 </head>
-<body>
 
-  <header class="site-header">
-    <a class="brand" href="index.html">SHRISHA</a>
-    <nav>
-      <a href="about.html">ABOUT ME</a>
-      <a href="blogs.html">BLOGS</a>
-      <a href="projects.html" aria-current="page">PROJECTS</a>
-      <a href="contact.html">CONTACT</a>
-    </nav>
-  </header>
+<body class="projects-page">
 
-  <section class="page-hero">
-    <p class="eyebrow-mono">PROJECTS</p>
-    <h1>Things I've built and broken.</h1>
-    <p>A running set of work — some finished, some deliberately left open. Swap these placeholder
-       cards out for your real project write-ups and links.</p>
+<header class="site-header">
+
+  <a class="brand" href="index.html">SHRISHA</a>
+
+  <nav>
+    <a href="about.html">ABOUT ME</a>
+    <a href="blogs.html">BLOGS</a>
+    <a href="projects.html" aria-current="page">PROJECTS</a>
+    <a href="contact.html">CONTACT</a>
+  </nav>
+
+</header>
+
+
+<!-- FIXED ROBOT -->
+
+<aside class="projects-robot">
+  <canvas id="projectsRobotCanvas"></canvas>
+</aside>
+
+
+<main class="projects-layout">
+
+  <section class="projects-content">
+
+    <div class="projects-intro">
+
+      <p class="eyebrow-mono">SELECTED WORK</p>
+
+      <h1>
+        Experiments,<br>
+        tools &amp; questions.
+      </h1>
+
+      <p>
+        Research projects, computational experiments and small tools
+        exploring neural representations, language and machine learning.
+      </p>
+
+    </div>
+
+
+    <section class="project-grid">
+
+
+      <!-- 01 -->
+
+      <article class="project-card">
+
+        <span class="project-number">01</span>
+
+        <h2>Metaphor vs Surrogate RSA</h2>
+
+        <p>
+          Source-level MEG representational similarity analysis testing
+          whether metaphorical language produces neural representations
+          beyond a matched surrogate distribution.
+        </p>
+
+        <div class="tags">
+          <span>MEG</span>
+          <span>RSA</span>
+          <span>Kendall τ</span>
+          <span>GPU</span>
+        </div>
+
+      </article>
+
+
+      <!-- 02 -->
+
+      <article class="project-card">
+
+        <span class="project-number">02</span>
+
+        <h2>Metaphor vs Speech Envelope</h2>
+
+        <p>
+          Neural encoding analysis separating lexical-semantic metaphor
+          effects from low-level acoustic speech-envelope tracking.
+        </p>
+
+        <div class="tags">
+          <span>MEG</span>
+          <span>mTRF</span>
+          <span>Speech</span>
+        </div>
+
+      </article>
+
+
+      <!-- 03 -->
+
+      <article class="project-card">
+
+        <span class="project-number">03</span>
+
+        <h2>Metaphor mTRF</h2>
+
+        <p>
+          Word-onset locked temporal response functions examining when
+          metaphor-related linguistic information is encoded in cortical
+          source space.
+        </p>
+
+        <div class="tags">
+          <span>mTRF</span>
+          <span>Ridge</span>
+          <span>Source MEG</span>
+        </div>
+
+      </article>
+
+
+      <!-- 04 -->
+
+      <article class="project-card">
+
+        <span class="project-number">04</span>
+
+        <h2>Iconicity RSA</h2>
+
+        <p>
+          Representational similarity analysis linking neural activity
+          during continuous speech to computational estimates of lexical
+          iconicity.
+        </p>
+
+        <div class="tags">
+          <span>Iconicity</span>
+          <span>RSA</span>
+          <span>MEG</span>
+        </div>
+
+      </article>
+
+
+      <!-- 05 -->
+
+      <article class="project-card">
+
+        <span class="project-number">05</span>
+
+        <h2>Iconicity vs Sensorimotor Space</h2>
+
+        <p>
+          Testing whether iconicity explains neural variance beyond
+          established Lancaster sensorimotor norms.
+        </p>
+
+        <div class="tags">
+          <span>Iconicity</span>
+          <span>Sensorimotor</span>
+          <span>Regression</span>
+        </div>
+
+      </article>
+
+
+      <!-- 06 -->
+
+      <article class="project-card">
+
+        <span class="project-number">06</span>
+
+        <h2>Sensorimotor Representation</h2>
+
+        <p>
+          Computational and neural analysis of perceptual and action-related
+          lexical dimensions during naturalistic speech.
+        </p>
+
+        <div class="tags">
+          <span>MEG</span>
+          <span>Lexical Semantics</span>
+        </div>
+
+      </article>
+
+
+      <!-- 07 -->
+
+      <article class="project-card">
+
+        <span class="project-number">07</span>
+
+        <h2>LexiGround</h2>
+
+        <p>
+          Open-source Python package for estimating missing lexical
+          sensorimotor and iconicity ratings using pretrained language
+          representations and regression.
+        </p>
+
+        <div class="tags">
+          <span>Python</span>
+          <span>PyPI</span>
+          <span>SBERT</span>
+          <span>Ridge</span>
+        </div>
+
+      </article>
+
+
+      <!-- 08 -->
+
+      <article class="project-card">
+
+        <span class="project-number">08</span>
+
+        <h2>FriConic</h2>
+
+        <p>
+          Computational exploration of iconicity representations using
+          distributional language models and semantic feature spaces.
+        </p>
+
+        <div class="tags">
+          <span>Python</span>
+          <span>NLP</span>
+          <span>Embeddings</span>
+        </div>
+
+      </article>
+
+
+      <!-- 09 -->
+
+      <article class="project-card">
+
+        <span class="project-number">09</span>
+
+        <h2>SBERT Iconicity Model</h2>
+
+        <p>
+          Ridge regression from contextual sentence embeddings to
+          human-rated lexical iconicity, with model comparison across
+          embedding spaces.
+        </p>
+
+        <div class="tags">
+          <span>SBERT</span>
+          <span>Ridge</span>
+          <span>NLP</span>
+        </div>
+
+      </article>
+
+
+      <!-- 10 -->
+
+      <article class="project-card">
+
+        <span class="project-number">10</span>
+
+        <h2>FastText Semantic Axis</h2>
+
+        <p>
+          Investigation of semantic dimensions in distributional
+          representations and their relationship to iconic and
+          non-iconic lexical categories.
+        </p>
+
+        <div class="tags">
+          <span>FastText</span>
+          <span>PCA</span>
+          <span>Semantics</span>
+        </div>
+
+      </article>
+
+
+      <!-- 11 -->
+
+      <article class="project-card">
+
+        <span class="project-number">11</span>
+
+        <h2>GPU RSA Searchlight</h2>
+
+        <p>
+          GPU-accelerated source-level RSA searchlight pipeline designed
+          to make large-scale MEG representational analyses computationally
+          tractable.
+        </p>
+
+        <div class="tags">
+          <span>CUDA</span>
+          <span>PyTorch</span>
+          <span>GPU</span>
+          <span>MEG</span>
+        </div>
+
+      </article>
+
+
+      <!-- 12 -->
+
+      <article class="project-card">
+
+        <span class="project-number">12</span>
+
+        <h2>OCT-6 Source RSA</h2>
+
+        <p>
+          High-resolution cortical RSA using an OCT-6 source space,
+          dSPM inverse modelling and temporal-spatial searchlights.
+        </p>
+
+        <div class="tags">
+          <span>MNE</span>
+          <span>dSPM</span>
+          <span>OCT-6</span>
+        </div>
+
+      </article>
+
+
+      <!-- 13 -->
+
+      <article class="project-card">
+
+        <span class="project-number">13</span>
+
+        <h2>MEG Language Encoding</h2>
+
+        <p>
+          Naturalistic speech encoding pipeline linking continuous
+          linguistic regressors to cortical neural responses.
+        </p>
+
+        <div class="tags">
+          <span>MEG</span>
+          <span>Encoding</span>
+          <span>Ridge</span>
+        </div>
+
+      </article>
+
+
+      <!-- 14 -->
+
+      <article class="project-card">
+
+        <span class="project-number">14</span>
+
+        <h2>Cluster-Based MEG Statistics</h2>
+
+        <p>
+          Spatiotemporal permutation testing for identifying reliable
+          neural effects across cortical source space.
+        </p>
+
+        <div class="tags">
+          <span>Permutation</span>
+          <span>Clusters</span>
+          <span>MNE</span>
+        </div>
+
+      </article>
+
+
+      <!-- 15 -->
+
+      <article class="project-card">
+
+        <span class="project-number">15</span>
+
+        <h2>Sensorimotor Prediction</h2>
+
+        <p>
+          Comparison of computational lexical sensorimotor estimates
+          against neural representations during naturalistic language.
+        </p>
+
+        <div class="tags">
+          <span>Semantics</span>
+          <span>MEG</span>
+          <span>Regression</span>
+        </div>
+
+      </article>
+
+
+      <!-- 16 -->
+
+      <article class="project-card">
+
+        <span class="project-number">16</span>
+
+        <h2>Surrogate Neural Distributions</h2>
+
+        <p>
+          Construction of matched surrogate representations to establish
+          empirical null distributions for neural similarity analyses.
+        </p>
+
+        <div class="tags">
+          <span>Statistics</span>
+          <span>RSA</span>
+          <span>Null Models</span>
+        </div>
+
+      </article>
+
+
+      <!-- 17 -->
+
+      <article class="project-card">
+
+        <span class="project-number">17</span>
+
+        <h2>Behaviour–Neural RSA</h2>
+
+        <p>
+          Linking participant-level behavioural similarity measures with
+          neural representational structure across temporal windows.
+        </p>
+
+        <div class="tags">
+          <span>Behaviour</span>
+          <span>RSA</span>
+          <span>Statistics</span>
+        </div>
+
+      </article>
+
+
+      <!-- 18 -->
+
+      <article class="project-card">
+
+        <span class="project-number">18</span>
+
+        <h2>Naturalistic Speech Pipeline</h2>
+
+        <p>
+          End-to-end preprocessing and modelling workflow for continuous
+          speech MEG, from lexical alignment through source-level analysis.
+        </p>
+
+        <div class="tags">
+          <span>Python</span>
+          <span>MNE</span>
+          <span>MEG</span>
+        </div>
+
+      </article>
+
+
+      <!-- 19 -->
+
+      <article class="project-card">
+
+        <span class="project-number">19</span>
+
+        <h2>Neural Representation Benchmark</h2>
+
+        <p>
+          Benchmarking computational representations against neural
+          geometry using multiple similarity metrics and temporal windows.
+        </p>
+
+        <div class="tags">
+          <span>RSA</span>
+          <span>Representations</span>
+        </div>
+
+      </article>
+
+
+      <!-- 20 -->
+
+      <article class="project-card project-placeholder">
+
+        <span class="project-number">20</span>
+
+        <h2>More to come.</h2>
+
+        <p>
+          Another experiment is currently being built.
+        </p>
+
+        <div class="tags">
+          <span>IN PROGRESS</span>
+        </div>
+
+      </article>
+
+
+    </section>
+
   </section>
 
-  <section class="content-block">
-    <div class="grid">
-      <article class="card">
-        <h3>EEG-to-text baseline</h3>
-        <p>A small reproduction of contrastive non-invasive decoding pipelines, built to
-           understand where the accuracy ceiling actually comes from.</p>
-        <div class="tags"><span>PyTorch</span><span>EEG</span><span>Contrastive learning</span></div>
-      </article>
+</main>
 
-      <article class="card">
-        <h3>Attention on cortical time-series</h3>
-        <p>Exploring transformer attention maps over MEG windows to see what the model is
-           actually attending to when it gets a prediction right.</p>
-        <div class="tags"><span>Transformers</span><span>MEG</span><span>Interpretability</span></div>
-      </article>
 
-      <article class="card">
-        <h3>This portfolio</h3>
-        <p>A cinematic, robot-guided site built to feel less like a résumé and more like a
-           small piece of interactive fiction.</p>
-        <div class="tags"><span>Three.js</span><span>WebGL</span><span>Design</span></div>
-      </article>
-    </div>
-  </section>
+<script type="module">
 
-  <div class="corner-robot"><canvas id="cornerCanvas"></canvas></div>
+import { createCornerRobot } from "./js/robots.js";
 
-  <div class="walk-strip">
-    <div class="walk-robot" id="walkContainer" style="left:12px;">
-      <canvas id="walkCanvas"></canvas>
-    </div>
-  </div>
+createCornerRobot(
+  "#projectsRobotCanvas",
+  "models/Flair.glb",
+  {
+    scale: 2.0,
+    y: -0.65,
+    cameraY: 1.45,
+    cameraZ: 5.2
+  }
+);
 
-  <script type="module">
-    import { createCornerRobot, createScrollWalkRobot } from "./js/robots.js";
-    createCornerRobot("#cornerCanvas", "models/jumpy.glb");
-    createScrollWalkRobot("#walkCanvas", "#walkContainer", "models/walking.glb");
-  </script>
+</script>
+
 </body>
 </html>
