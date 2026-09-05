@@ -131,8 +131,8 @@ const MODEL_PATH =
 
 const ROBOT_POSITION =
   new THREE.Vector3(
-    -2.9,
-    0.15,
+    -3.3,
+    -0.15,
     0
   );
 
@@ -487,21 +487,15 @@ const PHRASES = [
 
   "building models, doubting models.",
 
-  "curious enough to question the model.",
-
-  "I like evidence. I also like asking why.",
+  "The brain doesn't explain itself. I'm trying to get it to.",
 
   "somewhere between brains and machines.",
-
-  "part researcher, part builder.",
 
   "less interested in answers than better questions.",
 
   "trying to understand what the brain leaves unsaid.",
 
-  "neuroscience, but make it computational.",
-
-  "I trust the data. I inspect the assumptions.",
+  "Every accuracy number hides a decision nobody wrote down.",
 
   "always one experiment away from changing my mind."
 
@@ -609,7 +603,7 @@ phraseStyle.textContent = `
 
   left:50%;
 
-  bottom:10vh;
+  bottom:2vh;
 
   transform:translateX(-50%);
 
@@ -621,9 +615,9 @@ phraseStyle.textContent = `
 
   font-family:var(--font-display);
 
-  font-weight:600;
+  font-weight:300;
 
-  font-size:clamp(2.5rem,5.8vw,6.5rem);
+  font-size:clamp(1.2rem,5.8vw,6.5rem);
 
   line-height:0.95;
 
