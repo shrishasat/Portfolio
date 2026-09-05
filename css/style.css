@@ -1,168 +1,72 @@
-/* =========================================================
-   SHRISHA SATHISHKUMAR
-   BASE
-========================================================= */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=VT323&display=swap');
 
-@import url(
-  'https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=VT323&display=swap'
-);
-
-
-:root {
-
+:root{
   --void: #ffffff;
+  --panel: #f4f4f2;
+  --line: #dcdcd6;
 
-  --ink: #090909;
-
+  --ink: #0a0a0a;
   --ink-dim: #4a4a46;
 
-  --line: #ddddda;
+  --signal: #0077b3;
+  --pulse: #b3560a;
+  --violet: #6a4fd1;
 
-  --font-display:
-    'Space Grotesk',
-    sans-serif;
-
-  --font-mono:
-    'IBM Plex Mono',
-    monospace;
-
-  --font-digital:
-    'VT323',
-    monospace;
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+  --font-digital: 'VT323', monospace;
 }
-
 
 *,
 *::before,
-*::after {
+*::after{
   box-sizing: border-box;
 }
 
-
-html {
+html{
   scroll-behavior: smooth;
 }
 
-
-body {
-
+body{
   margin: 0;
 
-  background: #ffffff;
-
+  background: var(--void);
   color: var(--ink);
 
   font-family: var(--font-mono);
 
   overflow-x: hidden;
+
+  /*
+    IMPORTANT:
+    Gives the page enough physical height
+    for the navigation reveal to work.
+  */
+  min-height: 120vh;
 }
 
-
-a {
-
+a{
   color: inherit;
-
   text-decoration: none;
 }
 
-
-::selection {
-
-  background: #000000;
-
-  color: #ffffff;
+::selection{
+  background: #000;
+  color: #fff;
 }
 
 
-/* =========================================================
-   HEADER
-========================================================= */
+/* =====================================================
+   ROBOT
+===================================================== */
 
-.site-header {
-
-  position: sticky;
-
-  top: 0;
-
-  z-index: 100;
-
-  height: 74px;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: space-between;
-
-  padding:
-    0
-    clamp(1.2rem, 4vw, 4rem);
-
-  background:
-    rgba(255,255,255,0.92);
-
-  backdrop-filter: blur(14px);
-
-  border-bottom:
-    1px solid var(--line);
-}
-
-
-.site-header .brand {
-
-  font-family: var(--font-display);
-
-  font-weight: 600;
-
-  font-size: 0.95rem;
-
-  letter-spacing: 0.03em;
-}
-
-
-.site-header nav {
-
-  display: flex;
-
-  gap:
-    clamp(1rem, 3vw, 2.5rem);
-}
-
-
-.site-header nav a {
-
-  font-family: var(--font-mono);
-
-  font-size: 0.7rem;
-
-  letter-spacing: 0.12em;
-
-  color: #666662;
-
-  transition:
-    color 0.2s ease;
-}
-
-
-.site-header nav a:hover,
-.site-header nav a[aria-current="page"] {
-
-  color: #000000;
-}
-
-
-/* =========================================================
-   HOME ROBOT CANVAS
-========================================================= */
-
-#robotCanvas {
-
+#robotCanvas{
   position: fixed;
 
   inset: 0;
 
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
 
   display: block;
 
@@ -172,60 +76,52 @@ a {
 }
 
 
-/* =========================================================
-   HOME NAV
-========================================================= */
+/* =====================================================
+   NAV
+===================================================== */
 
-#nav {
+#nav{
 
   position: fixed;
 
   top: 0;
-
   left: 0;
-
   right: 0;
 
-  height: 100px;
-
-  z-index: 80;
+  z-index: 50;
 
   display: flex;
 
+  justify-content: flex-end;
   align-items: center;
 
-  justify-content: flex-end;
-
-  gap:
-    clamp(2rem, 5vw, 5rem);
+  gap: clamp(1.5rem, 3vw, 3rem);
 
   padding:
-    0
-    clamp(1.5rem, 5vw, 5rem);
+    1.25rem
+    clamp(1.2rem, 4vw, 3rem);
 
-  background:
-    rgba(255,255,255,0.93);
+  background: rgba(255,255,255,0.88);
 
-  backdrop-filter: blur(16px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 
-  border-bottom:
-    1px solid transparent;
+  border-bottom: 1px solid transparent;
 
-  transform:
-    translateY(-110%);
+  transform: translateY(-120%);
 
   opacity: 0;
 
   pointer-events: none;
 
   transition:
-    transform 0.65s cubic-bezier(.22,.9,.32,1),
-    opacity 0.4s ease,
-    border-color 0.4s ease;
+    transform 0.55s cubic-bezier(.22,.9,.32,1),
+    opacity 0.45s ease,
+    border-color 0.45s ease;
 }
 
 
-#nav.nav--visible {
+#nav.nav--visible{
 
   transform: translateY(0);
 
@@ -233,233 +129,61 @@ a {
 
   pointer-events: auto;
 
-  border-bottom-color:
-    var(--line);
+  border-bottom-color: var(--line);
 }
 
 
-#nav a {
+#nav a{
 
-  font-family: var(--font-display);
+  font-family: var(--font-mono);
 
-  font-weight: 500;
+  /*
+    Bigger than the original,
+    but not absurdly huge.
+  */
+  font-size: clamp(1rem, 1.35vw, 1.35rem);
 
-  font-size:
-    clamp(1.2rem, 2.2vw, 2.2rem);
+  letter-spacing: 0.12em;
 
-  letter-spacing: -0.02em;
-
-  color: #111111;
+  color: #111;
 
   transition:
+    color 0.2s ease,
     opacity 0.2s ease;
 }
 
 
-#nav a:hover {
+#nav a:hover{
 
-  opacity: 0.45;
+  color: #000;
+
+  opacity: 0.55;
 }
 
 
-/* =========================================================
-   HOME HERO
-========================================================= */
-
-.home-page {
-
-  height: 100vh;
-
-  overflow: hidden;
-}
-
-
-.hero {
-
-  position: relative;
-
-  width: 100%;
-
-  height: 100vh;
-
-  min-height: 600px;
-
-  z-index: 5;
-
-  pointer-events: none;
-}
-
-
-/* =========================================================
-   IDENTITY
-========================================================= */
-
-#identity {
-
-  position: absolute;
-
-  left:
-    clamp(5vw, 9vw, 11vw);
-
-  top: 50%;
-
-  transform:
-    translateY(-50%);
-
-  width:
-    min(55vw, 850px);
-}
-
-
-#identity .role {
-
-  margin: 0 0 1.3rem;
-
-  font-family: var(--font-mono);
-
-  font-size:
-    clamp(0.65rem, 1vw, 0.9rem);
-
-  letter-spacing: 0.17em;
-
-  color: #777773;
-}
-
-
-#identity h1 {
-
-  margin: 0;
-
-  font-family: var(--font-display);
-
-  font-weight: 600;
-
-  font-size:
-    clamp(4rem, 7.5vw, 8rem);
-
-  line-height: 0.9;
-
-  letter-spacing: -0.065em;
-
-  color: #050505;
-}
-
-
-#identity .tagline {
-
-  margin-top: 2rem;
-
-  font-family: var(--font-mono);
-
-  font-size:
-    clamp(1rem, 1.5vw, 1.4rem);
-
-  color: #444440;
-}
-
-
-/* =========================================================
-   HERO META
-========================================================= */
-
-.hero-meta {
-
-  position: absolute;
-
-  left:
-    clamp(5vw, 9vw, 11vw);
-
-  bottom: 8vh;
-
-  display: flex;
-
-  gap: 2rem;
-
-  font-family: var(--font-mono);
-
-  font-size: 0.58rem;
-
-  letter-spacing: 0.13em;
-
-  color: #999994;
-}
-
-
-/* =========================================================
-   SCROLL
-========================================================= */
-
-.scroll-hint {
-
-  position: absolute;
-
-  bottom: 3vh;
-
-  left: 50%;
-
-  transform:
-    translateX(-50%);
-
-  font-family: var(--font-mono);
-
-  font-size: 0.6rem;
-
-  letter-spacing: 0.25em;
-
-  color: #999994;
-
-  animation:
-    scrollPulse 2.5s ease-in-out infinite;
-}
-
-
-@keyframes scrollPulse {
-
-  0%,
-  100% {
-    opacity: 0.35;
-    transform: translateX(-50%) translateY(0);
-  }
-
-  50% {
-    opacity: 1;
-    transform: translateX(-50%) translateY(5px);
-  }
-}
-
-
-/* =========================================================
+/* =====================================================
    TELEMETRY
-   No box. Just small live information.
-========================================================= */
+===================================================== */
 
-#telemetry {
+#telemetry{
 
   position: fixed;
 
-  right: 2.5vw;
+  right: clamp(1rem, 3vw, 2.5rem);
 
-  bottom: 2.5vh;
+  bottom: clamp(1rem, 3vw, 2.2rem);
 
-  z-index: 30;
+  z-index: 20;
 
-  width: auto;
-
-  padding: 0;
-
-  background: transparent;
-
-  border: none;
-
-  box-shadow: none;
+  width: min(430px, 34vw);
 
   font-family: var(--font-digital);
 
-  font-size: 1.25rem;
+  font-size: clamp(1.25rem, 1.7vw, 1.8rem);
 
-  line-height: 1.1;
+  line-height: 1.15;
 
-  color: #555550;
+  color: #050505;
 
   pointer-events: none;
 
@@ -467,138 +191,242 @@ a {
 }
 
 
-#telemetry .tele-row {
+.tele-row{
 
   display: flex;
 
   justify-content: flex-end;
 
-  gap: 0.8rem;
+  gap: 1.2rem;
 
   white-space: nowrap;
 }
 
 
-#telemetry .tele-zone {
+.tele-label{
 
-  color: #999994;
+  opacity: 0.5;
 }
 
 
-#telemetry .tele-time {
+.tele-value{
 
-  color: #444440;
-
-  letter-spacing: 0.02em;
+  color: #000;
 }
 
 
-#telemetry hr {
+/* =====================================================
+   HERO
+===================================================== */
 
-  border: 0;
+main{
 
-  border-top:
-    1px solid #ddddda;
+  position: relative;
 
-  margin:
-    0.35rem 0;
+  z-index: 5;
 }
 
 
-#telemetry .tele-metric {
+.hero{
 
-  color: #999994;
+  position: relative;
+
+  height: 100vh;
+
+  min-height: 600px;
+
+  pointer-events: none;
 }
 
 
-#telemetry .tele-value {
+/* =====================================================
+   IDENTITY
+===================================================== */
 
-  color: #444440;
+#identity{
+
+  position: absolute;
+
+  /*
+    Original-style left/centre placement.
+    Robot occupies the far left.
+  */
+  left: clamp(26vw, 31vw, 36vw);
+
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  z-index: 5;
+
+  max-width: 65vw;
 }
 
 
-#telemetry .tele-note {
+#identity .role{
 
-  margin-top: 0.4rem;
+  margin: 0 0 0.8rem;
 
   font-family: var(--font-mono);
 
-  font-size: 0.5rem;
+  font-size: clamp(0.8rem, 1.25vw, 1.2rem);
 
-  color: #aaaaa5;
+  letter-spacing: 0.09em;
+
+  color: var(--ink-dim);
+
+  white-space: nowrap;
 }
 
 
-/* =========================================================
+#identity h1{
+
+  margin: 0;
+
+  font-family: var(--font-display);
+
+  font-weight: 700;
+
+  font-size: clamp(3.2rem, 7vw, 7.5rem);
+
+  line-height: 0.92;
+
+  letter-spacing: -0.045em;
+
+  color: #080808;
+}
+
+
+#identity .tagline{
+
+  margin-top: 1.1rem;
+
+  font-family: var(--font-mono);
+
+  font-size: clamp(0.9rem, 1.5vw, 1.45rem);
+
+  color: var(--ink-dim);
+
+  white-space: nowrap;
+}
+
+
+/* =====================================================
+   SCROLL HINT
+===================================================== */
+
+.scroll-hint{
+
+  position: absolute;
+
+  left: 50%;
+
+  bottom: 1.5rem;
+
+  transform: translateX(-50%);
+
+  font-family: var(--font-mono);
+
+  font-size: 0.7rem;
+
+  letter-spacing: 0.28em;
+
+  color: var(--ink-dim);
+
+  animation: bob 2.4s ease-in-out infinite;
+}
+
+
+@keyframes bob{
+
+  0%,
+  100%{
+    transform:
+      translateX(-50%)
+      translateY(0);
+  }
+
+  50%{
+    transform:
+      translateX(-50%)
+      translateY(6px);
+  }
+}
+
+
+/* =====================================================
    MOBILE
-========================================================= */
+===================================================== */
 
-@media (max-width: 800px) {
+@media (max-width: 850px){
 
-  #identity {
+  #identity{
 
-    left: 7vw;
+    left: 8vw;
 
-    width: 85vw;
+    max-width: 84vw;
+
+    top: 43%;
   }
 
 
-  #identity h1 {
+  #identity h1{
 
-    font-size:
-      clamp(3.5rem, 14vw, 6rem);
+    font-size: clamp(3rem, 12vw, 5rem);
   }
 
 
-  #identity .role {
+  #identity .role,
+  #identity .tagline{
 
     white-space: normal;
-
-    line-height: 1.5;
   }
 
 
-  .hero-meta {
+  #telemetry{
 
-    left: 7vw;
-
-    bottom: 8vh;
-
-    flex-direction: column;
-
-    gap: 0.5rem;
-  }
-
-
-  #nav {
-
-    height: auto;
-
-    min-height: 100vh;
-
-    flex-direction: column;
-
-    align-items: flex-start;
-
-    justify-content: center;
-
-    gap: 1.8rem;
-  }
-
-
-  #nav a {
-
-    font-size: 2.3rem;
-  }
-
-
-  #telemetry {
-
-    font-size: 0.9rem;
+    width: auto;
 
     right: 1rem;
 
     bottom: 1rem;
+
+    font-size: 1.1rem;
   }
 
+
+  #nav{
+
+    justify-content: center;
+
+    gap: 1rem;
+
+    padding:
+      1rem 0.7rem;
+  }
+
+
+  #nav a{
+
+    font-size: 0.72rem;
+
+    letter-spacing: 0.06em;
+  }
+}
+
+
+@media (prefers-reduced-motion: reduce){
+
+  *,
+  *::before,
+  *::after{
+
+    animation-duration: 0.01ms !important;
+
+    animation-iteration-count: 1 !important;
+
+    transition-duration: 0.01ms !important;
+
+    scroll-behavior: auto !important;
+  }
 }
