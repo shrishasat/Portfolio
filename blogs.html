@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Blogs — Shrisha Sathishskumar</title>
+
+<title>Blogs — Shrisha Sathishkumar</title>
+
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/pages.css">
 <link rel="stylesheet" href="css/blogs.css">
+
 <script type="importmap">
 {
   "imports": {
@@ -15,184 +19,410 @@
   }
 }
 </script>
+
 </head>
+
 <body class="blog-theme">
 
-  <button id="backTop" aria-label="Back to top">&uarr;</button>
+<header class="site-header">
 
-  <header class="site-header">
-    <a class="brand" href="index.html">SHRISHA</a>
-    <nav>
-      <a href="about.html">ABOUT ME</a>
-      <a href="blogs.html" aria-current="page">BLOGS</a>
-      <a href="projects.html">PROJECTS</a>
-      <a href="contact.html">CONTACT</a>
-    </nav>
-  </header>
+  <a class="brand" href="index.html">SHRISHA</a>
 
-  <section class="page-hero">
-    <p class="eyebrow-mono">BLOGS</p>
-    <h1>Field notes since 2019.</h1>
-    <p>Short posts — never more than a hundred words — on papers I've read, ideas I'm turning
-       over, and the odd non-technical detour. Started in a school notebook in 2019, still going.</p>
-  </section>
-
-  <nav class="year-nav" aria-label="Jump to year">
-    <a href="#reading-corner">Reading corner</a><span class="sep">/</span>
-    <a href="#y2026">2026</a><span class="sep">/</span>
-    <a href="#y2025">2025</a><span class="sep">/</span>
-    <a href="#y2024">2024</a><span class="sep">/</span>
-    <a href="#y2023">2023</a><span class="sep">/</span>
-    <a href="#y2022">2022</a><span class="sep">/</span>
-    <a href="#y2021">2021</a><span class="sep">/</span>
-    <a href="#y2020">2020</a><span class="sep">/</span>
-    <a href="#y2019">2019</a>
+  <nav>
+    <a href="about.html">ABOUT ME</a>
+    <a href="blogs.html" aria-current="page">BLOGS</a>
+    <a href="projects.html">PROJECTS</a>
+    <a href="contact.html">CONTACT</a>
   </nav>
 
-  <!-- ================= READING CORNER ================= -->
-  <section class="reading-corner" id="reading-corner">
-    <h2>Reading corner</h2>
-    <p class="tamil-quote">கற்றது கைமண்ணளவு கல்லாதது உலகளவு</p>
-    <p class="tamil-translation">
-      "What you have learned is a mere handful of sand; what you have not learned is the size
-      of the world." — attributed to Avvaiyar, Tamil poet (trad. medieval period, exact era disputed).
-    </p>
+</header>
 
-    <ul class="book-list">
-      <li>
-        <div class="book-title">The Idea of the Brain</div>
-        <div class="book-author">Matthew Cobb</div>
-        <p class="book-note">A history of how we've tried, and repeatedly failed, to find the
-          right metaphor for the brain — from clockwork to computer.</p>
-      </li>
-      <li>
-        <div class="book-title">Being You</div>
-        <div class="book-author">Anil Seth</div>
-        <p class="book-note">A controlled-hallucination theory of consciousness that changed how
-          I think about perception and prediction.</p>
-      </li>
-      <li>
-        <div class="book-title">Gödel, Escher, Bach</div>
-        <div class="book-author">Douglas Hofstadter</div>
-        <p class="book-note">Slow going, worth it. The chapters on recursion and self-reference
-          still shape how I think about representation.</p>
-      </li>
-      <li>
-        <div class="book-title">An Immense World</div>
-        <div class="book-author">Ed Yong</div>
-        <p class="book-note">A reminder that "signal" is relative — every species reads a
-          different slice of the same world.</p>
-      </li>
-    </ul>
-  </section>
 
-  <!-- ================= 2026 ================= -->
-  <section class="blog-year" id="y2026">
-    <h2>2026</h2>
-    <article class="post">
-      <span class="post-date">Written 2nd September 2026</span>
-      <h3>The sequel that reads whole sentences</h3>
-      <p>How much better can a mind-reading keyboard get in eighteen months? On 29th June 2026,
-        Meta AI released Brain2Qwerty v2 alongside the peer-reviewed paper for v1 — timing that
-        felt deliberate. V2 reasons over words and meaning instead of single characters, trained
-        on around 22,000 sentences from nine volunteers wearing MEG helmets for hours at a time.
-        Meta open-sourced the training code for both versions. How much of the remaining gap is
-        engineering, and how much is something we haven't named yet?</p>
-      <div class="source">Source: AI at Meta, Brain2Qwerty v2 announcement, 29 June 2026.</div>
-    </article>
-  </section>
+<!-- =====================================================
+     FIXED ROBOT
+===================================================== -->
 
-  <!-- ================= 2025 ================= -->
-  <section class="blog-year" id="y2025">
-    <h2>2025</h2>
-    <article class="post">
-      <span class="post-date">Written 28th June 2025</span>
-      <h3>Typing with your mind, one letter at a time</h3>
-      <p>Can you type without touching a keyboard? In February 2025, Meta AI unveiled
-        Brain2Qwerty — a system that reads EEG or MEG signals while someone silently types on a
-        QWERTY layout, then a language model cleans up the guesses. MEG got the character error
-        rate down near 19% for the best-trained participants; EEG lagged far behind. Still a lab
-        rig, not a laptop. What happens the day the hardware finally catches up to the model?</p>
-      <div class="source">Source: Meta AI, "Brain2Qwerty" announcement, Feb 2025.</div>
-    </article>
-  </section>
+<aside class="blog-robot">
+  <canvas id="blogRobotCanvas"></canvas>
+</aside>
 
-  <!-- ================= 2024 ================= -->
-  <section class="blog-year" id="y2024">
-    <h2>2024</h2>
-    <article class="post">
-      <span class="post-date">Written 3rd March 2024</span>
-      <h3>Can a machine hear what you're only listening to?</h3>
-      <p>What does it mean for an algorithm to eavesdrop on perception itself? Back in October
-        2023, Meta AI described a model that matched three seconds of MEG or EEG signal to the
-        right spoken sentence out of a thousand candidates — up to 80% accuracy in their best
-        participants, no implants involved. It's a contrastive model trained across 175
-        volunteers. If machines can decode what we hear, how long before they decode what we
-        only intend?</p>
-      <div class="source">Source: Défossez et al., "Decoding speech perception from non-invasive
-        brain recordings," Nature Machine Intelligence, Oct 2023.</div>
-    </article>
-  </section>
 
-  <!-- ================= 2023 ================= -->
-  <section class="blog-year" id="y2023">
-    <h2>2023</h2>
-    <article class="post stub">
-      <p>Entries from this year haven't been transcribed from my notebooks yet — more coming soon.</p>
-    </article>
-  </section>
+<!-- =====================================================
+     MAIN BLOG AREA
+===================================================== -->
 
-  <!-- ================= 2022 ================= -->
-  <section class="blog-year" id="y2022">
-    <h2>2022</h2>
-    <article class="post stub">
-      <p>Entries from this year haven't been transcribed from my notebooks yet — more coming soon.</p>
-    </article>
-  </section>
+<main class="blog-layout">
 
-  <!-- ================= 2021 ================= -->
-  <section class="blog-year" id="y2021">
-    <h2>2021</h2>
-    <article class="post stub">
-      <p>Entries from this year haven't been transcribed from my notebooks yet — more coming soon.</p>
-    </article>
-  </section>
+  <section class="blog-content">
 
-  <!-- ================= 2020 ================= -->
-  <section class="blog-year" id="y2020">
-    <h2>2020</h2>
-    <article class="post stub">
-      <p>Entries from this year haven't been transcribed from my notebooks yet — more coming soon.</p>
-    </article>
-  </section>
+    <div class="blog-intro">
 
-  <!-- ================= 2019 ================= -->
-  <section class="blog-year" id="y2019">
-    <h2>2019</h2>
-    <article class="post">
-      <span class="post-date">Written 18th November 2019</span>
-      <h3>Why does a continent burn before summer even starts?</h3>
-      <p>In November 2019, bushfires tore through New South Wales and Queensland weeks ahead of
-        the usual season, turning the sky over Sydney the color of rust. I kept coming back to
-        one image: koalas moving faster than the smoke. It made me wonder how any brain — human
-        or animal — decides, in half a second, whether to freeze or flee. I didn't have an
-        answer then. I'm not sure I do now.</p>
-    </article>
-  </section>
+      <p class="eyebrow-mono">FIELD NOTES</p>
 
-  <div class="corner-robot"><canvas id="cornerCanvas"></canvas></div>
+      <h1>Ideas I keep coming back to.</h1>
 
-  <div class="walk-strip">
-    <div class="walk-robot" id="walkContainer" style="left:12px;">
-      <canvas id="walkCanvas"></canvas>
+      <p>
+        Notes on neuroscience, brain-computer interfaces, AI,
+        language, cognition and whatever else manages to survive
+        a long walk through my head.
+      </p>
+
     </div>
-  </div>
 
-  <script type="module">
-    import { createCornerRobot, createScrollWalkRobot } from "./js/robots.js";
-    createCornerRobot("#cornerCanvas", "models/Flair.glb");
-    createScrollWalkRobot("#walkCanvas", "#walkContainer", "models/walking.glb");
-  </script>
-  <script src="js/blogs.js"></script>
+
+    <!-- YEAR NAV -->
+
+    <nav class="year-nav" aria-label="Jump to year">
+
+      <a href="#reading-corner">Reading corner</a>
+
+      <span>/</span>
+
+      <a href="#y2026">2026</a>
+      <span>/</span>
+
+      <a href="#y2025">2025</a>
+      <span>/</span>
+
+      <a href="#y2024">2024</a>
+      <span>/</span>
+
+      <a href="#y2023">2023</a>
+      <span>/</span>
+
+      <a href="#y2022">2022</a>
+      <span>/</span>
+
+      <a href="#y2021">2021</a>
+      <span>/</span>
+
+      <a href="#y2020">2020</a>
+      <span>/</span>
+
+      <a href="#y2019">2019</a>
+
+    </nav>
+
+
+    <!-- =================================================
+         2026
+    ================================================== -->
+
+    <section class="blog-year" id="y2026">
+
+      <div class="year-heading">2026</div>
+
+      <article class="post">
+
+        <span class="post-date">
+          02 SEPTEMBER 2026
+        </span>
+
+        <h2>
+          The sequel that reads whole sentences
+        </h2>
+
+        <p>
+          How much better can a mind-reading keyboard get in eighteen
+          months? On 29 June 2026, Meta AI released Brain2Qwerty v2
+          alongside the peer-reviewed paper for v1 — timing that felt
+          deliberate. V2 reasons over words and meaning instead of
+          single characters, trained on around 22,000 sentences from
+          nine volunteers wearing MEG helmets for hours at a time.
+        </p>
+
+        <p>
+          Meta open-sourced the training code for both versions.
+          How much of the remaining gap is engineering, and how much
+          is something we haven't named yet?
+        </p>
+
+        <div class="source">
+          Source: AI at Meta, Brain2Qwerty v2 announcement.
+        </div>
+
+      </article>
+
+    </section>
+
+
+    <!-- =================================================
+         2025
+    ================================================== -->
+
+    <section class="blog-year" id="y2025">
+
+      <div class="year-heading">2025</div>
+
+      <article class="post">
+
+        <span class="post-date">
+          28 JUNE 2025
+        </span>
+
+        <h2>
+          Typing with your mind, one letter at a time
+        </h2>
+
+        <p>
+          Can you type without touching a keyboard? In February 2025,
+          Meta AI unveiled Brain2Qwerty — a system that reads EEG or
+          MEG signals while someone silently types on a QWERTY layout,
+          then a language model cleans up the guesses.
+        </p>
+
+        <p>
+          MEG achieved substantially better character decoding than
+          EEG in their experiments. Still a laboratory system rather
+          than a laptop. What happens when the hardware finally
+          catches up to the model?
+        </p>
+
+        <div class="source">
+          Source: Meta AI, Brain2Qwerty.
+        </div>
+
+      </article>
+
+    </section>
+
+
+    <!-- =================================================
+         2024
+    ================================================== -->
+
+    <section class="blog-year" id="y2024">
+
+      <div class="year-heading">2024</div>
+
+      <article class="post">
+
+        <span class="post-date">
+          03 MARCH 2024
+        </span>
+
+        <h2>
+          Can a machine hear what you're only listening to?
+        </h2>
+
+        <p>
+          What does it mean for an algorithm to eavesdrop on perception
+          itself? In 2023, Meta AI described a model that matched
+          short segments of MEG or EEG activity to spoken sentences.
+        </p>
+
+        <p>
+          No implants. No conscious button press. Just neural activity
+          and a model trying to infer which linguistic representation
+          was being experienced.
+        </p>
+
+        <div class="source">
+          Source: Défossez et al., Nature Machine Intelligence.
+        </div>
+
+      </article>
+
+    </section>
+
+
+    <!-- =================================================
+         OLDER YEARS
+    ================================================== -->
+
+    <section class="blog-year" id="y2023">
+
+      <div class="year-heading">2023</div>
+
+      <article class="post stub">
+        Entries from this year haven't been transcribed yet.
+      </article>
+
+    </section>
+
+
+    <section class="blog-year" id="y2022">
+
+      <div class="year-heading">2022</div>
+
+      <article class="post stub">
+        Entries from this year haven't been transcribed yet.
+      </article>
+
+    </section>
+
+
+    <section class="blog-year" id="y2021">
+
+      <div class="year-heading">2021</div>
+
+      <article class="post stub">
+        Entries from this year haven't been transcribed yet.
+      </article>
+
+    </section>
+
+
+    <section class="blog-year" id="y2020">
+
+      <div class="year-heading">2020</div>
+
+      <article class="post stub">
+        Entries from this year haven't been transcribed yet.
+      </article>
+
+    </section>
+
+
+    <section class="blog-year" id="y2019">
+
+      <div class="year-heading">2019</div>
+
+      <article class="post">
+
+        <span class="post-date">
+          18 NOVEMBER 2019
+        </span>
+
+        <h2>
+          Why does a continent burn before summer even starts?
+        </h2>
+
+        <p>
+          In November 2019, bushfires tore through New South Wales
+          and Queensland weeks ahead of the usual season, turning the
+          sky over Sydney the colour of rust.
+        </p>
+
+        <p>
+          I kept coming back to one image: koalas moving faster than
+          the smoke. It made me wonder how any brain — human or animal —
+          decides, in half a second, whether to freeze or flee.
+        </p>
+
+      </article>
+
+    </section>
+
+
+    <!-- =================================================
+         READING CORNER
+    ================================================== -->
+
+    <section class="reading-corner" id="reading-corner">
+
+      <p class="eyebrow-mono">READING CORNER</p>
+
+      <h2>
+        Books that changed the questions.
+      </h2>
+
+      <p class="tamil-quote">
+        கற்றது கைமண்ணளவு கல்லாதது உலகளவு
+      </p>
+
+      <p class="tamil-translation">
+        What you have learned is a mere handful of sand;
+        what you have not learned is the size of the world.
+      </p>
+
+
+      <div class="book-list">
+
+        <article class="book">
+
+          <div class="book-number">01</div>
+
+          <div>
+            <h3>The Idea of the Brain</h3>
+            <span>Matthew Cobb</span>
+
+            <p>
+              A history of how we've tried to explain the brain,
+              from clockwork machines to computers.
+            </p>
+          </div>
+
+        </article>
+
+
+        <article class="book">
+
+          <div class="book-number">02</div>
+
+          <div>
+            <h3>Being You</h3>
+            <span>Anil Seth</span>
+
+            <p>
+              A fascinating account of perception, prediction
+              and consciousness.
+            </p>
+          </div>
+
+        </article>
+
+
+        <article class="book">
+
+          <div class="book-number">03</div>
+
+          <div>
+            <h3>Gödel, Escher, Bach</h3>
+            <span>Douglas Hofstadter</span>
+
+            <p>
+              Recursion, self-reference and the strange relationship
+              between symbols and minds.
+            </p>
+          </div>
+
+        </article>
+
+
+        <article class="book">
+
+          <div class="book-number">04</div>
+
+          <div>
+            <h3>An Immense World</h3>
+            <span>Ed Yong</span>
+
+            <p>
+              A reminder that every organism experiences only
+              a tiny slice of the physical world.
+            </p>
+          </div>
+
+        </article>
+
+      </div>
+
+    </section>
+
+  </section>
+
+</main>
+
+
+<script type="module">
+
+import { createScrollRobot } from "./js/robots.js";
+
+createScrollRobot(
+  "#blogRobotCanvas",
+  "models/Flair.glb",
+  {
+    scale: 2.0,
+    y: -0.65,
+    cameraY: 1.45,
+    cameraZ: 5.2
+  }
+);
+
+</script>
+
+<script src="js/blogs.js"></script>
+
 </body>
 </html>
