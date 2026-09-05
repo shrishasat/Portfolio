@@ -5,6 +5,15 @@ import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
    SCENE / CAMERA / RENDERER
    ================================================================== */
 
+const nav = document.getElementById("nav");
+const REVEAL_AT = () => window.innerHeight * 0.12;
+
+function updateNav() {
+  nav.classList.toggle("nav--visible", window.scrollY > REVEAL_AT());
+}
+window.addEventListener("scroll", updateNav, { passive: true });
+updateNav();
+
 const scene = new THREE.Scene();
 scene.background = null;
 
