@@ -3,83 +3,62 @@ import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 
 
 /* =========================================================
-   SCENE
+   THREE.JS SETUP
 ========================================================= */
 
-const canvas =
-  document.getElementById("robotCanvas");
+const canvas = document.getElementById("robotCanvas");
 
-const scene =
-  new THREE.Scene();
+const scene = new THREE.Scene();
 
-
-/* =========================================================
-   CAMERA
-========================================================= */
-
-const camera =
-  new THREE.PerspectiveCamera(
-    35,
-    window.innerWidth / window.innerHeight,
-    0.1,
-    100
-  );
+scene.background = null;
 
 
-camera.position.set(
-  0,
-  1.6,
-  8
+const camera = new THREE.PerspectiveCamera(
+  35,
+  window.innerWidth / window.innerHeight,
+  0.1,
+  100
 );
 
-
-/* =========================================================
-   RENDERER
-========================================================= */
-
-const renderer =
-  new THREE.WebGLRenderer({
-
-    canvas,
-
-    antialias: true,
-
-    alpha: true
-
-  });
+camera.position.set(0, 1.6, 8);
 
 
-renderer.setPixelRatio(
-  Math.min(window.devicePixelRatio, 2)
-);
+const renderer = new THREE.WebGLRenderer({
+  canvas,
+  antialias: true,
+  alpha: true
+});
+
 
 renderer.setSize(
   window.innerWidth,
   window.innerHeight
 );
 
-renderer.outputColorSpace =
-  THREE.SRGBColorSpace;
+renderer.setPixelRatio(
+  Math.min(window.devicePixelRatio, 2)
+);
+
+renderer.outputColorSpace = THREE.SRGBColorSpace;
 
 
 /* =========================================================
    LIGHTING
 ========================================================= */
 
-scene.add(
-  new THREE.HemisphereLight(
-    0xffffff,
-    0x555555,
-    2.6
-  )
+const hemi = new THREE.HemisphereLight(
+  0xffffff,
+  0x777777,
+  2.8
 );
 
+scene.add(hemi);
 
-const keyLight =
-  new THREE.DirectionalLight(
-    0xffffff,
-    4.5
-  );
+
+const keyLight = new THREE.DirectionalLight(
+  0xffffff,
+  4.5
+);
 
 keyLight.position.set(
   4,
@@ -90,16 +69,15 @@ keyLight.position.set(
 scene.add(keyLight);
 
 
-const fillLight =
-  new THREE.DirectionalLight(
-    0xffffff,
-    2
-  );
+const fillLight = new THREE.DirectionalLight(
+  0xffffff,
+  2.5
+);
 
 fillLight.position.set(
-  -4,
+  -5,
   4,
-  -3
+  -4
 );
 
 scene.add(fillLight);
@@ -109,8 +87,7 @@ scene.add(fillLight);
    ROBOT
 ========================================================= */
 
-const loader =
-  new GLTFLoader();
+const loader = new GLTFLoader();
 
 let robot = null;
 
@@ -120,26 +97,102 @@ let greetingAction = null;
 
 let isGreeting = false;
 
-let lastGreeting = 0;
+let greetingTimer = null;
 
 
 /*
-  Position robot on right side.
+  Large robot on the LEFT.
+
+  Increase/decrease these if you want to move it.
 */
+const ROBOT_POSITION = new THREE.Vector3(
+  -2.8,
+  0.15,
+  0
+);
 
-const ROBOT_POSITION =
-  new THREE.Vector3(
-    2.9,
-    -0.45,
-    0
-  );
-
-
-const ROBOT_SCALE = 2.15;
+const ROBOT_SCALE = 2.35;
 
 
 /* =========================================================
-   LOAD
+   ROBOT MATERIAL
+========================================================= */
+
+function styleRobot(model) {
+
+  model.traverse((child) => {
+
+    if (!child.isMesh) return;
+
+
+    child.castShadow = true;
+    child.receiveShadow = true;
+
+
+    const materials = Array.isArray(child.material)
+      ? child.material
+      : [child.material];
+
+
+    child.material = materials.map((source) => {
+
+      const material = source.clone();
+
+
+      if ("metalness" in material) {
+
+        material.metalness = 0.92;
+      }
+
+
+      if ("roughness" in material) {
+
+        material.roughness = 0.16;
+      }
+
+
+      if ("envMapIntensity" in material) {
+
+        material.envMapIntensity = 2;
+      }
+
+
+      const name = (
+        `${child.name} ${material.name}`
+      ).toLowerCase();
+
+
+      /*
+        Default = shiny black.
+
+        Parts named joint / silver / chrome /
+        white / eye etc. become white.
+      */
+
+      const lightPart =
+        /joint|white|silver|chrome|eye|light|hand|foot|neck/.test(name);
+
+
+      if ("color" in material) {
+
+        material.color.set(
+          lightPart
+            ? 0xf2f2f0
+            : 0x111111
+        );
+      }
+
+
+      return material;
+
+    });
+
+  });
+}
+
+
+/* =========================================================
+   LOAD GREETING ROBOT
 ========================================================= */
 
 loader.load(
@@ -150,101 +203,109 @@ loader.load(
 
     robot = gltf.scene;
 
+
     robot.position.copy(
       ROBOT_POSITION
     );
+
 
     robot.scale.setScalar(
       ROBOT_SCALE
     );
 
 
-    robot.traverse((child) => {
-
-      if (!child.isMesh) return;
-
-      child.castShadow = true;
-
-      child.receiveShadow = true;
+    styleRobot(robot);
 
 
-      if (child.material) {
+    /*
+      Prevent feet from being accidentally below
+      the visible canvas.
+    */
 
-        child.material =
-          child.material.clone();
+    const box = new THREE.Box3()
+      .setFromObject(robot);
 
-        /*
-          Shiny black chrome.
-        */
 
-        child.material.color.setRGB(
-          0.025,
-          0.025,
-          0.025
-        );
+    const minY = box.min.y;
 
-        child.material.metalness =
-          0.88;
 
-        child.material.roughness =
-          0.16;
+    if (minY < -0.8) {
 
-      }
-
-    });
+      robot.position.y +=
+        Math.abs(minY) + 0.1;
+    }
 
 
     scene.add(robot);
 
 
-    /* =====================================================
-       ANIMATION
-    ===================================================== */
+    mixer = new THREE.AnimationMixer(robot);
 
-    mixer =
-      new THREE.AnimationMixer(
-        robot
+
+    if (gltf.animations.length === 0) {
+
+      console.warn(
+        "greetinggreet.glb contains no animation clips."
+      );
+
+      return;
+    }
+
+
+    /*
+      Use the first animation in the GLB.
+    */
+
+    greetingAction =
+      mixer.clipAction(
+        gltf.animations[0]
       );
 
 
-    if (
-      gltf.animations.length > 0
-    ) {
+    greetingAction.setLoop(
+      THREE.LoopOnce,
+      1
+    );
 
-      greetingAction =
-        mixer.clipAction(
-          gltf.animations[0]
+
+    greetingAction.clampWhenFinished = true;
+
+
+    /*
+      When greeting finishes:
+      wait 30 seconds,
+      then greet again.
+    */
+
+    mixer.addEventListener(
+      "finished",
+      () => {
+
+        isGreeting = false;
+
+
+        clearTimeout(
+          greetingTimer
         );
 
-      greetingAction.setLoop(
-        THREE.LoopOnce,
-        1
-      );
 
-      greetingAction.clampWhenFinished =
-        true;
+        greetingTimer = setTimeout(
+          playGreeting,
+          30000
+        );
 
-
-      mixer.addEventListener(
-        "finished",
-        () => {
-
-          isGreeting = false;
-
-        }
-      );
+      }
+    );
 
 
-      /*
-        First greeting after entering.
-      */
+    /*
+      First greeting after 1 second.
+    */
 
-      setTimeout(
-        playGreeting,
-        1200
-      );
-
-    }
+    setTimeout(
+      playGreeting,
+      1000
+    );
 
   },
 
@@ -253,124 +314,436 @@ loader.load(
   (error) => {
 
     console.error(
-      "Could not load models/greetinggreet.glb:",
+      "Could not load greetinggreet.glb:",
       error
     );
 
   }
-
 );
 
 
 /* =========================================================
-   GREETING
+   PLAY GREETING
 ========================================================= */
 
 function playGreeting() {
 
-  if (
-    !greetingAction ||
-    isGreeting
-  ) {
-    return;
-  }
-
-
-  const now =
-    performance.now();
+  if (!greetingAction) return;
 
 
   /*
-    Prevent frantic restarting.
+    Don't restart the animation halfway through.
   */
 
-  if (
-    now - lastGreeting <
-    3000
-  ) {
-    return;
-  }
+  if (isGreeting) return;
 
 
-  lastGreeting = now;
+  clearTimeout(
+    greetingTimer
+  );
+
 
   isGreeting = true;
 
 
   greetingAction.reset();
 
+  greetingAction.setLoop(
+    THREE.LoopOnce,
+    1
+  );
+
+  greetingAction.clampWhenFinished = true;
+
   greetingAction.play();
 }
 
 
 /* =========================================================
-   CURSOR
+   RIGHT-SIDE MOUSE TRIGGER
 ========================================================= */
 
-const pointer = {
-
-  x: -9999,
-
-  y: -9999
-
-};
+let pointerWasOnRight = false;
 
 
 window.addEventListener(
   "pointermove",
   (event) => {
 
-    pointer.x =
-      event.clientX;
+    /*
+      Rightmost 28% of the screen.
+    */
 
-    pointer.y =
-      event.clientY;
+    const pointerOnRight =
+      event.clientX >
+      window.innerWidth * 0.72;
 
+
+    /*
+      Trigger only when the cursor ENTERS
+      the right-side zone.
+
+      Otherwise it would restart constantly
+      while the mouse is moving.
+    */
+
+    if (
+      pointerOnRight &&
+      !pointerWasOnRight
+    ) {
+
+      playGreeting();
+    }
+
+
+    pointerWasOnRight =
+      pointerOnRight;
   }
 );
 
 
-/*
-  Instead of checking distance from the
-  robot's 3D position, create a simple
-  "robot area" on the right side.
-*/
+/* =========================================================
+   ROTATING PHRASES
+========================================================= */
 
-let cursorInsideRobotZone =
-  false;
+const PHRASES = [
+
+  "half scientist, half skeptic.",
+
+  "curious enough to question the model.",
+
+  "I like evidence. I also like asking why.",
+
+  "somewhere between brains and machines.",
+
+  "building models, doubting models.",
+
+  "less interested in answers than better questions.",
+
+  "part researcher, part builder.",
+
+  "trying to understand what the brain leaves unsaid.",
+
+  "neuroscience, but make it computational.",
+
+  "I trust the data. I inspect the assumptions.",
+
+  "always one experiment away from changing my mind."
+
+];
 
 
-function checkCursor() {
-
-  const zoneStart =
-    window.innerWidth * 0.68;
+const phraseEl =
+  document.getElementById("phrase");
 
 
-  const inside =
-    pointer.x > zoneStart;
+let phraseIndex = 0;
+
+
+function showNextPhrase() {
+
+  if (!phraseEl) return;
+
+
+  phraseEl.classList.remove("run");
 
 
   /*
-    Only trigger when cursor enters.
+    Force browser to restart animation.
   */
 
-  if (
-    inside &&
-    !cursorInsideRobotZone
-  ) {
-
-    playGreeting();
-
-  }
+  void phraseEl.offsetWidth;
 
 
-  cursorInsideRobotZone =
-    inside;
+  phraseEl.textContent =
+    PHRASES[phraseIndex];
+
+
+  phraseEl.classList.add("run");
+
+
+  phraseIndex =
+    (phraseIndex + 1) %
+    PHRASES.length;
 }
 
 
+/*
+  First phrase after a short delay.
+*/
+
+setTimeout(
+  showNextPhrase,
+  1800
+);
+
+
+/*
+  Change phrase every ~7 seconds.
+*/
+
+setInterval(
+  showNextPhrase,
+  7000
+);
+
+
 /* =========================================================
-   ANIMATION
+   LIVE TIME
+========================================================= */
+
+const localTimeEl =
+  document.getElementById("localTime");
+
+
+function updateClock() {
+
+  if (!localTimeEl) return;
+
+
+  const now =
+    new Date();
+
+
+  localTimeEl.textContent =
+    now.toLocaleTimeString(
+      [],
+      {
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit"
+      }
+    );
+}
+
+
+updateClock();
+
+
+setInterval(
+  updateClock,
+  1000
+);
+
+
+/* =========================================================
+   EARTH ORBIT
+========================================================= */
+
+/*
+  Approximate distance Earth travels around the Sun
+  during the current calendar day.
+
+  Circumference ≈ 2π × 149.6 million km
+  / 365.2425 days.
+*/
+
+const orbitTodayEl =
+  document.getElementById("orbitToday");
+
+
+function updateOrbit() {
+
+  if (!orbitTodayEl) return;
+
+
+  const earthOrbitRadius =
+    149600000;
+
+
+  const circumference =
+    2 * Math.PI *
+    earthOrbitRadius;
+
+
+  const dailyDistance =
+    circumference /
+    365.2425;
+
+
+  orbitTodayEl.textContent =
+    `${Math.round(dailyDistance).toLocaleString()} KM`;
+}
+
+
+updateOrbit();
+
+
+/* =========================================================
+   CLOSEST UPCOMING ASTEROID
+========================================================= */
+
+const asteroidEl =
+  document.getElementById(
+    "asteroidDistance"
+  );
+
+
+/*
+  NASA/JPL CNEOS CAD API.
+
+  We request close approaches from today
+  through the next 7 days.
+
+  sort=dist gives the closest object first.
+*/
+
+async function updateAsteroid() {
+
+  if (!asteroidEl) return;
+
+
+  try {
+
+    const now =
+      new Date();
+
+
+    const start =
+      now.toISOString()
+        .slice(0, 10);
+
+
+    const future =
+      new Date(
+        now.getTime() +
+        7 * 24 * 60 * 60 * 1000
+      );
+
+
+    const end =
+      future.toISOString()
+        .slice(0, 10);
+
+
+    const url =
+      "https://ssd-api.jpl.nasa.gov/cad.api" +
+      `?body=Earth` +
+      `&date-min=${start}` +
+      `&date-max=${end}` +
+      `&dist-max=0.1` +
+      `&sort=dist`;
+
+
+    const response =
+      await fetch(url);
+
+
+    if (!response.ok) {
+
+      throw new Error(
+        `NASA API returned ${response.status}`
+      );
+    }
+
+
+    const data =
+      await response.json();
+
+
+    /*
+      NASA's CAD API returns:
+      data = array of close approaches
+
+      dist is in AU.
+    */
+
+    if (
+      !data.data ||
+      data.data.length === 0
+    ) {
+
+      asteroidEl.textContent =
+        "NO OBJECTS";
+
+      return;
+    }
+
+
+    const closest =
+      data.data[0];
+
+
+    /*
+      According to the CNEOS API structure,
+      the distance column is returned in AU.
+    */
+
+    const distanceAU =
+      parseFloat(
+        closest[
+          data.fields.indexOf("dist")
+        ]
+      );
+
+
+    if (
+      Number.isNaN(distanceAU)
+    ) {
+
+      asteroidEl.textContent =
+        "DATA UNAVAILABLE";
+
+      return;
+    }
+
+
+    /*
+      1 AU ≈ 92,955,807 miles.
+    */
+
+    const distanceMiles =
+      distanceAU *
+      92955807;
+
+
+    const roundedMiles =
+      Math.round(
+        distanceMiles
+      );
+
+
+    asteroidEl.textContent =
+      `${roundedMiles.toLocaleString()} MI`;
+
+  }
+
+  catch (error) {
+
+    console.warn(
+      "Asteroid data unavailable:",
+      error
+    );
+
+
+    asteroidEl.textContent =
+      "SCAN UNAVAILABLE";
+  }
+}
+
+
+/*
+  Run immediately.
+*/
+
+updateAsteroid();
+
+
+/*
+  Re-check every 10 minutes.
+
+  The actual distance will also change as
+  NASA/JPL updates the orbital solution.
+*/
+
+setInterval(
+  updateAsteroid,
+  10 * 60 * 1000
+);
+
+
+/* =========================================================
+   ANIMATION LOOP
 ========================================================= */
 
 const clock =
@@ -390,19 +763,16 @@ function animate() {
 
   if (mixer) {
 
-    mixer.update(delta);
-
+    mixer.update(
+      delta
+    );
   }
-
-
-  checkCursor();
 
 
   renderer.render(
     scene,
     camera
   );
-
 }
 
 
@@ -421,6 +791,7 @@ window.addEventListener(
       window.innerWidth /
       window.innerHeight;
 
+
     camera.updateProjectionMatrix();
 
 
@@ -434,30 +805,34 @@ window.addEventListener(
 
 
 /* =========================================================
-   NAVIGATION
+   NAVIGATION REVEAL
 ========================================================= */
 
 const nav =
-  document.getElementById("nav");
+  document.getElementById(
+    "nav"
+  );
 
 
 function updateNav() {
 
+  if (!nav) return;
+
+
   /*
-    Very small amount of scroll.
-    The page itself does not move because
-    the home page is locked to 100vh.
+    Only a small scroll is necessary.
+    Previously the threshold was too large
+    relative to the available page height.
   */
 
-  const visible =
-    window.scrollY > 20;
+  const shouldShow =
+    window.scrollY > 35;
 
 
   nav.classList.toggle(
     "nav--visible",
-    visible
+    shouldShow
   );
-
 }
 
 
@@ -469,145 +844,9 @@ window.addEventListener(
   }
 );
 
+
+/*
+  Run once on page load.
+*/
+
 updateNav();
-
-
-/* =========================================================
-   TELEMETRY
-========================================================= */
-
-const telemetry =
-  document.getElementById(
-    "telemetry"
-  );
-
-
-const AU_KM =
-  149597870;
-
-
-const EARTH_ORBIT_SPEED =
-  29.78;
-
-
-const ANDROMEDA_LY =
-  2537000;
-
-
-function renderTelemetry() {
-
-  const now =
-    new Date();
-
-
-  const seconds =
-    now.getHours() * 3600 +
-    now.getMinutes() * 60 +
-    now.getSeconds();
-
-
-  const orbitToday =
-    EARTH_ORBIT_SPEED *
-    seconds;
-
-
-  const sunDistance =
-    AU_KM +
-    Math.sin(
-      now.getTime() / 90000
-    ) * 25000;
-
-
-  const time =
-    new Intl.DateTimeFormat(
-      "en-GB",
-      {
-        timeZone:
-          "Asia/Kolkata",
-
-        hour:
-          "2-digit",
-
-        minute:
-          "2-digit",
-
-        second:
-          "2-digit",
-
-        hour12:
-          false
-      }
-    ).format(now);
-
-
-  telemetry.innerHTML = `
-
-    <div class="tele-row">
-      <span class="tele-zone">
-        IST
-      </span>
-
-      <span class="tele-time">
-        ${time}
-      </span>
-    </div>
-
-    <hr>
-
-    <div class="tele-row">
-      <span class="tele-metric">
-        SUN
-      </span>
-
-      <span class="tele-value">
-        ${sunDistance.toLocaleString(
-          "en-US",
-          {
-            maximumFractionDigits: 0
-          }
-        )} KM
-      </span>
-    </div>
-
-    <div class="tele-row">
-      <span class="tele-metric">
-        ORBIT
-      </span>
-
-      <span class="tele-value">
-        ${orbitToday.toLocaleString(
-          "en-US",
-          {
-            maximumFractionDigits: 0
-          }
-        )} KM
-      </span>
-    </div>
-
-    <div class="tele-row">
-      <span class="tele-metric">
-        ANDROMEDA
-      </span>
-
-      <span class="tele-value">
-        ${ANDROMEDA_LY.toLocaleString(
-          "en-US"
-        )} LY
-      </span>
-    </div>
-
-    <div class="tele-note">
-      LIVE ESTIMATE
-    </div>
-
-  `;
-
-}
-
-
-renderTelemetry();
-
-setInterval(
-  renderTelemetry,
-  1000
-);
