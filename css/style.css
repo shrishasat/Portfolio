@@ -198,7 +198,7 @@ main{ position: relative; z-index: 5; }
 }
 #identity .role{
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.9rem;
   letter-spacing: 0.22em;
   color: var(--ink-dim);
   margin-bottom: 0.6rem;
@@ -207,7 +207,7 @@ main{ position: relative; z-index: 5; }
   margin: 0;
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(1.8rem, 4.4vw, 3.4rem);
+  font-size: clamp(2.6rem, 6vw, 5rem);
   line-height: 1.05;
   background: linear-gradient(100deg, var(--signal), var(--violet), var(--pulse), var(--signal));
   background-size: 300% auto;
@@ -223,7 +223,7 @@ main{ position: relative; z-index: 5; }
 #identity .tagline{
   margin-top: 0.9rem;
   font-family: var(--font-mono);
-  font-size: 0.85rem;
+  font-size: 1.1rem;
   color: var(--ink-dim);
   line-height: 1.6;
 }
