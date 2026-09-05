@@ -1,270 +1,133 @@
-/* ===================================================================
-   Shared subpage theme — About / Projects / Contact
-   =================================================================== */
+/* =========================================================
+   SHARED SUBPAGE
+========================================================= */
 
-.site-header{
+.site-header {
   position: sticky;
+
   top: 0;
-  z-index: 40;
+
+  z-index: 100;
+
+  height: 74px;
+
   display: flex;
+
   align-items: center;
+
   justify-content: space-between;
-  padding: 1.2rem clamp(1.2rem, 4vw, 3rem);
-  background: rgba(5, 5, 10, 0.75);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--line);
+
+  padding:
+    0
+    clamp(1.2rem, 4vw, 4rem);
+
+  background:
+    rgba(255,255,255,0.92);
+
+  backdrop-filter:
+    blur(14px);
+
+  border-bottom:
+    1px solid #ddddda;
 }
-.site-header .brand{
-  font-family: var(--font-display);
+
+
+.site-header .brand {
+
+  font-family:
+    var(--font-display);
+
   font-weight: 600;
+
   font-size: 0.95rem;
-  letter-spacing: 0.02em;
 }
-.site-header nav{
-  display: flex;
-  gap: clamp(1rem, 3vw, 2.2rem);
-}
-.site-header nav a{
-  font-size: 0.76rem;
-  letter-spacing: 0.12em;
-  color: var(--ink-dim);
-  transition: color 0.25s ease;
-}
-.site-header nav a:hover,
-.site-header nav a[aria-current="page"]{ color: var(--signal); }
 
-.page-hero{
-  padding: clamp(3rem, 9vw, 6rem) clamp(1.2rem, 6vw, 5rem) 2rem;
-  max-width: 920px;
+
+.site-header nav {
+
+  display: flex;
+
+  gap:
+    clamp(1rem, 3vw, 2.5rem);
 }
-.page-hero .eyebrow-mono{
+
+
+.site-header nav a {
+
+  font-family:
+    var(--font-mono);
+
   font-size: 0.7rem;
+
+  letter-spacing: 0.12em;
+
+  color: #666662;
+}
+
+
+.site-header nav a:hover,
+.site-header nav a[aria-current="page"] {
+
+  color: #000000;
+}
+
+
+/* =========================================================
+   GENERAL PAGE HERO
+========================================================= */
+
+.page-hero {
+
+  padding:
+    clamp(4rem, 9vw, 7rem)
+    6vw
+    4rem;
+
+  max-width: 1100px;
+}
+
+
+.page-hero .eyebrow-mono {
+
+  font-family:
+    var(--font-mono);
+
+  font-size: 0.7rem;
+
   letter-spacing: 0.2em;
-  color: var(--signal);
-}
-.page-hero h1{
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(2rem, 5vw, 3.2rem);
-  line-height: 1.1;
-  margin: 0.6rem 0 1rem;
-}
-.page-hero p{
-  color: var(--ink-dim);
-  font-size: 1rem;
-  line-height: 1.8;
-  max-width: 62ch;
-}
 
-.content-block{
-  padding: 0 clamp(1.2rem, 6vw, 5rem) 5rem;
-  max-width: 920px;
-}
-.content-block h2{
-  font-family: var(--font-display);
-  font-size: 1.3rem;
-  margin: 2.4rem 0 0.8rem;
-}
-.content-block p{
-  color: var(--ink-dim);
-  line-height: 1.85;
-  max-width: 66ch;
-}
-
-/* project cards */
-.grid{
-  display: grid;
-  gap: 1.2rem;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  margin-top: 1.4rem;
-}
-.card{
-  border: 1px solid var(--line);
-  border-radius: 4px;
-  padding: 1.4rem;
-  background: var(--panel);
-}
-.card h3{
-  font-family: var(--font-display);
-  font-size: 1.05rem;
-  margin: 0 0 0.5rem;
-}
-.card p{
-  font-size: 0.88rem;
-  color: var(--ink-dim);
-  line-height: 1.7;
-  margin: 0 0 0.9rem;
-}
-.card .tags{
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-}
-.card .tags span{
-  font-size: 0.62rem;
-  letter-spacing: 0.06em;
-  color: var(--signal);
-  border: 1px solid var(--line);
-  border-radius: 3px;
-  padding: 0.2rem 0.5rem;
-}
-
-/* contact links */
-.contact-list{ list-style: none; padding: 0; margin: 1.4rem 0 0; }
-.contact-list li{ margin-bottom: 0.9rem; }
-.contact-list a{
-  font-size: 1rem;
-  border-bottom: 1px solid var(--line);
-  padding-bottom: 0.15rem;
-  transition: border-color 0.25s ease, color 0.25s ease;
-}
-.contact-list a:hover{ color: var(--signal); border-color: var(--signal); }
-
-/* corner idle robot */
-.corner-robot{
-  position: fixed;
-  left: 1rem;
-  bottom: 1rem;
-  width: 130px;
-  height: 130px;
-  z-index: 30;
-  pointer-events: none;
-  opacity: 0.92;
-}
-.corner-robot canvas{ width: 100%; height: 100%; display: block; }
-
-/* scroll-triggered walking robot strip */
-.walk-strip{
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 120px;
-  z-index: 25;
-  pointer-events: none;
-  overflow: visible;
-}
-.walk-robot{
-  position: absolute;
-  bottom: 0;
-  width: 110px;
-  height: 110px;
-  transition: left 0.15s linear;
-}
-.walk-robot canvas{ width: 100%; height: 100%; display: block; }
-
-@media (max-width: 700px){
-  .corner-robot{ width: 90px; height: 90px; }
-  .walk-robot{ width: 80px; height: 80px; }
+  color: #777773;
 }
 
 
-```css
-/* --------------------------------------------------
-   ABOUT PAGE LAYOUT
--------------------------------------------------- */
+.page-hero h1 {
 
-.about-page {
-    position: relative;
+  margin:
+    0.8rem 0
+    1.2rem;
 
-    width: 100%;
-    max-width: 1400px;
+  font-family:
+    var(--font-display);
 
-    margin: 0 auto;
+  font-size:
+    clamp(3rem, 6vw, 6rem);
 
-    padding: 120px 7vw 120px;
+  line-height: 0.95;
 
-    min-height: calc(100vh - 80px);
+  letter-spacing: -0.05em;
 }
 
 
-/* --------------------------------------------------
-   LEFT CONTENT
--------------------------------------------------- */
+.page-hero p {
 
-.about-page .page-hero {
-    width: 62%;
-    max-width: 850px;
+  max-width: 800px;
 
-    margin-left: 0;
+  font-family:
+    var(--font-mono);
+
+  font-size: 0.95rem;
+
+  line-height: 1.9;
+
+  color: #444440;
 }
-
-
-.about-page .content-block {
-    width: 62%;
-    max-width: 850px;
-
-    margin-left: 0;
-}
-
-
-/* --------------------------------------------------
-   ROBOT — RIGHT BOTTOM
--------------------------------------------------- */
-
-.about-robot {
-    position: absolute;
-
-    right: 3vw;
-    bottom: 20px;
-
-    width: 32vw;
-    height: 42vh;
-
-    min-width: 260px;
-    min-height: 280px;
-
-    max-width: 430px;
-    max-height: 450px;
-
-    pointer-events: none;
-
-    z-index: 2;
-}
-
-
-#flairCanvas {
-    width: 100%;
-    height: 100%;
-
-    display: block;
-}
-
-
-/* --------------------------------------------------
-   MOBILE
--------------------------------------------------- */
-
-@media (max-width: 800px) {
-
-    .about-page {
-        padding: 100px 7vw 40px;
-    }
-
-
-    .about-page .page-hero,
-    .about-page .content-block {
-
-        width: 100%;
-        max-width: none;
-    }
-
-
-    .about-robot {
-
-        position: relative;
-
-        right: auto;
-        bottom: auto;
-
-        width: 280px;
-        height: 300px;
-
-        margin-left: auto;
-        margin-top: 40px;
-
-    }
-
-}
-```
