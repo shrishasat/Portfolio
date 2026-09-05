@@ -554,4 +554,20 @@
     border-left: 0;
   }
 
+  .project-detail {z-index: 20;}
+  .project-detail::before {
+    content: "";
+    position: absolute;
+    left: -30px;
+    top: 0;
+    width: 30px;
+    height: 100%;}
+
+  .detail-project {
+    position: relative;
+    z-index: 21;}
+
+
 }
+
+
