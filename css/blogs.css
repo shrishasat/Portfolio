@@ -278,54 +278,43 @@
 ========================================================= */
 
 .book-list {
-  border-top: 1px solid #ddddda;
+  margin-top: 3rem;
 }
 
 .book {
   display: grid;
-
-  grid-template-columns: 70px minmax(0, 1fr);
-
-  gap: 2rem;
-
-  padding: 2rem 0;
-
-  border-bottom: 1px solid #ddddda;
+  grid-template-columns: 45px 1.3fr 1fr 2.5fr;
+  align-items: baseline;
+  column-gap: 1.5rem;
+  padding: 1rem 0;
 }
 
 .book-number {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
-
-  color: #999994;
+  font-size: .7rem;
+  color: #888883;
 }
 
 .book h3 {
-  margin: 0 0 0.2rem;
-
+  margin: 0;
   font-family: var(--font-display);
-  font-size: 1.4rem;
-
-  color: #080808;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #090909;
 }
 
 .book span {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
-
-  color: #777773;
+  font-size: .78rem;
+  color: #777772;
 }
 
 .book p {
-  max-width: 700px;
-
-  margin-top: 0.8rem;
-
+  margin: 0;
   font-family: var(--font-mono);
-  font-size: 0.85rem;
-  line-height: 1.8;
-
-  color: #444440;
+  font-size: .78rem;
+  line-height: 1.5;
+  color: #555550;
 }
 
 
