@@ -1,6 +1,289 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 
+
+
+
+
+export function createCornerRobot(canvasSelector, modelPath) {
+
+    const canvas = document.querySelector(canvasSelector);
+
+
+    // --------------------------------------------------
+    // SCENE
+    // --------------------------------------------------
+
+    const scene = new THREE.Scene();
+
+
+    // --------------------------------------------------
+    // CAMERA
+    // --------------------------------------------------
+
+    const camera = new THREE.PerspectiveCamera(
+        35,
+        canvas.clientWidth / canvas.clientHeight,
+        0.1,
+        100
+    );
+
+    camera.position.set(
+        0,
+        1.4,
+        5
+    );
+
+
+    // --------------------------------------------------
+    // RENDERER
+    // --------------------------------------------------
+
+    const renderer = new THREE.WebGLRenderer({
+        canvas: canvas,
+        alpha: true,
+        antialias: true
+    });
+
+    renderer.setPixelRatio(
+        Math.min(window.devicePixelRatio, 2)
+    );
+
+    renderer.setSize(
+        canvas.clientWidth,
+        canvas.clientHeight
+    );
+
+    renderer.outputColorSpace =
+        THREE.SRGBColorSpace;
+
+
+    // --------------------------------------------------
+    // LIGHTING
+    // --------------------------------------------------
+
+    const ambient =
+        new THREE.HemisphereLight(
+            0xffffff,
+            0x222222,
+            2.2
+        );
+
+    scene.add(ambient);
+
+
+    const keyLight =
+        new THREE.DirectionalLight(
+            0xffffff,
+            4
+        );
+
+    keyLight.position.set(
+        3,
+        6,
+        5
+    );
+
+    scene.add(keyLight);
+
+
+    const rimLight =
+        new THREE.DirectionalLight(
+            0xffffff,
+            2
+        );
+
+    rimLight.position.set(
+        -4,
+        4,
+        -4
+    );
+
+    scene.add(rimLight);
+
+
+    // --------------------------------------------------
+    // LOAD ROBOT
+    // --------------------------------------------------
+
+    const loader = new GLTFLoader();
+
+    let mixer = null;
+
+
+    loader.load(
+
+        modelPath,
+
+        (gltf) => {
+
+            const robot = gltf.scene;
+
+
+            // Small elegant robot
+            robot.scale.setScalar(1.5);
+
+
+            // Position inside canvas
+            robot.position.set(
+                0,
+                -1.2,
+                0
+            );
+
+
+            robot.traverse((child) => {
+
+                if (child.isMesh) {
+
+                    child.castShadow = true;
+                    child.receiveShadow = true;
+
+                    if (child.material) {
+
+                        child.material =
+                            child.material.clone();
+
+                        child.material.metalness = 0.85;
+                        child.material.roughness = 0.2;
+
+                    }
+
+                }
+
+            });
+
+
+            scene.add(robot);
+
+
+            // --------------------------------------------------
+            // ANIMATION
+            // --------------------------------------------------
+
+            mixer =
+                new THREE.AnimationMixer(robot);
+
+
+            if (gltf.animations.length > 0) {
+
+                const action =
+                    mixer.clipAction(
+                        gltf.animations[0]
+                    );
+
+
+                // Repeat forever
+                action.setLoop(
+                    THREE.LoopRepeat,
+                    Infinity
+                );
+
+
+                action.clampWhenFinished = false;
+
+                action.play();
+
+            }
+
+        },
+
+        undefined,
+
+        (error) => {
+
+            console.error(
+                "Could not load robot:",
+                modelPath,
+                error
+            );
+
+        }
+
+    );
+
+
+    // --------------------------------------------------
+    // ANIMATION LOOP
+    // --------------------------------------------------
+
+    const clock =
+        new THREE.Clock();
+
+
+    function animate() {
+
+        requestAnimationFrame(animate);
+
+
+        const delta =
+            clock.getDelta();
+
+
+        if (mixer) {
+
+            mixer.update(delta);
+
+        }
+
+
+        renderer.render(
+            scene,
+            camera
+        );
+
+    }
+
+
+    animate();
+
+
+    // --------------------------------------------------
+    // RESIZE
+    // --------------------------------------------------
+
+    function resize() {
+
+        const width =
+            canvas.clientWidth;
+
+        const height =
+            canvas.clientHeight;
+
+
+        if (width === 0 || height === 0) {
+            return;
+        }
+
+
+        camera.aspect =
+            width / height;
+
+        camera.updateProjectionMatrix();
+
+
+        renderer.setSize(
+            width,
+            height,
+            false
+        );
+
+    }
+
+
+    window.addEventListener(
+        "resize",
+        resize
+    );
+
+    resize();
+
+}
+
+
+
+
+
 const loader = new GLTFLoader();
 
 function buildScene(canvas) {
