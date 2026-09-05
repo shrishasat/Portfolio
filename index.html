@@ -1,11 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shrisha Sathishskumar</title>
-<meta name="description" content="Shrisha Sathishskumar — neuroAI. Brains, machines, and the space between them.">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>Shrisha Sathishkumar</title>
+
+<meta
+  name="description"
+  content="Shrisha Sathishkumar — computational neuroscience, neuroAI and brain-machine interfaces."
+>
+
 <link rel="stylesheet" href="css/style.css">
+
 <script type="importmap">
 {
   "imports": {
@@ -14,42 +27,90 @@
   }
 }
 </script>
+
 </head>
-<body>
 
-  <canvas id="robotCanvas" aria-hidden="true"></canvas>
 
-  <nav id="nav">
-    <a href="about.html">ABOUT ME</a>
-    <a href="blogs.html">BLOGS</a>
-    <a href="projects.html">PROJECTS</a>
-    <a href="contact.html">CONTACT</a>
-  </nav>
+<body class="home-page">
 
-  <div id="telemetry" aria-hidden="true"></div>
 
-  <main>
-    <section class="hero" id="about">
-      <div id="identity">
-        <p class="role">neuroAI · brain–machine interfaces</p>
-        <h1>Shrisha Sathishskumar</h1>
-        <p class="tagline">Welcome to my neuro-space</p>
-      </div>
+<!-- =====================================================
+     ROBOT
+===================================================== -->
 
-      <p id="phrase"></p>
+<canvas id="robotCanvas"></canvas>
 
-      <div class="scroll-hint">SCROLL</div>
-    </section>
 
-    <!-- This section exists so the page has real scroll height —
-         without it window.scrollY never moves and the nav never reveals. -->
-    <section class="intro-strip">
-      <p>Brain decoding, representation learning, and the question of how much of
-         cognition is legible from the outside, that's the short version of what I work on.
-         Scroll up for the header, or jump straight in.</p>
-    </section>
-  </main>
+<!-- =====================================================
+     NAVIGATION
+===================================================== -->
 
-  <script type="module" src="js/hero.js"></script>
+<nav id="nav">
+
+  <a href="about.html">ABOUT ME</a>
+
+  <a href="blogs.html">BLOGS</a>
+
+  <a href="projects.html">PROJECTS</a>
+
+  <a href="contact.html">CONTACT</a>
+
+</nav>
+
+
+<!-- =====================================================
+     SMALL TELEMETRY
+===================================================== -->
+
+<div id="telemetry" aria-hidden="true"></div>
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<main>
+
+<section class="hero">
+
+  <div id="identity">
+
+    <p class="role">
+      NEUROAI · COMPUTATIONAL NEUROSCIENCE · BCI
+    </p>
+
+    <h1>
+      Shrisha<br>
+      Sathishkumar
+    </h1>
+
+    <p class="tagline">
+      Welcome to my neuro-space.
+    </p>
+
+  </div>
+
+
+  <div class="hero-meta">
+
+    <span>BIOMEDICAL ENGINEERING</span>
+
+    <span>Neuo · AI · COGNITION</span>
+
+  </div>
+
+
+  <div class="scroll-hint">
+    SCROLL TO EXPLORE
+  </div>
+
+</section>
+
+</main>
+
+
+<script type="module" src="js/hero.js"></script>
+
 </body>
+
 </html>
