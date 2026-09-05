@@ -688,10 +688,31 @@ function updateTelemetry(){
     new Date();
 
 
-  const time =
+  /* =====================================================
+     BST — UK TIME
+  ===================================================== */
+
+  const bstTime =
     now.toLocaleTimeString(
-      [],
+      "en-GB",
       {
+        timeZone: "Europe/London",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit"
+      }
+    );
+
+
+  /* =====================================================
+     IST — INDIA TIME
+  ===================================================== */
+
+  const istTime =
+    now.toLocaleTimeString(
+      "en-IN",
+      {
+        timeZone: "Asia/Kolkata",
         hour: "2-digit",
         minute: "2-digit",
         second: "2-digit"
@@ -721,18 +742,37 @@ function updateTelemetry(){
 
   telemetry.innerHTML = `
 
+    <!-- BST -->
+
     <div class="tele-row">
 
       <span class="tele-label">
-        LOCAL
+        BST
       </span>
 
       <span class="tele-value">
-        ${time}
+        ${bstTime}
       </span>
 
     </div>
 
+
+    <!-- IST -->
+
+    <div class="tele-row">
+
+      <span class="tele-label">
+        IST
+      </span>
+
+      <span class="tele-value">
+        ${istTime}
+      </span>
+
+    </div>
+
+
+    <!-- EARTH → SUN -->
 
     <div class="tele-row">
 
@@ -747,6 +787,8 @@ function updateTelemetry(){
     </div>
 
 
+    <!-- ANDROMEDA -->
+
     <div class="tele-row">
 
       <span class="tele-label">
@@ -760,6 +802,8 @@ function updateTelemetry(){
     </div>
 
 
+    <!-- EARTH ORBIT -->
+
     <div class="tele-row">
 
       <span class="tele-label">
@@ -772,6 +816,8 @@ function updateTelemetry(){
 
     </div>
 
+
+    <!-- ROBOT STATUS -->
 
     <div class="tele-row">
 
@@ -788,6 +834,10 @@ function updateTelemetry(){
   `;
 }
 
+
+/* =====================================================
+   UPDATE TELEMETRY
+===================================================== */
 
 updateTelemetry();
 
