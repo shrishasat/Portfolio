@@ -1,116 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta charset="UTF-8">
+  <title>Shrisha Sathishkumar</title>
 
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
->
+  <meta
+    name="description"
+    content="Shrisha Sathishkumar — neuroscience, neuroAI, brain-machine interfaces and computational research."
+  >
 
-<title>Shrisha Sathishkumar</title>
+  <link rel="stylesheet" href="css/style.css">
 
-<meta
-  name="description"
-  content="Shrisha Sathishkumar — computational neuroscience, neuroAI and brain-machine interfaces."
->
-
-<link rel="stylesheet" href="css/style.css">
-
-<script type="importmap">
-{
-  "imports": {
-    "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
-    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"
+    }
   }
-}
-</script>
-
+  </script>
 </head>
 
+<body>
 
-<body class="home-page">
+  <!-- 3D robot -->
+  <canvas id="robotCanvas"></canvas>
 
+  <!-- Navigation revealed by scrolling -->
+  <nav id="nav" aria-label="Main navigation">
 
-<!-- =====================================================
-     ROBOT
-===================================================== -->
+    <a href="about.html">ABOUT ME</a>
+    <a href="blogs.html">BLOGS</a>
+    <a href="projects.html">PROJECTS</a>
+    <a href="contact.html">CONTACT</a>
 
-<canvas id="robotCanvas"></canvas>
-
-
-<!-- =====================================================
-     NAVIGATION
-===================================================== -->
-
-<nav id="nav">
-
-  <a href="about.html">ABOUT ME</a>
-
-  <a href="blogs.html">BLOGS</a>
-
-  <a href="projects.html">PROJECTS</a>
-
-  <a href="contact.html">CONTACT</a>
-
-</nav>
+  </nav>
 
 
-<!-- =====================================================
-     SMALL TELEMETRY
-===================================================== -->
+  <!-- Live information -->
+  <div id="telemetry">
 
-<div id="telemetry" aria-hidden="true"></div>
+    <div class="tele-line">
+      <span>LOCAL TIME</span>
+      <span id="localTime">--:--:--</span>
+    </div>
 
+    <div class="tele-line">
+      <span>EARTH → SUN</span>
+      <span>~149.6M KM</span>
+    </div>
 
-<!-- =====================================================
-     HERO
-===================================================== -->
+    <div class="tele-line">
+      <span>EARTH → ANDROMEDA</span>
+      <span>~2.54M LY</span>
+    </div>
 
-<main>
+    <div class="tele-line">
+      <span>EARTH ORBIT / TODAY</span>
+      <span id="orbitToday">-- KM</span>
+    </div>
 
-<section class="hero">
+    <div class="tele-line asteroid-line">
+      <span>CLOSEST ASTEROID</span>
+      <span id="asteroidDistance">SCANNING...</span>
+    </div>
 
-  <div id="identity">
-
-    <p class="role">
-      NEUROAI · COMPUTATIONAL NEUROSCIENCE · BCI
-    </p>
-
-    <h1>
-      Shrisha<br>
-      Sathishkumar
-    </h1>
-
-    <p class="tagline">
-      Welcome to my neuro-space.
-    </p>
+    <div class="tele-status">
+      <span>ROBOT</span>
+      <span>ONLINE</span>
+    </div>
 
   </div>
 
 
-  <div class="hero-meta">
+  <main>
 
-    <span>BIOMEDICAL ENGINEERING</span>
+    <section class="hero" id="home">
 
-    <span>Neuo · AI · COGNITION</span>
+      <!-- Identity -->
+      <div id="identity">
 
-  </div>
+        <p class="role">
+          neuroAI · brain–machine interfaces
+        </p>
+
+        <h1>
+          Shrisha Sathishkumar
+        </h1>
+
+        <p class="tagline">
+          neuroscience × machine learning × curiosity
+        </p>
+
+      </div>
 
 
-  <div class="scroll-hint">
-    SCROLL TO EXPLORE
-  </div>
-
-</section>
-
-</main>
+      <!-- Rotating philosophical/scientific phrases -->
+      <div id="phrase" aria-live="polite"></div>
 
 
-<script type="module" src="js/hero.js"></script>
+      <!-- Scroll indicator -->
+      <div class="scroll-hint">
+        SCROLL ↓
+      </div>
+
+    </section>
+
+
+    <!--
+      Invisible extra scroll space.
+      This gives the browser enough page height for
+      the navigation to reveal when scrolling.
+    -->
+    <div class="scroll-space"></div>
+
+  </main>
+
+
+  <script type="module" src="js/hero.js"></script>
 
 </body>
-
 </html>
