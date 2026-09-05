@@ -132,7 +132,7 @@ const MODEL_PATH =
 const ROBOT_POSITION =
   new THREE.Vector3(
     -3.8,
-    0.15,
+    -0.5,
     0
   );
 
