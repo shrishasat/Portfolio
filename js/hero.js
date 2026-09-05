@@ -603,7 +603,7 @@ phraseStyle.textContent = `
 
   left:50%;
 
-  bottom:2vh;
+  bottom:5vh;
 
   transform:translateX(-50%);
 
@@ -617,7 +617,8 @@ phraseStyle.textContent = `
 
   font-weight:300;
 
-  font-size:clamp(1.2rem,5.8vw,6.5rem);
+ 
+  font-size:clamp(1rem,2.3vw,2.8rem);
 
   line-height:0.95;
 
