@@ -125,6 +125,13 @@
 }
 
 .year-heading {
+  /* pin the heading to the left rail, row 1 — otherwise, once a
+     year has more than one .post, grid auto-placement starts
+     shoving posts into this narrow column instead of stacking
+     them in the content column below one another. */
+  grid-column: 1;
+  grid-row: 1;
+
   font-family: var(--font-mono);
 
   font-size: 0.75rem;
@@ -139,6 +146,11 @@
 ========================================================= */
 
 .post {
+  /* force every post (however many a year has) into the content
+     column; they'll stack top-to-bottom automatically, each in
+     its own implicit row, using the grid's row gap for spacing. */
+  grid-column: 2;
+
   max-width: 850px;
 }
 
@@ -347,5 +359,14 @@
   .blog-year {
     grid-template-columns: 1fr;
     gap: 1rem;
+  }
+
+  /* single column on mobile — without this override, .year-heading
+     and .post explicitly asking for column 1 / column 2 would make
+     the browser invent an extra implicit column instead of
+     stacking everything, which breaks the single-column layout. */
+  .year-heading,
+  .post {
+    grid-column: 1;
   }
 }
